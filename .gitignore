@@ -1,0 +1,4 @@
+/build/*
+!build/.gitkeep
+/examples_of_the_project/linux_netbeans/build/
+/examples_of_the_project/linux_netbeans/dist/
