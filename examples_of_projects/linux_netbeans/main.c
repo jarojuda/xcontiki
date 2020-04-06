@@ -30,31 +30,20 @@
  */
 
 /* 
- * File:   arch_xcontiki_os_sys_Clock.c
+ * File:   main.c
+ * 
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#include "xcontiki/xcontiki.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-#ifndef ARCH_XCONTIKI_OS_SYS_CLOCK_C
+/*
+ * 
+ */
+int main(int argc, char** argv) {
 
-#warning This is only a dummy implementation of arch_xcontiki_os_sys_Clock module
-
-static arch_xcontiki_os_sys_Clock__time_t  dummy_clock;
-
-arch_xcontiki_os_sys_Clock__time_t arch_xcontiki_os_sys_Clock__time(void){
-
-    return dummy_clock++;
+    return (EXIT_SUCCESS);
 }
-
-
-void arch_xcontiki_os_sys_Clock__init(void){
-    dummy_clock=0;
-}
-
-
-
-
-#endif
 

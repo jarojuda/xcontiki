@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="arch" displayName="arch" projectFiles="true">
+        <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
+          <logicalFolder name="os" displayName="os" projectFiles="true">
+            <logicalFolder name="sys" displayName="sys" projectFiles="true">
+              <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h</itemPath>
+              <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c</itemPath>
+              <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h</itemPath>
+            </logicalFolder>
+            <itemPath>../../src/arch_placeholder/arch/xcontiki/os/arch_xcontiki_os.h</itemPath>
+          </logicalFolder>
+          <itemPath>../../src/arch_placeholder/arch/xcontiki/arch_xcontiki.h</itemPath>
+        </logicalFolder>
+        <itemPath>../../src/arch_placeholder/arch/arch.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
+        <logicalFolder name="os" displayName="os" projectFiles="true">
+          <logicalFolder name="sys" displayName="sys" projectFiles="true">
+            <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys.h</itemPath>
+            <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Clock.h</itemPath>
+            <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h</itemPath>
+          </logicalFolder>
+          <itemPath>../../src/xcontiki/os/xcontiki_os.h</itemPath>
+        </logicalFolder>
+        <itemPath>../../src/xcontiki/xcontiki.h</itemPath>
+      </logicalFolder>
+      <itemPath>main.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>../../src/arch_placeholder/arch</Elem>
+    <Elem>../../src/xcontiki</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <standard>3</standard>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>../../src</pElem>
+            <pElem>../../src/arch_placeholder</pElem>
+          </incDir>
+        </cTool>
+      </compileType>
+      <item path="../../src/arch_placeholder/arch/arch.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/arch_xcontiki.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/os/arch_xcontiki_os.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Clock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/xcontiki_os.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/xcontiki.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <standard>3</standard>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>../../src</pElem>
+            <pElem>../../src/arch_placeholder</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="../../src/arch_placeholder/arch/arch.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/arch_xcontiki.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/os/arch_xcontiki_os.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Clock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/xcontiki_os.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/xcontiki.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
