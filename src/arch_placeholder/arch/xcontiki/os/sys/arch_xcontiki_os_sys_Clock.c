@@ -38,23 +38,36 @@
 #include "xcontiki/xcontiki.h"
 
 #ifndef ARCH_XCONTIKI_OS_SYS_CLOCK_C
-
 #warning This is only a dummy implementation of arch_xcontiki_os_sys_Clock module
 
-static arch_xcontiki_os_sys_Clock__time_t  dummy_clock;
+static arch_xcontiki_os_sys_Clock__time_t dummy_clock;
+static unsigned long dummy_clock_seconds;
 
-arch_xcontiki_os_sys_Clock__time_t arch_xcontiki_os_sys_Clock__time(void){
+void arch_xcontiki_os_sys_Clock__init(void) {
+    dummy_clock = 0;
+    dummy_clock_seconds = 0;
+}
+
+arch_xcontiki_os_sys_Clock__time_t arch_xcontiki_os_sys_Clock__time(void) {
 
     return dummy_clock++;
 }
 
+unsigned long arch_xcontiki_os_sys_Clock__seconds(void) {
+    return dummy_clock_seconds;
+}
 
-void arch_xcontiki_os_sys_Clock__init(void){
-    dummy_clock=0;
+void arch_xcontiki_os_sys_Clock__set_seconds(unsigned long sec) {
+    dummy_clock_seconds = sec;
+}
+
+void arch_xcontiki_os_sys_Clock__wait(arch_xcontiki_os_sys_Clock__time_t t) {
+
+}
+
+void arch_xcontiki_os_sys_Clock__delay_usec(uint16_t dt) {
+
 }
 
 
-
-
 #endif
-
