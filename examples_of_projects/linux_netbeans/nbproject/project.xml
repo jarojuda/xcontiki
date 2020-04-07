@@ -10,8 +10,9 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>../../src/arch_placeholder/arch</sourceRootElem>
+                <sourceRootElem>.</sourceRootElem>
                 <sourceRootElem>../../src/xcontiki</sourceRootElem>
+                <sourceRootElem>../../src/arch_placeholder/arch</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

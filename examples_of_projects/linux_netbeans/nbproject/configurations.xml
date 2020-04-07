@@ -12,19 +12,21 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="arch" displayName="arch" projectFiles="true">
-        <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
-          <logicalFolder name="os" displayName="os" projectFiles="true">
-            <logicalFolder name="sys" displayName="sys" projectFiles="true">
-              <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h</itemPath>
-              <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c</itemPath>
-              <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h</itemPath>
+      <logicalFolder name="f1" displayName="arch_placeholder" projectFiles="true">
+        <logicalFolder name="arch" displayName="arch" projectFiles="true">
+          <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
+            <logicalFolder name="os" displayName="os" projectFiles="true">
+              <logicalFolder name="sys" displayName="sys" projectFiles="true">
+                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h</itemPath>
+                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c</itemPath>
+                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h</itemPath>
+              </logicalFolder>
+              <itemPath>../../src/arch_placeholder/arch/xcontiki/os/arch_xcontiki_os.h</itemPath>
             </logicalFolder>
-            <itemPath>../../src/arch_placeholder/arch/xcontiki/os/arch_xcontiki_os.h</itemPath>
+            <itemPath>../../src/arch_placeholder/arch/xcontiki/arch_xcontiki.h</itemPath>
           </logicalFolder>
-          <itemPath>../../src/arch_placeholder/arch/xcontiki/arch_xcontiki.h</itemPath>
+          <itemPath>../../src/arch_placeholder/arch/arch.h</itemPath>
         </logicalFolder>
-        <itemPath>../../src/arch_placeholder/arch/arch.h</itemPath>
       </logicalFolder>
       <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
         <logicalFolder name="os" displayName="os" projectFiles="true">
@@ -52,8 +54,9 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>../../src/arch_placeholder/arch</Elem>
+    <Elem>.</Elem>
     <Elem>../../src/xcontiki</Elem>
+    <Elem>../../src/arch_placeholder/arch</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
