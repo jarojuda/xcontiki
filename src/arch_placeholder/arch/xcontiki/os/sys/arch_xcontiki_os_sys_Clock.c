@@ -61,8 +61,13 @@ void arch_xcontiki_os_sys_Clock__set_seconds(unsigned long sec) {
     dummy_clock_seconds = sec;
 }
 
-void arch_xcontiki_os_sys_Clock__wait(arch_xcontiki_os_sys_Clock__time_t t) {
-
+void arch_xcontiki_os_sys_Clock__wait(arch_xcontiki_os_sys_Clock__time_t interval) {
+    static arch_xcontiki_os_sys_Clock__time_t start;
+    //TODO: ensure that the loop stops if the clock returns discontinuous values
+    start = arch_xcontiki_os_sys_Clock__time();
+    while((arch_xcontiki_os_sys_Clock__time_t)(arch_xcontiki_os_sys_Clock__time()-start)<interval){
+        
+    };
 }
 
 void arch_xcontiki_os_sys_Clock__delay_usec(uint16_t dt) {

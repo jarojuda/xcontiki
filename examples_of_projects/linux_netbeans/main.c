@@ -36,14 +36,15 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "xcontiki/xcontiki.h"
 
 /*
  * 
  */
 int main(int argc, char** argv) {
-
+    
+    arch_xcontiki_os_sys_Clock__wait(0);
+    
     return (EXIT_SUCCESS);
 }
 
