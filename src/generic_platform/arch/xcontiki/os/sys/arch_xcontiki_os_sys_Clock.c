@@ -48,10 +48,11 @@ void arch_xcontiki_os_sys_Clock__init(void) {
     dummy_clock_seconds = 0;
 }
 
+#ifndef TEST
 arch_xcontiki_os_sys_Clock__time_t arch_xcontiki_os_sys_Clock__time(void) {
-    dummy_clock += ARCH_XCONTIKI_OS_SYS_CLOCK__DUMMY_CLOCK_INCREMENT;
-    return dummy_clock;
+    return dummy_clock++;
 }
+#endif
 
 arch_xcontiki_os_sys_Clock__seconds_t arch_xcontiki_os_sys_Clock__seconds(void) {
     return dummy_clock_seconds;

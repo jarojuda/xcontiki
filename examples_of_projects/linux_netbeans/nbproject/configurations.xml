@@ -12,25 +12,25 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="arch_placeholder" projectFiles="true">
+      <logicalFolder name="f1" displayName="generic_platform" projectFiles="true">
         <logicalFolder name="arch" displayName="arch" projectFiles="true">
           <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
             <logicalFolder name="os" displayName="os" projectFiles="true">
               <logicalFolder name="f1" displayName="dev" projectFiles="true">
-                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h</itemPath>
-                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c</itemPath>
-                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h</itemPath>
+                <itemPath>../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h</itemPath>
+                <itemPath>../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c</itemPath>
+                <itemPath>../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h</itemPath>
               </logicalFolder>
               <logicalFolder name="sys" displayName="sys" projectFiles="true">
-                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h</itemPath>
-                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c</itemPath>
-                <itemPath>../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h</itemPath>
+                <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h</itemPath>
+                <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c</itemPath>
+                <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h</itemPath>
               </logicalFolder>
-              <itemPath>../../src/arch_placeholder/arch/xcontiki/os/arch_xcontiki_os.h</itemPath>
+              <itemPath>../../src/generic_platform/arch/xcontiki/os/arch_xcontiki_os.h</itemPath>
             </logicalFolder>
-            <itemPath>../../src/arch_placeholder/arch/xcontiki/arch_xcontiki.h</itemPath>
+            <itemPath>../../src/generic_platform/arch/xcontiki/arch_xcontiki.h</itemPath>
           </logicalFolder>
-          <itemPath>../../src/arch_placeholder/arch/arch.h</itemPath>
+          <itemPath>../../src/generic_platform/arch/arch.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
@@ -60,8 +60,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
-    <Elem>../../src/xcontiki</Elem>
-    <Elem>../../src/arch_placeholder/arch</Elem>
+    <Elem>../../src</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -77,51 +76,48 @@
           <incDir>
             <pElem>.</pElem>
             <pElem>../../src</pElem>
-            <pElem>../../src/arch_placeholder</pElem>
+            <pElem>../../src/generic_platform</pElem>
           </incDir>
         </cTool>
       </compileType>
-      <item path="../../src/arch_placeholder/arch/arch.h"
+      <item path="../../src/generic_platform/arch/arch.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/xcontiki/arch_xcontiki.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/arch_xcontiki.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/arch_xcontiki_os.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/arch_xcontiki_os.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c"
+      <item path="../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c"
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -164,7 +160,7 @@
           <incDir>
             <pElem>.</pElem>
             <pElem>../../src</pElem>
-            <pElem>../../src/arch_placeholder</pElem>
+            <pElem>../../src/generic_platform</pElem>
           </incDir>
         </cTool>
         <ccTool>
@@ -177,47 +173,44 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="../../src/arch_placeholder/arch/arch.h"
+      <item path="../../src/generic_platform/arch/arch.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/xcontiki/arch_xcontiki.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/arch_xcontiki.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/arch_xcontiki_os.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/arch_xcontiki_os.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c"
+      <item path="../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c"
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="../../src/arch_placeholder/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
             ex="false"
             tool="3"
             flavor2="0">

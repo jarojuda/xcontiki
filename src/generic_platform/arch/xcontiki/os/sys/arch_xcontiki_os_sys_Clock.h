@@ -75,7 +75,6 @@ extern "C" {
 
     typedef uint32_t arch_xcontiki_os_sys_Clock__time_t;
     #define ARCH_XCONTIKI_OS_SYS_CLOCK__MAX UINT32_MAX
-    #define ARCH_XCONTIKI_OS_SYS_CLOCK__DUMMY_CLOCK_INCREMENT (1000ull)
     typedef uint32_t arch_xcontiki_os_sys_Clock__seconds_t;
 
     /**
@@ -83,7 +82,7 @@ extern "C" {
      *
      * \hideinitializer
      */
-#define ARCH_XCONTIKI_OS_SYS_CLOCK__SECOND ((arch_xcontiki_os_sys_Clock__time_t)8000000ull) //8MHz
+#define ARCH_XCONTIKI_OS_SYS_CLOCK__SECOND ((arch_xcontiki_os_sys_Clock__time_t)1000ull) 
 
 
     /**

@@ -35,8 +35,8 @@
   :source:
     - src/**
   :include:
-    - src/arch_placeholder/arch/xcontiki/os/sys
-    - src/arch_placeholder/arch/xcontiki/os/dev
+    - src/generic_platform/arch/xcontiki/os/sys
+    - src/generic_platform/arch/xcontiki/os/dev
   :support:
     - test/support
 

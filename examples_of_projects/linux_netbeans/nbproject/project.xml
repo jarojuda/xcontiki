@@ -11,8 +11,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
-                <sourceRootElem>../../src/xcontiki</sourceRootElem>
-                <sourceRootElem>../../src/arch_placeholder/arch</sourceRootElem>
+                <sourceRootElem>../../src</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
