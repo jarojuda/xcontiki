@@ -30,25 +30,24 @@
  */
 
 /* 
- * File:   arch_xcontiki_os.h
+ * File:   arch_xcontiki_os_dev.h
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#ifndef ARCH_XCONTIKI_OS_H
-#define ARCH_XCONTIKI_OS_H
+#ifndef ARCH_XCONTIKI_OS_DEV_H
+#define ARCH_XCONTIKI_OS_DEV_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
-#include "arch/xcontiki/os/dev/arch_xcontiki_os_dev.h"
+#include "arch_xcontiki_os_dev_Watchdog.h"
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* ARCH_XCONTIKI_OS_H */
+#endif /* ARCH_XCONTIKI_OS_DEV_H */
 
