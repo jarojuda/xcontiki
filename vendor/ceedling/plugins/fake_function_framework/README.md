@@ -1,5 +1,7 @@
 # A Fake Function Framework Plug-in for Ceedling
 
+[![Build Status](https://travis-ci.com/ElectronVector/fake_function_framework.svg?branch=master)](https://travis-ci.com/ElectronVector/fake_function_framework)
+
 This is a plug-in for [Ceedling](https://github.com/ThrowTheSwitch/Ceedling) to use the [Fake Function Framework](https://github.com/meekrosoft/fff) for mocking instead of CMock.
 
 Using fff provides less strict mocking than CMock, and allows for more loosely-coupled tests.
@@ -13,26 +15,39 @@ To use the plugin you need to 1) get the contents of this repo and 2) configure 
 
 The easiest way to get the source is to just clone this repo into the Ceedling plugin folder for your existing Ceedling project.
 (Don't have a Ceedling project already? [Here are instructions to create one.](http://www.electronvector.com/blog/try-embedded-test-driven-development-right-now-with-ceedling))
-From within `<your-project>/vendor/ceedling/plugins`, run:
 
-`git clone https://github.com/ElectronVector/fake_function_framework.git`
+Take a look inside the **vendor/ceedling/plugins** folder in your project. If you already have a **fake_function_framework** folder you'll need to remove it first. Then run (from the plugins folder):
 
-This will create a new folder named `fake_function_framework` in the plugins folder.
+```
+git clone --recursive https://github.com/ElectronVector/fake_function_framework.git
+```
 
-### Enable the plug-in.
+NOTE: A recursive clone is necessary to get the fff submodule.
+
+This will create a new folder named **fake_function_framework** in the plugins folder.
+
+If you have already done a non-recursive clone you can run this:
+
+```
+git submodule update --init
+```
+
+from inside **vendor/ceedling/plugins/fake_function_framework** in your project.
+
+### Enable the plug-in
 
 The plug-in is enabled from within your project.yml file.
 
-In the `:plugins` configuration, add `fake_function_framework` to the list of enabled plugins:
+In the `:plugins` configuration, add `fake_function_framework` to the list of enabled plugins. Also set the load path to your project vendor folder:
 
 ```yaml
 :plugins:
   :load_paths:
-    - vendor/ceedling/plugins
+    - vendor/ceedling/plugins # <-- Load the plugin from your project folder.
   :enabled:
     - stdout_pretty_tests_report
     - module_generator
-    - fake_function_framework
+    - fake_function_framework # <-- Add to the list of enable plugins.
 ```
 *Note that you could put the plugin source in some other loaction.
 In that case you'd need to add a new path the `:load_paths`.*
@@ -237,12 +252,11 @@ Use still use some of the CMock configuration options for setting things like th
         :includes_c_post_header:
 ```
 
-## Running the tests
+## Plugin developer tools: Running the tests
 
 There are unit and integration tests for the plug-in itself.
 These are run with the default `rake` task.
 The integration test runs the tests for the example project in examples/fff_example.
-For the integration tests to succeed, this repository must be placed in a Ceedling tree in the plugins folder.
 
 ## More examples
 

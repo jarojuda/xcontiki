@@ -1,0 +1,8 @@
+language: ruby
+
+rvm:
+ - 2.4
+
+install:
+  - gem install rspec
+  - gem install ceedling -v 0.28.2
