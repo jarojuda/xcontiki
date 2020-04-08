@@ -74,14 +74,16 @@ extern "C" {
 #endif
 
     typedef uint32_t arch_xcontiki_os_sys_Clock__time_t;
+    #define ARCH_XCONTIKI_OS_SYS_CLOCK__MAX UINT32_MAX
+    #define ARCH_XCONTIKI_OS_SYS_CLOCK__DUMMY_CLOCK_INCREMENT (1000ull)
+    typedef uint32_t arch_xcontiki_os_sys_Clock__seconds_t;
 
     /**
      * A second, measured in system clock time.
      *
      * \hideinitializer
      */
-
-#define ARCH_XCONTIKI_OS_SYS_CLOCK__SECOND ((arch_xcontiki_os_sys_Clock__time_t)1000ull)
+#define ARCH_XCONTIKI_OS_SYS_CLOCK__SECOND ((arch_xcontiki_os_sys_Clock__time_t)8000000ull) //8MHz
 
 
     /**
@@ -112,14 +114,14 @@ extern "C" {
      *
      * \return The value.
      */
-    unsigned long arch_xcontiki_os_sys_Clock__seconds(void);
+    arch_xcontiki_os_sys_Clock__seconds_t arch_xcontiki_os_sys_Clock__seconds(void);
 
     /**
      * Set the value of the platform seconds.
      * \param sec   The value to set.
      *
      */
-    void arch_xcontiki_os_sys_Clock__set_seconds(unsigned long sec);
+    void arch_xcontiki_os_sys_Clock__set_seconds(arch_xcontiki_os_sys_Clock__seconds_t sec);
 
     /**
      * Wait for a given number of ticks.
@@ -142,4 +144,3 @@ extern "C" {
 #endif
 
 #endif /* ARCH_XCONTIKI_OS_SYS_CLOCK_H */
-

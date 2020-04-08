@@ -34,6 +34,9 @@
     - -:test/support
   :source:
     - src/**
+  :include:
+    - src/arch_placeholder/arch/xcontiki/os/sys
+    - src/arch_placeholder/arch/xcontiki/os/dev
   :support:
     - test/support
 
@@ -95,4 +98,6 @@
     - stdout_pretty_tests_report
     - module_generator
     - raw_output_report
+    - fake_function_framework
+
 ...
