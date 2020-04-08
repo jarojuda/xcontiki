@@ -26,12 +26,12 @@
 
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
- * projects. 
+ * projects.
  */
 
-/* 
+/*
  * File:   main.c
- * 
+ *
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
@@ -39,12 +39,9 @@
 #include "xcontiki/xcontiki.h"
 
 /*
- * 
+ *
  */
 int main(int argc, char** argv) {
-    
-    arch_xcontiki_os_sys_Clock__wait(0);
-    
+
     return (EXIT_SUCCESS);
 }
-
