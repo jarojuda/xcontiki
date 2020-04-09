@@ -40,19 +40,16 @@
 #ifndef ARCH_XCONTIKI_OS_SYS_CLOCK_C
 #warning This is only a dummy implementation of the arch_xcontiki_os_sys_Clock module
 
-static volatile arch_xcontiki_os_sys_Clock__time_t dummy_clock;
 static volatile arch_xcontiki_os_sys_Clock__seconds_t dummy_clock_seconds;
 
 void arch_xcontiki_os_sys_Clock__init(void) {
-    dummy_clock = 0;
+    arch_dev_HardwareClock__init();
     dummy_clock_seconds = 0;
 }
 
-#ifndef TEST
 arch_xcontiki_os_sys_Clock__time_t arch_xcontiki_os_sys_Clock__time(void) {
-    return dummy_clock++;
+    return (arch_xcontiki_os_sys_Clock__time_t) arch_dev_HardwareClock__get_clock();
 }
-#endif
 
 arch_xcontiki_os_sys_Clock__seconds_t arch_xcontiki_os_sys_Clock__seconds(void) {
     return dummy_clock_seconds;
@@ -62,17 +59,54 @@ void arch_xcontiki_os_sys_Clock__set_seconds(arch_xcontiki_os_sys_Clock__seconds
     dummy_clock_seconds = sec;
 }
 
+//Do not use it unless you know what you are doing.
+
 void arch_xcontiki_os_sys_Clock__wait(arch_xcontiki_os_sys_Clock__time_t interval) {
-    static arch_xcontiki_os_sys_Clock__time_t start;
-    //TODO: ensure that the loop stops if the arch_xcontiki_os_sys_Clock__time() returns discontinuous values
+    arch_xcontiki_os_sys_Clock__time_t start;
+    arch_xcontiki_os_sys_Clock__time_t diff;
+    arch_xcontiki_os_sys_Clock__time_t prev_diff;
+
+
     start = arch_xcontiki_os_sys_Clock__time();
-    while ((arch_xcontiki_os_sys_Clock__time_t) (arch_xcontiki_os_sys_Clock__time() - start) < interval) {
+    prev_diff = 0;
+    for (;;) {
+        diff = arch_xcontiki_os_sys_Clock__time() - start;
+        if (diff == prev_diff) {
+            continue;
+        }
+        //Ensure that the loop will stop if the arch_xcontiki_os_sys_Clock__time() returns discontinuous values
+        if (diff >= interval || diff < prev_diff) {
+            break;
+        }
+        prev_diff = diff;
         arch_xcontiki_os_dev_Watchdog__periodic();
-    };
+    }
 }
 
 void arch_xcontiki_os_sys_Clock__delay_usec(uint16_t dt) {
+    uint16_t start;
+    uint16_t diff;
+    uint16_t prev_diff;
+    uint16_t interval;
 
+    start = arch_dev_HardwareClock__get_timer();
+#if(ARCH_DEV_HARDWARECLOCK__FREQUENCY>32768ull)
+#error This method is suitable only for the clock frequency no greater than 32768 Hz   
+#endif
+
+    interval = ((dt * ARCH_DEV_HARDWARECLOCK__FREQUENCY)+(ARCH_DEV_HARDWARECLOCK__FREQUENCY / 2)) / 1000000ull;
+    prev_diff = 0;
+    for (;;) {
+        diff = arch_dev_HardwareClock__get_timer() - start;
+        if (diff == prev_diff) {
+            continue;
+        }
+        //Ensure that the loop will stop if the arch_dev_HardwareClock__get_timer() returns discontinuous values
+        if (diff >= interval || diff < prev_diff) {
+            break;
+        }
+        prev_diff = diff;
+    }
 }
 
 #endif

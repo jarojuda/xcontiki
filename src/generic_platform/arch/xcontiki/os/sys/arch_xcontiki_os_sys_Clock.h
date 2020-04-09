@@ -82,7 +82,7 @@ extern "C" {
      *
      * \hideinitializer
      */
-#define ARCH_XCONTIKI_OS_SYS_CLOCK__SECOND ((arch_xcontiki_os_sys_Clock__time_t)1000ull) 
+#define ARCH_XCONTIKI_OS_SYS_CLOCK__SECOND ((arch_xcontiki_os_sys_Clock__time_t)ARCH_DEV_HARDWARECLOCK__FREQUENCY)
 
 
     /**
@@ -124,7 +124,9 @@ extern "C" {
 
     /**
      * Wait for a given number of ticks.
-     * \param t   How many ticks.
+     *
+     * Do not use it unless you know what you are doing.
+      \param t   How many ticks.
      *
      */
     void arch_xcontiki_os_sys_Clock__wait(arch_xcontiki_os_sys_Clock__time_t t);
