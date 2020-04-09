@@ -26,33 +26,28 @@
 
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
- * projects.
+ * projects. 
  */
 
-/*
- * File:   arch.h
+/* 
+ * File:   arch_dev.h
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#ifndef ARCH_H
-#define ARCH_H
+#ifndef ARCH_DEV_H
+#define ARCH_DEV_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include "arch/dev/arch_dev.h"
-#include "arch/xcontiki/arch_xcontiki.h"
+#include "arch/dev/arch_dev_HardwareClock.h"
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* ARCH_H */
+#endif /* ARCH_DEV_H */
+

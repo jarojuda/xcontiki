@@ -14,6 +14,11 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="generic_platform" projectFiles="true">
         <logicalFolder name="arch" displayName="arch" projectFiles="true">
+          <logicalFolder name="f1" displayName="dev" projectFiles="true">
+            <itemPath>../../src/generic_platform/arch/dev/arch_dev.h</itemPath>
+            <itemPath>../../src/generic_platform/arch/dev/arch_dev_HardwareClock.c</itemPath>
+            <itemPath>../../src/generic_platform/arch/dev/arch_dev_HardwareClock.h</itemPath>
+          </logicalFolder>
           <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
             <logicalFolder name="os" displayName="os" projectFiles="true">
               <logicalFolder name="f1" displayName="dev" projectFiles="true">
@@ -80,7 +85,25 @@
           </incDir>
         </cTool>
       </compileType>
-      <item path="../../src/generic_platform/arch/arch.h" ex="false" tool="3" flavor2="0">
+      <item path="../../src/generic_platform/arch/arch.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/dev/arch_dev.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/dev/arch_dev_HardwareClock.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/dev/arch_dev_HardwareClock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="../../src/generic_platform/arch/xcontiki/arch_xcontiki.h"
             ex="false"
@@ -173,7 +196,25 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="../../src/generic_platform/arch/arch.h" ex="false" tool="3" flavor2="0">
+      <item path="../../src/generic_platform/arch/arch.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/dev/arch_dev.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/dev/arch_dev_HardwareClock.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/dev/arch_dev_HardwareClock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="../../src/generic_platform/arch/xcontiki/arch_xcontiki.h"
             ex="false"

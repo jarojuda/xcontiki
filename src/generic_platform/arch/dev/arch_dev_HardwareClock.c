@@ -30,29 +30,41 @@
  */
 
 /*
- * File:   arch.h
+ * File:   arch_dev_HardwareClock.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#ifndef ARCH_H
-#define ARCH_H
+#include "arch/arch.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef ARCH_DEV_HARDWARECLOCK_C
+#warning This is only a dummy implementation of the arch_dev_HardwareClock module
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
+volatile static struct {
+        uint16_t timer;
+        unsigned timer_overflow : 1;
+} hardware_timer_mock;
 
-#include "arch/dev/arch_dev.h"
-#include "arch/xcontiki/arch_xcontiki.h"
+static uint16_t ticks;
 
-
-#ifdef __cplusplus
+void arch_dev_HardwareClock__init(void){
+        memset((void*)&hardware_timer_mock,0,sizeof(hardware_timer_mock));
+        ticks=0;
 }
-#endif
 
-#endif /* ARCH_H */
+uint16_t arch_dev_HardwareClock__get_timer(void){
+        return hardware_timer_mock.timer;
+}
+
+uint32_t  arch_dev_HardwareClock__get_clock(void){
+        uint32_t tmp;
+        do {
+                if(hardware_timer_mock.timer_overflow) {
+                        ticks++;
+                        hardware_timer_mock.timer_overflow=0;
+                }
+                tmp = hardware_timer_mock.timer;
+                tmp += ((uint32_t)ticks<<16ul);
+        } while(hardware_timer_mock.timer_overflow);
+        return tmp;
+}
