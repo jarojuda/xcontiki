@@ -48,9 +48,8 @@
 #ifndef XCONTIKI_OS_SYS_PT_H
 #define XCONTIKI_OS_SYS_PT_H
 
-
-typedef struct  {
-  uint16_t local_continuation;
+typedef struct {
+    uint16_t local_continuation;
 } xcontiki_os_sys_Protothread__pt_t;
 
 
@@ -141,12 +140,12 @@ typedef struct  {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_UNTIL(pt, condition)	        \
-  do {						\
-    (pt)->local_continuation = __LINE__; case __LINE__:;				\
-    if(!(condition)) {				\
-      return XCONTIKI_OS_SYS_PROTOTHREAD__WAITING;			\
-    }						\
+#define XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_UNTIL(pt, condition)         \
+  do {      \
+    (pt)->local_continuation = __LINE__; case __LINE__:;    \
+    if(!(condition)) {    \
+      return XCONTIKI_OS_SYS_PROTOTHREAD__WAITING;   \
+    }      \
   } while(0)
 
 /**
@@ -199,10 +198,10 @@ typedef struct  {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN(pt, child, thread)		\
-  do {						\
-    XCONTIKI_OS_SYS_PROTOTHREAD__INIT((child));				\
-    XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_THREAD((pt), (thread));		\
+#define XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN(pt, child, thread)  \
+  do {      \
+    XCONTIKI_OS_SYS_PROTOTHREAD__INIT((child));    \
+    XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_THREAD((pt), (thread));  \
   } while(0)
 
 /** @} */
@@ -222,10 +221,10 @@ typedef struct  {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__RESTART(pt)				\
-  do {						\
-    XCONTIKI_OS_SYS_PROTOTHREAD__INIT(pt);				\
-    return XCONTIKI_OS_SYS_PROTOTHREAD__WAITING;			\
+#define XCONTIKI_OS_SYS_PROTOTHREAD__RESTART(pt)    \
+  do {      \
+    XCONTIKI_OS_SYS_PROTOTHREAD__INIT(pt);    \
+    return XCONTIKI_OS_SYS_PROTOTHREAD__WAITING;   \
   } while(0)
 
 /**
@@ -239,10 +238,10 @@ typedef struct  {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__EXIT(pt)				\
-  do {						\
-    XCONTIKI_OS_SYS_PROTOTHREAD__INIT(pt);				\
-    return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;			\
+#define XCONTIKI_OS_SYS_PROTOTHREAD__EXIT(pt)    \
+  do {      \
+    XCONTIKI_OS_SYS_PROTOTHREAD__INIT(pt);    \
+    return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;   \
   } while(0)
 
 /** @} */
@@ -283,8 +282,8 @@ typedef struct  {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__YIELD(pt)				\
-  do {						\
+#define XCONTIKI_OS_SYS_PROTOTHREAD__YIELD(pt)    \
+  do {      \
       (pt)->local_continuation = __LINE__; case __LINE__:;\
       return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;\
   } while(0)
@@ -300,12 +299,12 @@ typedef struct  {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__YIELD_UNTIL(pt, cond)		\
-  do {						\
-    (pt)->local_continuation = __LINE__; case __LINE__:;				\
-    if( !(cond)) {	\
-      return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;			\
-    }						\
+#define XCONTIKI_OS_SYS_PROTOTHREAD__YIELD_UNTIL(pt, cond)  \
+  do {      \
+    (pt)->local_continuation = __LINE__; case __LINE__:;    \
+    if( !(cond)) { \
+      return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;   \
+    }      \
   } while(0)
 
 /** @} */
