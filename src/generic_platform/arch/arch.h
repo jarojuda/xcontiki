@@ -47,9 +47,11 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 
+#define __PACKED __attribute__((packed))     
 #include "arch/dev/arch_dev.h"
 #include "arch/xcontiki/arch_xcontiki.h"
 
+    
 
 #ifdef __cplusplus
 }

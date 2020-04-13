@@ -66,7 +66,9 @@ void arch_xcontiki_os_sys_Clock__wait(arch_xcontiki_os_sys_Clock__time_t interva
     arch_xcontiki_os_sys_Clock__time_t diff;
     arch_xcontiki_os_sys_Clock__time_t prev_diff;
 
-
+    if (0 == interval) {
+        return;
+    }
     start = arch_xcontiki_os_sys_Clock__time();
     prev_diff = 0;
     for (;;) {

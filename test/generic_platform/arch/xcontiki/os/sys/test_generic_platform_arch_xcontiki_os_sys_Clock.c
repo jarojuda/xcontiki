@@ -48,10 +48,12 @@ void test_whenZeroIntervalIsSet_thenClockWaitShouldReturnImmediately(void){
         number_of_watchdog_calls_indicating_an_infinite_loop = 1;
         arch_xcontiki_os_dev_Watchdog__periodic_fake.custom_fake = watchdog_periodic_fake;
 
-        uint32_t time_points_1[4]={0, 0, 1, 1};
+        uint32_t time_points_1[4]={0, 0, 0, 1};
         SET_RETURN_SEQ(arch_dev_HardwareClock__get_clock, time_points_1, 4);
         arch_xcontiki_os_sys_Clock__wait(0);
+        TEST_ASSERT_NOT_CALLED( arch_dev_HardwareClock__get_clock);
         TEST_ASSERT_NOT_CALLED(arch_xcontiki_os_dev_Watchdog__periodic);
+
 
         RESET_FAKE(arch_dev_HardwareClock__get_clock);
 
@@ -63,6 +65,7 @@ void test_whenZeroIntervalIsSet_thenClockWaitShouldReturnImmediately(void){
         };
         SET_RETURN_SEQ(arch_dev_HardwareClock__get_clock, time_points_2, 4);
         arch_xcontiki_os_sys_Clock__wait(0);
+        TEST_ASSERT_NOT_CALLED(arch_dev_HardwareClock__get_clock);
         TEST_ASSERT_NOT_CALLED(arch_xcontiki_os_dev_Watchdog__periodic);
 }
 

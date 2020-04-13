@@ -44,6 +44,7 @@ extern "C" {
 
 
 #include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
+#include "xcontiki/os/sys/xcontiki_os_sys_Timer.h"
 
 #ifdef __cplusplus
 }

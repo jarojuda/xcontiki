@@ -42,8 +42,9 @@
         <logicalFolder name="os" displayName="os" projectFiles="true">
           <logicalFolder name="sys" displayName="sys" projectFiles="true">
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys.h</itemPath>
-            <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Clock.h</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h</itemPath>
+            <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Timer.c</itemPath>
+            <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Timer.h</itemPath>
           </logicalFolder>
           <itemPath>../../src/xcontiki/os/xcontiki_os.h</itemPath>
         </logicalFolder>
@@ -150,12 +151,17 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Clock.h"
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Timer.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Timer.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -261,12 +267,17 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Clock.h"
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Timer.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Timer.h"
             ex="false"
             tool="3"
             flavor2="0">
