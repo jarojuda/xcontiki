@@ -94,7 +94,7 @@ typedef struct {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__THREAD char 
+#define XCONTIKI_OS_SYS_PROTOTHREAD__THREAD char
 
 /**
  * Declare the start of a protothread inside the C function
@@ -121,7 +121,8 @@ typedef struct {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__END(pt) }; (pt)->local_continuation=0; return XCONTIKI_OS_SYS_PROTOTHREAD__ENDED; }
+#define XCONTIKI_OS_SYS_PROTOTHREAD__END(pt) }; (pt)->local_continuation=0;\
+  return XCONTIKI_OS_SYS_PROTOTHREAD__ENDED; }
 
 /** @} */
 
@@ -160,7 +161,8 @@ typedef struct {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_WHILE(pt, cond)  XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_UNTIL((pt), !(cond))
+#define XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_WHILE(pt, cond)\
+  XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_UNTIL((pt), !(cond))
 
 /** @} */
 
@@ -185,7 +187,8 @@ typedef struct {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_THREAD(pt, thread) XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_WHILE((pt), XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULE(thread))
+#define XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_THREAD(pt, thread)\
+ XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_WHILE((pt), XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULE(thread))
 
 /**
  * Spawn a child protothread and wait until it exits.
@@ -311,7 +314,6 @@ typedef struct {
 /** @} */
 
 #define XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULER_TASK(task, interval) {task, interval},
-
 
 
 #define XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULER(name, list_of_tasks)\
