@@ -53,10 +53,11 @@ typedef struct {
 } xcontiki_os_sys_Protothread__pt_t;
 
 
-#define XCONTIKI_OS_SYS_PROTOTHREAD__WAITING 0
-#define XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED 1
-#define XCONTIKI_OS_SYS_PROTOTHREAD__EXITED  2
-#define XCONTIKI_OS_SYS_PROTOTHREAD__ENDED   3
+#define XCONTIKI_OS_SYS_PROTOTHREAD__WAITING    0
+#define XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED    1
+#define XCONTIKI_OS_SYS_PROTOTHREAD__EXITED     2
+#define XCONTIKI_OS_SYS_PROTOTHREAD__ENDED      3
+#define XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN  4
 
 /**
  * \name Initialization
@@ -241,7 +242,7 @@ typedef struct {
 #define XCONTIKI_OS_SYS_PROTOTHREAD__EXIT(pt)    \
   do {      \
     XCONTIKI_OS_SYS_PROTOTHREAD__INIT(pt);    \
-    return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;   \
+    return XCONTIKI_OS_SYS_PROTOTHREAD__EXITED;   \
   } while(0)
 
 /** @} */
@@ -263,7 +264,7 @@ typedef struct {
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULE(f) ((f) < XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED)
+#define XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULE(f) ((f) < XCONTIKI_OS_SYS_PROTOTHREAD__EXITED)
 
 /** @} */
 
@@ -308,6 +309,49 @@ typedef struct {
   } while(0)
 
 /** @} */
+
+#define XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULER_TASK(task, interval) {task, interval},
+
+
+
+#define XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULER(name, list_of_tasks)\
+    static const struct {\
+        XCONTIKI_OS_SYS_PROTOTHREAD__THREAD(* const task)(void);\
+        arch_xcontiki_os_sys_Clock__time_t interval;\
+    } name##_tasks[]=\
+    {\
+        list_of_tasks\
+    };\
+    enum{  name##number_of_tasks = sizeof(name##_tasks)/sizeof(name##_tasks[0])};\
+    static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD name##_last_states[name##number_of_tasks];\
+    static arch_xcontiki_os_sys_Clock__time_t name##_last_ticks[name##number_of_tasks];\
+    \
+    static void name(void) {\
+        static uint8_t i;\
+        \
+        for (i = 0; i < name##number_of_tasks; i++) {\
+            if (name##_last_states[i] >= XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN) {\
+                name##_last_ticks[i] = arch_xcontiki_os_sys_Clock__time();\
+                name##_last_states[i] = name##_tasks[i].task();\
+            } else if (0 == name##_tasks[i].interval || name##_last_states[i] < XCONTIKI_OS_SYS_PROTOTHREAD__EXITED) {\
+                name##_last_states[i] = name##_tasks[i].task();\
+            } else {\
+                if (name##_last_ticks[i] + name##_tasks[i].interval <= arch_xcontiki_os_sys_Clock__time()) {\
+                    name##_last_ticks[i] = arch_xcontiki_os_sys_Clock__time();\
+                    name##_last_states[i] = name##_tasks[i].task();\
+                }\
+            }\
+        }\
+    }\
+    \
+    static void name##__init(void) {\
+        uint8_t i;\
+        for (i = 0; i <= name##number_of_tasks; i++) {\
+            name##_last_states[i] = XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN;\
+            name##_last_ticks[i] = 0;\
+        }\
+    }\
+
 
 #endif /* XCONTIKI_OS_SYS_PT_H */
 
