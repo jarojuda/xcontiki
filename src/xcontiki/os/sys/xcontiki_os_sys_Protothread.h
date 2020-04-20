@@ -45,8 +45,8 @@
  *
  */
 
-#ifndef XCONTIKI_OS_SYS_PT_H
-#define XCONTIKI_OS_SYS_PT_H
+#ifndef XCONTIKI_OS_SYS_PROTOTHREAD_H
+#define XCONTIKI_OS_SYS_PROTOTHREAD_H
 
 typedef struct {
     uint16_t local_continuation;
@@ -327,20 +327,27 @@ typedef struct {
     enum{  name##number_of_tasks = sizeof(name##_tasks)/sizeof(name##_tasks[0])};\
     static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD name##_last_states[name##number_of_tasks];\
     static arch_xcontiki_os_sys_Clock__time_t name##_last_ticks[name##number_of_tasks];\
+    static arch_xcontiki_os_sys_Clock__time_t name##_prev_diff[name##number_of_tasks];\
     \
     static void name(void) {\
         static uint8_t i;\
+        arch_xcontiki_os_sys_Clock__time_t diff;\
         \
         for (i = 0; i < name##number_of_tasks; i++) {\
             if (name##_last_states[i] >= XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN) {\
                 name##_last_ticks[i] = arch_xcontiki_os_sys_Clock__time();\
+                name##_prev_diff[i]=0;\
                 name##_last_states[i] = name##_tasks[i].task();\
             } else if (0 == name##_tasks[i].interval || name##_last_states[i] < XCONTIKI_OS_SYS_PROTOTHREAD__EXITED) {\
                 name##_last_states[i] = name##_tasks[i].task();\
             } else {\
-                if (name##_last_ticks[i] + name##_tasks[i].interval <= arch_xcontiki_os_sys_Clock__time()) {\
+                diff = arch_xcontiki_os_sys_Clock__time() - name##_last_ticks[i];\
+                if (diff >= name##_tasks[i].interval || diff < name##_prev_diff[i]) {\
                     name##_last_ticks[i] = arch_xcontiki_os_sys_Clock__time();\
+                    name##_prev_diff[i]=0;\
                     name##_last_states[i] = name##_tasks[i].task();\
+                } else{\
+                  name##_prev_diff[i]=diff;\
                 }\
             }\
         }\
@@ -355,6 +362,6 @@ typedef struct {
     }\
 
 
-#endif /* XCONTIKI_OS_SYS_PT_H */
+#endif /* XCONTIKI_OS_SYS_PROTOTHREAD_H */
 
 /** @} */
