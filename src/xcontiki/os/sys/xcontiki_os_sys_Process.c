@@ -52,22 +52,22 @@
 struct xcontiki_os_sys_Process *xcontiki_os_sys_Process__list = NULL;
 struct xcontiki_os_sys_Process *xcontiki_os_sys_Process__current = NULL;
 
-static xcontiki_os_sys_process_event_t lastevent;
+static xcontiki_os_sys_Process__event_t lastevent;
 
 /*
  * Structure used for keeping the queue of active events.
  */
 struct event_data {
-  xcontiki_os_sys_process_event_t ev;
-  xcontiki_os_sys_process_data_t data;
+  xcontiki_os_sys_Process__event_t ev;
+  xcontiki_os_sys_Process__data_t data;
   struct xcontiki_os_sys_Process *p;
 };
 
-static xcontiki_os_sys_process_num_events_t nevents, fevent;
+static xcontiki_os_sys_Process__num_events_t nevents, fevent;
 static struct event_data events[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
 
 #if XCONTIKI_OS_SYS_PROCESS__CONF_STATS
-xcontiki_os_sys_process_num_events_t xcontiki_os_sys_process_maxevents;
+xcontiki_os_sys_Process__num_events_t xcontiki_os_sys_process_maxevents;
 #endif
 
 static volatile unsigned char poll_requested;
@@ -76,7 +76,7 @@ static volatile unsigned char poll_requested;
 #define STATE_RUNNING     1
 #define STATE_CALLED      2
 
-static void call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_process_event_t ev, xcontiki_os_sys_process_data_t data);
+static void call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
 
 #define DEBUG 0
 #if DEBUG
@@ -87,14 +87,14 @@ static void call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_proc
 #endif
 
 /*---------------------------------------------------------------------------*/
-xcontiki_os_sys_process_event_t
+xcontiki_os_sys_Process__event_t
 xcontiki_os_sys_Process__alloc_event(void)
 {
   return lastevent++;
 }
 /*---------------------------------------------------------------------------*/
 void
-xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_process_data_t data)
+xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__data_t data)
 {
   struct xcontiki_os_sys_Process *q;
 
@@ -144,7 +144,7 @@ exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *
      */
     for(q = xcontiki_os_sys_Process__list; q != NULL; q = q->next) {
       if(p != q) {
-        call_process(q, XCONTIKI_OS_SYS_PROCESS__EVENT_EXITED, (xcontiki_os_sys_process_data_t)p);
+        call_process(q, XCONTIKI_OS_SYS_PROCESS__EVENT_EXITED, (xcontiki_os_sys_Process__data_t)p);
       }
     }
 
@@ -170,7 +170,7 @@ exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *
 }
 /*---------------------------------------------------------------------------*/
 static void
-call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_process_event_t ev, xcontiki_os_sys_process_data_t data)
+call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data)
 {
   int ret;
 
@@ -243,8 +243,8 @@ do_poll(void)
 static void
 do_event(void)
 {
-  xcontiki_os_sys_process_event_t ev;
-  xcontiki_os_sys_process_data_t data;
+  xcontiki_os_sys_Process__event_t ev;
+  xcontiki_os_sys_Process__data_t data;
   struct xcontiki_os_sys_Process *receiver;
   struct xcontiki_os_sys_Process *p;
 
@@ -317,9 +317,9 @@ xcontiki_os_sys_Process__nevents(void)
 }
 /*---------------------------------------------------------------------------*/
 int
-xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_process_event_t ev, xcontiki_os_sys_process_data_t data)
+xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data)
 {
-  xcontiki_os_sys_process_num_events_t snum;
+  xcontiki_os_sys_Process__num_events_t snum;
 
   if(XCONTIKI_OS_SYS_PROCESS__CURRENT() == NULL) {
     PRINTF("xcontiki_os_sys_process_post: NULL process posts event %d to process '%s', nevents %d\n",
@@ -341,7 +341,7 @@ xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os_sys
     return XCONTIKI_OS_SYS_PROCESS__ERR_FULL;
   }
 
-  snum = (xcontiki_os_sys_process_num_events_t)(fevent + nevents) % XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS;
+  snum = (xcontiki_os_sys_Process__num_events_t)(fevent + nevents) % XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS;
   events[snum].ev = ev;
   events[snum].data = data;
   events[snum].p = p;
@@ -357,7 +357,7 @@ xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os_sys
 }
 /*---------------------------------------------------------------------------*/
 void
-xcontiki_os_sys_Process__post_synch(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_process_event_t ev, xcontiki_os_sys_process_data_t data)
+xcontiki_os_sys_Process__post_synch(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data)
 {
   struct xcontiki_os_sys_Process *caller = xcontiki_os_sys_Process__current;
 

@@ -55,9 +55,9 @@
 
 #include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
 
-typedef unsigned char xcontiki_os_sys_process_event_t;
-typedef void *        xcontiki_os_sys_process_data_t;
-typedef unsigned char xcontiki_os_sys_process_num_events_t;
+typedef unsigned char xcontiki_os_sys_Process__event_t;
+typedef void *        xcontiki_os_sys_Process__data_t;
+typedef unsigned char xcontiki_os_sys_Process__num_events_t;
 
 /**
  * \name Return values
@@ -207,7 +207,7 @@ typedef unsigned char xcontiki_os_sys_process_num_events_t;
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROCESS__XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN(pt, thread)   XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN(process_pt, pt, thread)
+#define XCONTIKI_OS_SYS_PROCESS__PROTOTHREAD__SPAWN(pt, thread)   XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN(process_pt, pt, thread)
 
 /**
  * Yield the process for a short while.
@@ -271,8 +271,8 @@ typedef unsigned char xcontiki_os_sys_process_num_events_t;
  */
 #define XCONTIKI_OS_SYS_PROCESS__THREAD(name, ev, data) 				\
 static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(xcontiki_os_sys_Protothread__pt_t *process_pt,	\
-				       xcontiki_os_sys_process_event_t ev,	\
-				       xcontiki_os_sys_process_data_t data)
+				       xcontiki_os_sys_Process__event_t ev,	\
+				       xcontiki_os_sys_Process__data_t data)
 
 /**
  * Declare the name of a process.
@@ -319,7 +319,7 @@ struct xcontiki_os_sys_Process {
   const char *name;
 #define XCONTIKI_OS_SYS_PROCESS__NAME_STRING(process) (process)->name
 #endif
-  XCONTIKI_OS_SYS_PROTOTHREAD__THREAD (* thread)(xcontiki_os_sys_Protothread__pt_t*, xcontiki_os_sys_process_event_t, xcontiki_os_sys_process_data_t);
+  XCONTIKI_OS_SYS_PROTOTHREAD__THREAD (* thread)(xcontiki_os_sys_Protothread__pt_t*, xcontiki_os_sys_Process__event_t, xcontiki_os_sys_Process__data_t);
   xcontiki_os_sys_Protothread__pt_t pt;
   unsigned char state, needspoll;
 };
@@ -338,7 +338,7 @@ struct xcontiki_os_sys_Process {
  * process
  *
  */
-void xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_process_data_t data);
+void xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__data_t data);
 
 /**
  * Post an asynchronous event.
@@ -361,7 +361,7 @@ void xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_
  * \retval XCONTIKI_OS_SYS_PROCESS__ERR_FULL The event queue was full and the event could
  * not be posted.
  */
-int xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_process_event_t ev, xcontiki_os_sys_process_data_t data);
+int xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
 
 /**
  * Post a synchronous event to a process.
@@ -374,7 +374,7 @@ int xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os
  * with the event.
  */
 void xcontiki_os_sys_Process__post_synch(struct xcontiki_os_sys_Process *p,
-                        xcontiki_os_sys_process_event_t ev, xcontiki_os_sys_process_data_t data);
+                        xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
 
 /**
  * \brief      Cause a process to exit
@@ -449,7 +449,7 @@ xcontiki_os_sys_Process__current = p
  * \note       There currently is no way to deallocate an allocated event
  *             number.
  */
-xcontiki_os_sys_process_event_t xcontiki_os_sys_Process__alloc_event(void);
+xcontiki_os_sys_Process__event_t xcontiki_os_sys_Process__alloc_event(void);
 
 /** @} */
 
