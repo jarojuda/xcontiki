@@ -2,3 +2,4 @@
 !build/.gitkeep
 /examples_of_projects/linux_netbeans/build/
 /examples_of_projects/linux_netbeans/dist/
+*.bak
