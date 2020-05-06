@@ -142,3 +142,21 @@ void test_process_exit(void){
         TEST_ASSERT_EQUAL(&process_2, process_3_internals_fake.arg1_history[1]);
 
 }
+
+void test_process_post_broadcast_event(void){
+        const char* msg="Message";
+        xcontiki_os_sys_Process__post_event_via_queue(XCONTIKI_OS_SYS_PROCESS__BROADCAST, XCONTIKI_OS_SYS_PROCESS__EVENT_MSG, (void*)msg);
+        xcontiki_os_sys_Process__process_next_event();
+        TEST_ASSERT_CALLED_TIMES(2, process_1_internals);
+        TEST_ASSERT_EQUAL(XCONTIKI_OS_SYS_PROCESS__EVENT_MSG, process_1_internals_fake.arg0_val);
+        TEST_ASSERT_EQUAL(msg, process_1_internals_fake.arg1_val);
+
+        TEST_ASSERT_CALLED_TIMES(2, process_2_internals);
+        TEST_ASSERT_EQUAL(XCONTIKI_OS_SYS_PROCESS__EVENT_MSG, process_2_internals_fake.arg0_val);
+        TEST_ASSERT_EQUAL(msg, process_2_internals_fake.arg1_val);
+
+        TEST_ASSERT_CALLED_TIMES(2, process_3_internals);
+        TEST_ASSERT_EQUAL(XCONTIKI_OS_SYS_PROCESS__EVENT_MSG, process_3_internals_fake.arg0_val);
+        TEST_ASSERT_EQUAL(msg, process_3_internals_fake.arg1_val);
+
+}
