@@ -46,6 +46,7 @@
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer.h</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Process.c</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Process.h</itemPath>
+            <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Process_priv.h</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Protothread.h</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Timer.c</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Timer.h</itemPath>
@@ -171,6 +172,11 @@
             flavor2="0">
       </item>
       <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Process.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Process_priv.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -307,6 +313,11 @@
             flavor2="0">
       </item>
       <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Process.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Process_priv.h"
             ex="false"
             tool="3"
             flavor2="0">

@@ -218,7 +218,7 @@ typedef unsigned char xcontiki_os_sys_Process__num_events_t;
  * \hideinitializer
  */
 #define XCONTIKI_OS_SYS_PROCESS__PAUSE()             do {				\
-  xcontiki_os_sys_Process__post(XCONTIKI_OS_SYS_PROCESS__CURRENT(), XCONTIKI_OS_SYS_PROCESS__EVENT_CONTINUE, NULL);	\
+  xcontiki_os_sys_Process__post_event_via_queue(XCONTIKI_OS_SYS_PROCESS__CURRENT(), XCONTIKI_OS_SYS_PROCESS__EVENT_CONTINUE, NULL);	\
   XCONTIKI_OS_SYS_PROCESS__WAIT_EVENT_UNTIL(ev == XCONTIKI_OS_SYS_PROCESS__EVENT_CONTINUE);               \
 } while(0)
 
@@ -361,7 +361,7 @@ void xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_
  * \retval XCONTIKI_OS_SYS_PROCESS__ERR_FULL The event queue was full and the event could
  * not be posted.
  */
-int xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
+int8_t xcontiki_os_sys_Process__post_event_via_queue(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
 
 /**
  * Post a synchronous event to a process.
@@ -373,7 +373,7 @@ int xcontiki_os_sys_Process__post(struct xcontiki_os_sys_Process *p, xcontiki_os
  * \param data A pointer to additional data that is posted together
  * with the event.
  */
-void xcontiki_os_sys_Process__post_synch(struct xcontiki_os_sys_Process *p,
+void xcontiki_os_sys_Process__post_synchronous_event(struct xcontiki_os_sys_Process *p,
                         xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
 
 /**
@@ -398,8 +398,7 @@ void xcontiki_os_sys_Process__exit(struct xcontiki_os_sys_Process *p);
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROCESS__CURRENT() xcontiki_os_sys_Process__current
-extern struct xcontiki_os_sys_Process *xcontiki_os_sys_Process__current;
+struct xcontiki_os_sys_Process * xcontiki_os_sys_Process__get_current_process(void);
 
 /**
  * Switch context to another process
@@ -436,7 +435,7 @@ xcontiki_os_sys_Process__current = p
  *
  * \sa XCONTIKI_OS_SYS_PROCESS__CONTEXT_START()
  */
-#define XCONTIKI_OS_SYS_PROCESS__CONTEXT_END(p) xcontiki_os_sys_Process__current = tmp_current; }
+#define XCONTIKI_OS_SYS_PROCESS__CONTEXT_END(p) current_process_ptr = tmp_current; }
 
 /**
  * \brief      Allocate a global event number.
@@ -481,7 +480,7 @@ void xcontiki_os_sys_Process__poll(struct xcontiki_os_sys_Process *p);
  *             This function initializes the process module and should
  *             be called by the system boot-up code.
  */
-void xcontiki_os_sys_Process__init(void);
+void xcontiki_os_sys_Process__initialize_the_process_module(void);
 
 /**
  * Run the system once - call poll handlers and process one event.
@@ -496,7 +495,7 @@ void xcontiki_os_sys_Process__init(void);
  * \return The number of events that are currently waiting in the
  * event queue.
  */
-int xcontiki_os_sys_Process__run(void);
+int xcontiki_os_sys_Process__process_next_event(void);
 
 
 /**
@@ -508,7 +507,7 @@ int xcontiki_os_sys_Process__run(void);
  * \retval Non-zero if the process is running.
  * \retval Zero if the process is not running.
  */
-int xcontiki_os_sys_Process__is_running(struct xcontiki_os_sys_Process *p);
+bool xcontiki_os_sys_Process__is_running(struct xcontiki_os_sys_Process *p);
 
 /**
  *  Number of events waiting to be processed.
@@ -516,13 +515,10 @@ int xcontiki_os_sys_Process__is_running(struct xcontiki_os_sys_Process *p);
  * \return The number of events that are currently waiting to be
  * processed.
  */
-int xcontiki_os_sys_Process__nevents(void);
+int xcontiki_os_sys_Process__number_of_events_waiting(void);
 
 /** @} */
 
-extern struct xcontiki_os_sys_Process *xcontiki_os_sys_Process__list;
-
-#define XCONTIKI_OS_SYS_PROCESS__LIST() xcontiki_os_sys_Process__list
 
 #endif /* XCONTIKI_OS_SYS_XCONTIKI_OS_SYS_PROCESS__H */
 

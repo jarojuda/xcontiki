@@ -115,7 +115,7 @@ again:
 
     for(t = timerlist; t != NULL; t = t->next) {
       if(xcontiki_os_sys_Timer__expired(&t->timer)) {
-        if(xcontiki_os_sys_Process__post(t->p, XCONTIKI_OS_SYS_PROCESS__EVENT_TIMER, t) == XCONTIKI_OS_SYS_PROCESS__ERR_OK) {
+        if(xcontiki_os_sys_Process__post_event_via_queue(t->p, XCONTIKI_OS_SYS_PROCESS__EVENT_TIMER, t) == XCONTIKI_OS_SYS_PROCESS__ERR_OK) {
 
           /* Reset the process ID of the event timer, to signal that the
              etimer has expired. This is later checked in the
@@ -147,17 +147,17 @@ xcontiki_os_sys_Etimer__request_poll(void)
 }
 /*---------------------------------------------------------------------------*/
 static void
-add_timer(struct xcontiki_os_sys_Etimer *xcontiki_os_sys_Timer__timer)
+add_timer(struct xcontiki_os_sys_Etimer *etimer)
 {
   struct xcontiki_os_sys_Etimer *t;
 
   xcontiki_os_sys_Etimer__request_poll();
 
-  if(xcontiki_os_sys_Timer__timer->p != XCONTIKI_OS_SYS_PROCESS__NONE) {
+  if(etimer->p != XCONTIKI_OS_SYS_PROCESS__NONE) {
     for(t = timerlist; t != NULL; t = t->next) {
-      if(t == xcontiki_os_sys_Timer__timer) {
+      if(t == etimer) {
         /* Timer already on list, bail out. */
-        xcontiki_os_sys_Timer__timer->p = XCONTIKI_OS_SYS_PROCESS__CURRENT();
+        etimer->p = xcontiki_os_sys_Process__get_current_process();
         update_time();
         return;
       }
@@ -165,9 +165,9 @@ add_timer(struct xcontiki_os_sys_Etimer *xcontiki_os_sys_Timer__timer)
   }
 
   /* Timer not on list. */
-  xcontiki_os_sys_Timer__timer->p = XCONTIKI_OS_SYS_PROCESS__CURRENT();
-  xcontiki_os_sys_Timer__timer->next = timerlist;
-  timerlist = xcontiki_os_sys_Timer__timer;
+  etimer->p = xcontiki_os_sys_Process__get_current_process();
+  etimer->next = timerlist;
+  timerlist = etimer;
 
   update_time();
 }

@@ -1,4 +1,5 @@
 #include "unity.h"
+#define XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS (3)
 #include "xcontiki/xcontiki.h"
 #include "xcontiki/os/sys/xcontiki_os_sys_Process.h"
 #include "mock_processes_for_test.h"
