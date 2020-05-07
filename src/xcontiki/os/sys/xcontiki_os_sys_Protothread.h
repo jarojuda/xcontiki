@@ -70,13 +70,13 @@ typedef struct {
  * Initializes a protothread. Initialization must be done prior to
  * starting to execute the protothread.
  *
- * \param pt A pointer to the protothread control structure.
+ * \param pt A protothread control structure.
  *
  * \sa PT_SPAWN()
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__INIT(pt)   ((pt)->local_continuation=0);
+#define XCONTIKI_OS_SYS_PROTOTHREAD__INIT(pt)   (pt.local_continuation=0);
 
 /** @} */
 
@@ -105,11 +105,11 @@ typedef struct {
  * which the protothread runs. All C statements above the PT_BEGIN()
  * invokation will be executed each time the protothread is scheduled.
  *
- * \param pt A pointer to the protothread control structure.
+ * \param pt A  protothread control structure.
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN(pt) { switch((pt)->local_continuation) { case 0:
+#define XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN(pt) { switch(pt.local_continuation) { case 0:
 
 /**
  * Declare the end of a protothread.
@@ -117,11 +117,11 @@ typedef struct {
  * This macro is used for declaring that a protothread ends. It must
  * always be used together with a matching PT_BEGIN() macro.
  *
- * \param pt A pointer to the protothread control structure.
+ * \param pt A protothread control structure.
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__END(pt) }; (pt)->local_continuation=0;\
+#define XCONTIKI_OS_SYS_PROTOTHREAD__END(pt) }; pt.local_continuation=0;\
   return XCONTIKI_OS_SYS_PROTOTHREAD__ENDED; }
 
 /** @} */
@@ -137,14 +137,14 @@ typedef struct {
  * This macro blocks the protothread until the specified condition is
  * true.
  *
- * \param pt A pointer to the protothread control structure.
+ * \param pt A  protothread control structure.
  * \param condition The condition.
  *
  * \hideinitializer
  */
 #define XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_UNTIL(pt, condition)         \
   do {      \
-    (pt)->local_continuation = __LINE__; case __LINE__:;    \
+    pt.local_continuation = __LINE__; case __LINE__:;    \
     if(!(condition)) {    \
       return XCONTIKI_OS_SYS_PROTOTHREAD__WAITING;   \
     }      \
@@ -156,7 +156,7 @@ typedef struct {
  * This function blocks and waits while condition is true. See
  * PT_WAIT_UNTIL().
  *
- * \param pt A pointer to the protothread control structure.
+ * \param pt A protothread control structure.
  * \param cond The condition.
  *
  * \hideinitializer
@@ -180,7 +180,7 @@ typedef struct {
  * \note The child protothread must be manually initialized with the
  * PT_INIT() function before this function is used.
  *
- * \param pt A pointer to the protothread control structure.
+ * \param pt A protothread control structure.
  * \param thread The child protothread with arguments
  *
  * \sa PT_SPAWN()
@@ -196,8 +196,8 @@ typedef struct {
  * This macro spawns a child protothread and waits until it exits. The
  * macro can only be used within a protothread.
  *
- * \param pt A pointer to the protothread control structure.
- * \param child A pointer to the child protothread's control structure.
+ * \param pt A protothread control structure.
+ * \param child A child protothread's control structure.
  * \param thread The child protothread with arguments
  *
  * \hideinitializer
@@ -238,7 +238,7 @@ typedef struct {
  * spawned by another protothread, the parent protothread will become
  * unblocked and can continue to run.
  *
- * \param pt A pointer to the protothread control structure.
+ * \param pt A protothread control structure.
  *
  * \hideinitializer
  */
@@ -282,19 +282,19 @@ typedef struct {
  * This function will yield the protothread, thereby allowing other
  * processing to take place in the system.
  *
- * \param pt A pointer to the protothread control structure.
+ * \param pt A protothread control structure.
  *
  * \hideinitializer
  */
 #define XCONTIKI_OS_SYS_PROTOTHREAD__YIELD(pt)    \
   do {      \
-      (pt)->local_continuation = __LINE__; case __LINE__:;\
+      pt.local_continuation = __LINE__; case __LINE__:;\
       return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;\
   } while(0)
 
 /**
  * \brief      Yield from the protothread until a condition occurs.
- * \param pt   A pointer to the protothread control structure.
+ * \param pt   A protothread control structure.
  * \param cond The condition.
  *
  *             This function will yield the protothread, until the
@@ -305,7 +305,7 @@ typedef struct {
  */
 #define XCONTIKI_OS_SYS_PROTOTHREAD__YIELD_UNTIL(pt, cond)  \
   do {      \
-    (pt)->local_continuation = __LINE__; case __LINE__:;    \
+    pt.local_continuation = __LINE__; case __LINE__:;    \
     if( !(cond)) { \
       return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;   \
     }      \

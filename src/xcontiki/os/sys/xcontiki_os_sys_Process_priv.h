@@ -118,7 +118,7 @@ exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *
     if(p->thread != NULL && p != fromprocess) {
       /* Post the exit event to the process that is about to exit. */
       current_process_ptr = p;
-      p->thread(&p->pt, XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, NULL);
+      p->thread(p->pt, XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, NULL);
     }
   }
 
@@ -152,7 +152,7 @@ call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t
     PRINTF("process: calling process '%s' with event %d\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), ev);
     current_process_ptr = p;
     p->state = STATE_CALLED;
-    ret = p->thread(&p->pt, ev, data);
+    ret = p->thread(p->pt, ev, data);
     if(ret == XCONTIKI_OS_SYS_PROTOTHREAD__EXITED ||
        ret == XCONTIKI_OS_SYS_PROTOTHREAD__ENDED ||
        ev == XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT) {
