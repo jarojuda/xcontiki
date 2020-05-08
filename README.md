@@ -9,7 +9,7 @@ Even the simple program can generate such errors:
 for simple assignment like this:
 
 ```c
-if (diff >= t->interval || diff &lt; t->previous_diff) {
+if (diff >= t->interval || diff < t->previous_diff) {
     t->expired = true;
     return true;
 }
