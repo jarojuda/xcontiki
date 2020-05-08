@@ -128,17 +128,26 @@ xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_t *t) {
  */
 bool
 xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t *t) {
-    if (t->expired) {
-        return true;
-    }
-    arch_xcontiki_os_sys_Clock__time_t diff = (arch_xcontiki_os_sys_Clock__time() - t->start);
-    if (diff >= t->interval || diff < t->previous_diff) {
-        t->expired = true;
-        return true;
-    }
-    t->previous_diff = diff;
-    return false;
+  //Hack to avoid XC8 error:(1466) registers unavailable for code generation of this expression
+  static xcontiki_os_sys_Timer__timer_t tmp_timer;
+  bool result;
 
+  if(t->expired){
+    return true;
+  }
+
+  memcpy(&tmp_timer, t, sizeof( xcontiki_os_sys_Timer__timer_t));
+  arch_xcontiki_os_sys_Clock__time_t diff = (arch_xcontiki_os_sys_Clock__time() - tmp_timer.start);
+  if (diff >= tmp_timer.interval || diff < tmp_timer.previous_diff) {
+      tmp_timer.expired = true;
+      result= true;
+  } else {
+      result = false;
+  }
+  tmp_timer.previous_diff = diff;
+  memcpy(t, &tmp_timer, sizeof( xcontiki_os_sys_Timer__timer_t));
+
+  return result;
 }
 /*---------------------------------------------------------------------------*/
 
