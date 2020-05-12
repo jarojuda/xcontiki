@@ -38,85 +38,85 @@
  */
 
 #include "xcontiki/xcontiki.h"
+
 /*---------------------------------------------------------------------------*/
 void
-xcontiki_os_lib_Ringbuf__init(struct xcontiki_os_lib_Ringbuf__ringbuf *r, uint8_t *dataptr, uint8_t size)
-{
-  r->data = dataptr;
-  r->mask = size - 1;
-  r->put_ptr = 0;
-  r->get_ptr = 0;
+xcontiki_os_lib_Ringbuf__init(struct xcontiki_os_lib_Ringbuf__ringbuf *r, uint8_t *dataptr, uint8_t size) {
+    r->data = dataptr;
+    r->mask = size - 1;
+    r->put_ptr = 0;
+    r->get_ptr = 0;
 }
-/*---------------------------------------------------------------------------*/
-int
-xcontiki_os_lib_Ringbuf__put(struct xcontiki_os_lib_Ringbuf__ringbuf *r, uint8_t c)
-{
-  /* Check if buffer is full. If it is full, return 0 to indicate that
-     the element was not inserted into the buffer.
 
-     XXX: there is a potential risk for a race condition here, because
-     the ->get_ptr field may be written concurrently by the
-     ringbuf_get() function. To avoid this, access to ->get_ptr must
-     be atomic. We use an uint8_t type, which makes access atomic on
-     most platforms, but C does not guarantee this.
-  */
-  if(((r->put_ptr - r->get_ptr) & r->mask) == r->mask) {
-    return 0;
-  }
-  /*
-   * CC_ACCESS_NOW is used because the compiler is allowed to reorder
-   * the access to non-volatile variables.
-   * In this case a reader might read from the moved index/ptr before
-   * its value (c) is written. Reordering makes little sense, but
-   * better safe than sorry.
-   */
-  ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(uint8_t, r->data[r->put_ptr]) = c;
-  ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(uint8_t, r->put_ptr) = (r->put_ptr + 1) & r->mask;
-  return 1;
-}
 /*---------------------------------------------------------------------------*/
-int
-xcontiki_os_lib_Ringbuf__get(struct xcontiki_os_lib_Ringbuf__ringbuf *r)
-{
-  uint8_t c;
-  
-  /* Check if there are bytes in the buffer. If so, we return the
-     first one and increase the pointer. If there are no bytes left, we
-     return -1.
+bool
+xcontiki_os_lib_Ringbuf__put(struct xcontiki_os_lib_Ringbuf__ringbuf *r, uint8_t c) {
+    /* Check if buffer is full. If it is full, return 0 to indicate that
+       the element was not inserted into the buffer.
 
-     XXX: there is a potential risk for a race condition here, because
-     the ->put_ptr field may be written concurrently by the
-     ringbuf_put() function. To avoid this, access to ->get_ptr must
-     be atomic. We use an uint8_t type, which makes access atomic on
-     most platforms, but C does not guarantee this.
-  */
-  if(((r->put_ptr - r->get_ptr) & r->mask) > 0) {
+       XXX: there is a potential risk for a race condition here, because
+       the ->get_ptr field may be written concurrently by the
+       ringbuf_get() function. To avoid this, access to ->get_ptr must
+       be atomic. We use an uint8_t type, which makes access atomic on
+       most platforms, but C does not guarantee this.
+     */
+    if (((r->put_ptr - r->get_ptr) & r->mask) == r->mask) {
+        return 0;
+    }
     /*
      * CC_ACCESS_NOW is used because the compiler is allowed to reorder
      * the access to non-volatile variables.
-     * In this case the memory might be freed and overwritten by
-     * increasing get_ptr before the value was copied to c.
-     * Opposed to the put-operation this would even make sense,
-     * because the register used for mask can be reused to save c
-     * (on some architectures).
+     * In this case a reader might read from the moved index/ptr before
+     * its value (c) is written. Reordering makes little sense, but
+     * better safe than sorry.
      */
-    c = ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(uint8_t, r->data[r->get_ptr]);
-    ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(uint8_t, r->get_ptr) = (r->get_ptr + 1) & r->mask;
-    return c;
-  } else {
-    return -1;
-  }
+    ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(uint8_t, r->data[r->put_ptr]) = c;
+    ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(uint8_t, r->put_ptr) = (r->put_ptr + 1) & r->mask;
+    return 1;
 }
+
 /*---------------------------------------------------------------------------*/
-int
-xcontiki_os_lib_Ringbuf__size(struct xcontiki_os_lib_Ringbuf__ringbuf *r)
-{
-  return r->mask + 1;
+uint8_t
+xcontiki_os_lib_Ringbuf__get(struct xcontiki_os_lib_Ringbuf__ringbuf *r) {
+    uint8_t c;
+
+    /* Check if there are bytes in the buffer. If so, we return the
+       first one and increase the pointer. If there are no bytes left, we
+       return -1.
+
+       XXX: there is a potential risk for a race condition here, because
+       the ->put_ptr field may be written concurrently by the
+       ringbuf_put() function. To avoid this, access to ->get_ptr must
+       be atomic. We use an uint8_t type, which makes access atomic on
+       most platforms, but C does not guarantee this.
+     */
+    if (((r->put_ptr - r->get_ptr) & r->mask) > 0) {
+        /*
+         * CC_ACCESS_NOW is used because the compiler is allowed to reorder
+         * the access to non-volatile variables.
+         * In this case the memory might be freed and overwritten by
+         * increasing get_ptr before the value was copied to c.
+         * Opposed to the put-operation this would even make sense,
+         * because the register used for mask can be reused to save c
+         * (on some architectures).
+         */
+        c = ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(uint8_t, r->data[r->get_ptr]);
+        ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(uint8_t, r->get_ptr) = (r->get_ptr + 1) & r->mask;
+        return c;
+    } else {
+        return -1;
+    }
 }
+
 /*---------------------------------------------------------------------------*/
-int
-xcontiki_os_lib_Ringbuf__elements(struct xcontiki_os_lib_Ringbuf__ringbuf *r)
-{
-  return (r->put_ptr - r->get_ptr) & r->mask;
+uint8_t
+xcontiki_os_lib_Ringbuf__size(struct xcontiki_os_lib_Ringbuf__ringbuf *r) {
+    return r->mask + 1;
+}
+
+/*---------------------------------------------------------------------------*/
+uint8_t
+xcontiki_os_lib_Ringbuf__elements(struct xcontiki_os_lib_Ringbuf__ringbuf *r) {
+    return (r->put_ptr - r->get_ptr) & r->mask;
 }
 /*---------------------------------------------------------------------------*/
