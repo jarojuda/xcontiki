@@ -269,12 +269,6 @@ typedef unsigned char xcontiki_os_sys_Process__num_events_t;
  *
  * \hideinitializer
  */
-<<<<<<< Updated upstream
-#define XCONTIKI_OS_SYS_PROCESS__THREAD(name, ev, data) 				\
-static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(xcontiki_os_sys_Protothread__pt_t process_pt,	\
-				       xcontiki_os_sys_Process__event_t ev,	\
-				       xcontiki_os_sys_Process__data_t data)
-=======
 #define XCONTIKI_OS_SYS_PROCESS__THREAD(name, ev, data) \
 static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name##_internal(\
                                         xcontiki_os_sys_Process__event_t,\
@@ -289,7 +283,6 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(\
                process_thread_##name##_pt=process_pt;\
                return process_thread_state;\
 }
->>>>>>> Stashed changes
 
 /**
  * Declare the name of a process.
@@ -340,14 +333,8 @@ struct xcontiki_os_sys_Process {
     const char *name;
 #define XCONTIKI_OS_SYS_PROCESS__NAME_STRING(process) (process)->name
 #endif
-<<<<<<< Updated upstream
-  XCONTIKI_OS_SYS_PROTOTHREAD__THREAD (* thread)(xcontiki_os_sys_Protothread__pt_t, xcontiki_os_sys_Process__event_t, xcontiki_os_sys_Process__data_t);
-  xcontiki_os_sys_Protothread__pt_t pt;
-  unsigned char state, needspoll;
-=======
     XCONTIKI_OS_SYS_PROTOTHREAD__THREAD(* thread)(xcontiki_os_sys_Process__event_t, xcontiki_os_sys_Process__data_t);
     unsigned char state, needspoll;
->>>>>>> Stashed changes
 };
 
 /**
