@@ -44,7 +44,8 @@ extern "C" {
 #endif
 
 #include "xcontiki/os/sys/xcontiki_os_sys.h"
-
+#include "xcontiki/os/lib/xcontiki_os_lib.h"
+    
 
 #ifdef	__cplusplus
 }
