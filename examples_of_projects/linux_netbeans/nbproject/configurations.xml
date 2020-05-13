@@ -28,6 +28,7 @@
               </logicalFolder>
               <logicalFolder name="sys" displayName="sys" projectFiles="true">
                 <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h</itemPath>
+                <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Cc.h</itemPath>
                 <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c</itemPath>
                 <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h</itemPath>
               </logicalFolder>
@@ -147,6 +148,11 @@
             flavor2="0">
       </item>
       <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Cc.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -311,6 +317,11 @@
             flavor2="0">
       </item>
       <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Cc.h"
             ex="false"
             tool="3"
             flavor2="0">
