@@ -28,6 +28,7 @@
               </logicalFolder>
               <logicalFolder name="sys" displayName="sys" projectFiles="true">
                 <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h</itemPath>
+                <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Cc.h</itemPath>
                 <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c</itemPath>
                 <itemPath>../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h</itemPath>
               </logicalFolder>
@@ -40,6 +41,11 @@
       </logicalFolder>
       <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
         <logicalFolder name="os" displayName="os" projectFiles="true">
+          <logicalFolder name="f1" displayName="lib" projectFiles="true">
+            <itemPath>../../src/xcontiki/os/lib/xcontiki_os_lib.h</itemPath>
+            <itemPath>../../src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c</itemPath>
+            <itemPath>../../src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.h</itemPath>
+          </logicalFolder>
           <logicalFolder name="sys" displayName="sys" projectFiles="true">
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys.h</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c</itemPath>
@@ -61,6 +67,11 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="New CUnit Test"
+                     projectFiles="true"
+                     kind="TEST">
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -141,12 +152,32 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Cc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
       <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -203,6 +234,14 @@
       </item>
       <item path="../../src/xcontiki/xcontiki.h" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles/f1">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
@@ -282,12 +321,32 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Cc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
       <item path="../../src/generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -344,6 +403,14 @@
       </item>
       <item path="../../src/xcontiki/xcontiki.h" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles/f1">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>

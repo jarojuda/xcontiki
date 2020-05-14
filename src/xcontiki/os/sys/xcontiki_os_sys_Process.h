@@ -56,7 +56,7 @@
 #include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
 
 typedef unsigned char xcontiki_os_sys_Process__event_t;
-typedef void *        xcontiki_os_sys_Process__data_t;
+typedef void * xcontiki_os_sys_Process__data_t;
 typedef unsigned char xcontiki_os_sys_Process__num_events_t;
 
 /**
@@ -217,8 +217,8 @@ typedef unsigned char xcontiki_os_sys_Process__num_events_t;
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROCESS__PAUSE()             do {				\
-  xcontiki_os_sys_Process__post_event_via_queue(XCONTIKI_OS_SYS_PROCESS__CURRENT(), XCONTIKI_OS_SYS_PROCESS__EVENT_CONTINUE, NULL);	\
+#define XCONTIKI_OS_SYS_PROCESS__PAUSE()             do {    \
+  xcontiki_os_sys_Process__post_event_via_queue(XCONTIKI_OS_SYS_PROCESS__CURRENT(), XCONTIKI_OS_SYS_PROCESS__EVENT_CONTINUE, NULL); \
   XCONTIKI_OS_SYS_PROCESS__WAIT_EVENT_UNTIL(ev == XCONTIKI_OS_SYS_PROCESS__EVENT_CONTINUE);               \
 } while(0)
 
@@ -269,10 +269,25 @@ typedef unsigned char xcontiki_os_sys_Process__num_events_t;
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROCESS__THREAD(name, ev, data) 				\
-static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(xcontiki_os_sys_Protothread__pt_t *process_pt,	\
-				       xcontiki_os_sys_Process__event_t ev,	\
-				       xcontiki_os_sys_Process__data_t data)
+#define XCONTIKI_OS_SYS_PROCESS__THREAD(name, ev, data) \
+                static\
+                XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name##_internal(\
+                                        xcontiki_os_sys_Process__event_t,\
+				                                xcontiki_os_sys_Process__data_t);\
+                static xcontiki_os_sys_Protothread__pt_t process_pt;\
+                static \
+                XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(\
+				       xcontiki_os_sys_Process__event_t ev,\
+				       xcontiki_os_sys_Process__data_t data){\
+               static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_state;\
+               process_pt = process_thread_##name##_pt;\
+               process_thread_state = process_thread_##name##_internal(ev,data);\
+               process_thread_##name##_pt=process_pt;\
+               return process_thread_state;\
+             }\
+static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name##_internal(\
+                                        xcontiki_os_sys_Process__event_t ev,\
+				        xcontiki_os_sys_Process__data_t data)
 
 /**
  * Declare the name of a process.
@@ -297,31 +312,24 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(xcontiki_os_sys
  *
  * \hideinitializer
  */
-#if XCONTIKI_OS_SYS_PROCESS__CONF_NO_PROCESS__NAMES
-#define XCONTIKI_OS_SYS_PROCESS(name, strname)				\
-  XCONTIKI_OS_SYS_PROCESS__THREAD(name, ev, data);			\
-  struct xcontiki_os_sys_Process name = { NULL,		        \
+
+#define XCONTIKI_OS_SYS_PROCESS(name, strname)    \
+  static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(\
+                                        xcontiki_os_sys_Process__event_t,\
+                                        xcontiki_os_sys_Process__data_t);   \
+  static xcontiki_os_sys_Protothread__pt_t process_thread_##name##_pt={0}; \
+  struct xcontiki_os_sys_Process name = { NULL,  \
                           process_thread_##name }
-#else
-#define XCONTIKI_OS_SYS_PROCESS(name, strname)				\
-  XCONTIKI_OS_SYS_PROCESS__THREAD(name, ev, data);			\
-  struct xcontiki_os_sys_Process name = { NULL, strname,		\
-                          process_thread_##name }
-#endif
+
 
 /** @} */
 
-struct xcontiki_os_sys_Process {
-  struct xcontiki_os_sys_Process *next;
-#if XCONTIKI_OS_SYS_PROCESS__CONF_NO_PROCESS_NAMES
 #define XCONTIKI_OS_SYS_PROCESS__NAME_STRING(process) ""
-#else
-  const char *name;
-#define XCONTIKI_OS_SYS_PROCESS__NAME_STRING(process) (process)->name
-#endif
-  XCONTIKI_OS_SYS_PROTOTHREAD__THREAD (* thread)(xcontiki_os_sys_Protothread__pt_t*, xcontiki_os_sys_Process__event_t, xcontiki_os_sys_Process__data_t);
-  xcontiki_os_sys_Protothread__pt_t pt;
-  unsigned char state, needspoll;
+
+struct xcontiki_os_sys_Process {
+    struct xcontiki_os_sys_Process *next;
+    XCONTIKI_OS_SYS_PROTOTHREAD__THREAD(* thread)(xcontiki_os_sys_Process__event_t, xcontiki_os_sys_Process__data_t);
+    unsigned char state, needspoll;
 };
 
 /**
@@ -374,7 +382,7 @@ int8_t xcontiki_os_sys_Process__post_event_via_queue(struct xcontiki_os_sys_Proc
  * with the event.
  */
 void xcontiki_os_sys_Process__post_synchronous_event(struct xcontiki_os_sys_Process *p,
-                        xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
+        xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
 
 /**
  * \brief      Cause a process to exit

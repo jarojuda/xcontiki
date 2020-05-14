@@ -42,6 +42,7 @@
 extern "C" {
 #endif
 
+#include "arch/xcontiki/os/sys/arch_xcontiki_os_sys_Cc.h"  
 #include "arch/xcontiki/os/sys/arch_xcontiki_os_sys_Clock.h"
 
 #ifdef __cplusplus
