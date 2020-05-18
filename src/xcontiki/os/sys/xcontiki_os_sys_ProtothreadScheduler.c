@@ -26,38 +26,12 @@
 
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
- * projects.
+ * projects. 
  */
 
-/*
- * File:   arch.h
+/* 
+ * File:   xcontiki_os_sys_ProtothreadScheduler.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#ifndef ARCH_H
-#define ARCH_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <stdint.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define __rom
-#define __ram
-    
-#define __PACKED __attribute__((packed))     
-#include "arch/dev/arch_dev.h"
-#include "arch/xcontiki/arch_xcontiki.h"
-
-    
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* ARCH_H */
