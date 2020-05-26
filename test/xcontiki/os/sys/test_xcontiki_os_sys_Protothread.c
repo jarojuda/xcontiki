@@ -6,7 +6,7 @@
 #include "mock_tasks_for_test.h"
 
 
-#define TEST_TASKS_LIST \
+#define TEST_TASK_LIST \
         XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULER_TASK(task1_that_runs_everytime, 0) \
         XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULER_TASK(task2_started_in_the_meantime, ARCH_XCONTIKI_OS_SYS_CLOCK__MAX/2ull) \
         XCONTIKI_OS_SYS_PROTOTHREAD__SCHEDULER_TASK(task3_with_max_interval, ARCH_XCONTIKI_OS_SYS_CLOCK__MAX) \

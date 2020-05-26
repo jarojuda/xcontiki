@@ -26,12 +26,108 @@
 
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
- * projects. 
+ * projects.
  */
 
-/* 
+/*
  * File:   xcontiki_os_sys_ProtothreadScheduler.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
+#ifdef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+#include "xcontiki/xcontiki.h"
+
+enum {
+    number_of_tasks = 0
+#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+     +1
+
+    XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+
+#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+};
+
+enum {
+#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+     __FILE##task,
+
+    XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+
+#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+};
+
+
+static const arch_xcontiki_os_sys_Clock__time_t interval[number_of_tasks] = {
+#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+     interval,
+
+    XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+
+#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+};
+
+static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD last_states[number_of_tasks];
+static arch_xcontiki_os_sys_Clock__time_t last_ticks[number_of_tasks];
+static arch_xcontiki_os_sys_Clock__time_t prev_diff[number_of_tasks];
+
+static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD call_task(uint8_t task_number) {
+    switch (task_number) {
+#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+ case __FILE##task: return task();
+
+            XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+
+#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+
+        default:
+            return XCONTIKI_OS_SYS_PROTOTHREAD__ENDED;
+    }
+}
+
+static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
+    static uint8_t i;
+    arch_xcontiki_os_sys_Clock__time_t diff;
+
+    for (i = 0; i < number_of_tasks; i++) {
+        if (last_states[i] >= XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN) {
+            last_ticks[i] = arch_xcontiki_os_sys_Clock__time();
+            prev_diff[i] = 0;
+            last_states[i] = call_task(i);
+        } else if (0 == interval[i] || last_states[i] < XCONTIKI_OS_SYS_PROTOTHREAD__EXITED) {
+            last_states[i] = call_task(i);
+        } else {
+            diff = arch_xcontiki_os_sys_Clock__time() - last_ticks[i];
+            if (diff >= interval[i] || diff < prev_diff[i]) {
+                last_ticks[i] = arch_xcontiki_os_sys_Clock__time();
+                prev_diff[i] = 0;
+                last_states[i] = call_task(i);
+            } else {
+                prev_diff[i] = diff;
+            }
+        }
+    }
+    XCONTIKI_OS_SYS_PROTOTHREAD__THREAD result;
+    result = XCONTIKI_OS_SYS_PROTOTHREAD__ENDED;
+    for (i = 0; i < number_of_tasks; i++) {
+        if (XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED == last_states[i]) {
+            result = XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;
+            break;
+        } else if (XCONTIKI_OS_SYS_PROTOTHREAD__WAITING == last_states[i]) {
+            result = XCONTIKI_OS_SYS_PROTOTHREAD__WAITING;
+        }
+    }
+    return result;
+}
+
+static void scheduler__init(void) {
+    uint8_t i;
+    for (i = 0; i <= number_of_tasks; i++) {
+        last_states[i] = XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN;
+        last_ticks[i] = 0;
+    }
+}
+#else
+#warning Define the list of tasks as the set of X macros
+
+#endif //XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
