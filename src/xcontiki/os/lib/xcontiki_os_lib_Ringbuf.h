@@ -127,6 +127,35 @@ uint8_t xcontiki_os_lib_Ringbuf__size(struct xcontiki_os_lib_Ringbuf__ringbuf *r
  */
 uint8_t xcontiki_os_lib_Ringbuf__elements(struct xcontiki_os_lib_Ringbuf__ringbuf *r);
 
+#define XCONTIKI_OS_LIB_RINGBUF__NEW_STATIC(ringbuf, size_power_of_two)\
+static struct xcontiki_os_lib_Ringbuf__ringbuf ringbuf;\
+static uint8_t ringbuf##array[size_power_of_two];\
+\
+static void ringbuf##init(void) {\
+  xcontiki_os_lib_Ringbuf__init(&ringbuf, ringbuf##array, size_power_of_two);\
+}\
+static bool ringbuf##put(uint8_t c){\
+  return xcontiki_os_lib_Ringbuf__put(&ringbuf, c);\
+}\
+static uint8_t ringbuf##get(void){\
+  return xcontiki_os_lib_Ringbuf__get(&ringbuf);\
+}\
+static uint8_t ringbuf##size(void){\
+  return size_power_of_two\;\
+}\
+static uint8_t ringbuf##elements(void){\
+  return xcontiki_os_lib_Ringbuf__elements(&ringbuf);\
+}\
+static const struct {\
+  void (* const init)(void);\
+  bool (* const put)(uint8_t);\
+  uint8_t (* const get)(void);\
+  uint8_t (* const size)(void);\
+  uint8_t (* const elements)(void);\
+} = \
+{ ringbuf##init, ringbuf##put, ringbuf##get, ringbuf##size, ringbuf##elements };\
+
+
 #endif /* XCONTIKI_OS_LIB_RINGBUF_H */
 
 /** @}*/
