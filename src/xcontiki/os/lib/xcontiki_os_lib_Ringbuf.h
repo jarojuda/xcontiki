@@ -63,13 +63,16 @@
  *             elements.
  *
  */
-struct xcontiki_os_lib_Ringbuf__ringbuf {
+struct __PACKED xcontiki_os_lib_Ringbuf__ringbuf {
     uint8_t *data;
     uint8_t mask;
 
     /* XXX these must be 8-bit quantities to avoid race conditions. */
     uint8_t put_ptr, get_ptr;
 };
+
+typedef  struct xcontiki_os_lib_Ringbuf__ringbuf xcontiki_os_lib_Ringbuf__ringbuf_t;
+#define xcontiki_os_lib_Ringbuf__ringbuf_t xcontiki_os_lib_Ringbuf__ringbuf_t
 
 /**
  * \brief      Initialize a ring buffer
@@ -84,7 +87,7 @@ struct xcontiki_os_lib_Ringbuf__ringbuf {
  *             bytes.
  *
  */
-void xcontiki_os_lib_Ringbuf__init(struct xcontiki_os_lib_Ringbuf__ringbuf *r, uint8_t *a,
+void xcontiki_os_lib_Ringbuf__init(xcontiki_os_lib_Ringbuf__ringbuf_t  __ram *r, uint8_t __ram *a,
         uint8_t size_power_of_two);
 
 /**
@@ -98,7 +101,7 @@ void xcontiki_os_lib_Ringbuf__init(struct xcontiki_os_lib_Ringbuf__ringbuf *r, u
  *             handler.
  *
  */
-bool xcontiki_os_lib_Ringbuf__put(struct xcontiki_os_lib_Ringbuf__ringbuf *r, uint8_t c);
+bool xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r, uint8_t c);
 
 
 /**
@@ -111,24 +114,24 @@ bool xcontiki_os_lib_Ringbuf__put(struct xcontiki_os_lib_Ringbuf__ringbuf *r, ui
  *             handler.
  *
  */
-uint8_t xcontiki_os_lib_Ringbuf__get(struct xcontiki_os_lib_Ringbuf__ringbuf *r);
+uint8_t xcontiki_os_lib_Ringbuf__get(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r);
 
 /**
  * \brief      Get the size of a ring buffer
  * \param r    A pointer to a struct ringbuf to hold the state of the ring buffer
  * \return     The size of the buffer.
  */
-uint8_t xcontiki_os_lib_Ringbuf__size(struct xcontiki_os_lib_Ringbuf__ringbuf *r);
+uint8_t xcontiki_os_lib_Ringbuf__size(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r);
 
 /**
  * \brief      Get the number of elements currently in the ring buffer
  * \param r    A pointer to a struct ringbuf to hold the state of the ring buffer
  * \return     The number of elements in the buffer.
  */
-uint8_t xcontiki_os_lib_Ringbuf__elements(struct xcontiki_os_lib_Ringbuf__ringbuf *r);
+uint8_t xcontiki_os_lib_Ringbuf__elements(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r);
 
 #define XCONTIKI_OS_LIB_RINGBUF__NEW_STATIC(ringbuf, size_power_of_two)\
-static struct xcontiki_os_lib_Ringbuf__ringbuf ringbuf;\
+static xcontiki_os_lib_Ringbuf__ringbuf_t ringbuf;\
 static uint8_t ringbuf##array[size_power_of_two];\
 \
 static void ringbuf##init(void) {\
