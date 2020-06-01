@@ -35,7 +35,10 @@
  *
  */
 
-#ifdef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+#ifndef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+#warning Define the list of tasks as the set of X macros
+#else
+
 #include "xcontiki/xcontiki.h"
 
 enum {
@@ -48,17 +51,14 @@ enum {
 #undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
 };
 
-enum {
 #define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
-     __FILE##task,
+    XCONTIKI_OS_SYS_PROTOTHREAD__THREAD task (void);
 
-    XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 
 #undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
-};
 
-
-static const arch_xcontiki_os_sys_Clock__time_t interval[number_of_tasks] = {
+        static const arch_xcontiki_os_sys_Clock__time_t interval[number_of_tasks] = {
 #define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
      interval,
 
@@ -72,9 +72,19 @@ static arch_xcontiki_os_sys_Clock__time_t last_ticks[number_of_tasks];
 static arch_xcontiki_os_sys_Clock__time_t prev_diff[number_of_tasks];
 
 static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD call_task(uint8_t task_number) {
+
+    enum {
+#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+     _##task,
+
+        XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+
+#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+    };
+
     switch (task_number) {
 #define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
- case __FILE##task: return task();
+ case _##task: return task();
 
             XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 
@@ -85,10 +95,19 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD call_task(uint8_t task_number) {
     }
 }
 
+static bool scheduler_first_run = true;
+
 static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
     static uint8_t i;
     arch_xcontiki_os_sys_Clock__time_t diff;
 
+    if (scheduler_first_run) {
+        for (i = 0; i <= number_of_tasks; i++) {
+            last_states[i] = XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN;
+            last_ticks[i] = 0;
+        }
+        scheduler_first_run = false;
+    }
     for (i = 0; i < number_of_tasks; i++) {
         if (last_states[i] >= XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN) {
             last_ticks[i] = arch_xcontiki_os_sys_Clock__time();
@@ -121,13 +140,7 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
 }
 
 static void scheduler__init(void) {
-    uint8_t i;
-    for (i = 0; i <= number_of_tasks; i++) {
-        last_states[i] = XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN;
-        last_ticks[i] = 0;
-    }
+    scheduler_first_run = true;
 }
-#else
-#warning Define the list of tasks as the set of X macros
 
 #endif //XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
