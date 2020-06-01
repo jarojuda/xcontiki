@@ -43,6 +43,7 @@ extern "C" {
 #endif
 
 #include "xcontiki/os/lib/xcontiki_os_lib_Ringbuf.h"
+#include "xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.h"
 
 
 
