@@ -41,7 +41,7 @@
 
 /*---------------------------------------------------------------------------*/
 void
-xcontiki_os_lib_Ringbuf__init(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r, uint8_t __ram *dataptr, uint8_t size) {
+xcontiki_os_lib_Ringbuf__init(xcontiki_os_lib_Ringbuf__ringbuf_t  *r, uint8_t  *dataptr, uint8_t size) {
     r->data = dataptr;
     r->mask = size - 1;
     r->put_ptr = 0;
@@ -50,7 +50,7 @@ xcontiki_os_lib_Ringbuf__init(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r, uint8
 
 /*---------------------------------------------------------------------------*/
 bool
-xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r, uint8_t c) {
+xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t  *r, uint8_t c) {
     /* Check if buffer is full. If it is full, return 0 to indicate that
        the element was not inserted into the buffer.
 
@@ -77,7 +77,7 @@ xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r, uint8_
 
 /*---------------------------------------------------------------------------*/
 uint8_t
-xcontiki_os_lib_Ringbuf__get(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r) {
+xcontiki_os_lib_Ringbuf__get(xcontiki_os_lib_Ringbuf__ringbuf_t  *r) {
     uint8_t c;
 
     /* Check if there are bytes in the buffer. If so, we return the
@@ -110,13 +110,13 @@ xcontiki_os_lib_Ringbuf__get(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r) {
 
 /*---------------------------------------------------------------------------*/
 uint8_t
-xcontiki_os_lib_Ringbuf__size(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r) {
+xcontiki_os_lib_Ringbuf__size(xcontiki_os_lib_Ringbuf__ringbuf_t  *r) {
     return r->mask + 1;
 }
 
 /*---------------------------------------------------------------------------*/
 uint8_t
-xcontiki_os_lib_Ringbuf__elements(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r) {
+xcontiki_os_lib_Ringbuf__elements(xcontiki_os_lib_Ringbuf__ringbuf_t  *r) {
     return (r->put_ptr - r->get_ptr) & r->mask;
 }
 /*---------------------------------------------------------------------------*/

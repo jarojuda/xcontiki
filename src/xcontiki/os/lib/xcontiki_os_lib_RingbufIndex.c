@@ -46,7 +46,7 @@
 
 /* Initialize a ring buffer. The size must be a power of two */
 void
-xcontiki_os_lib_RingbufIndex__init(xcontiki_os_lib_RingbufIndex__ringbufindex_t *r, uint8_t size) {
+xcontiki_os_lib_RingbufIndex__init(xcontiki_os_lib_RingbufIndex__ringbufindex_t  *r, uint8_t size) {
     r->mask = size - 1;
     r->put_ptr = 0;
     r->get_ptr = 0;
@@ -54,7 +54,7 @@ xcontiki_os_lib_RingbufIndex__init(xcontiki_os_lib_RingbufIndex__ringbufindex_t 
 
 /* Put one element to the ring buffer */
 bool
-xcontiki_os_lib_RingbufIndex__put(xcontiki_os_lib_RingbufIndex__ringbufindex_t *r) {
+xcontiki_os_lib_RingbufIndex__put(xcontiki_os_lib_RingbufIndex__ringbufindex_t  *r) {
     /* Check if buffer is full. If it is full, return 0 to indicate that
        the element was not inserted.
 
@@ -86,7 +86,7 @@ xcontiki_os_lib_RingbufIndex__peek_put(const xcontiki_os_lib_RingbufIndex__ringb
 
 /* Remove the first element and return its index */
 int
-xcontiki_os_lib_RingbufIndex__get(xcontiki_os_lib_RingbufIndex__ringbufindex_t *r) {
+xcontiki_os_lib_RingbufIndex__get(xcontiki_os_lib_RingbufIndex__ringbufindex_t  *r) {
     int get_ptr;
 
     /* Check if there are bytes in the buffer. If so, we return the

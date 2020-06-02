@@ -53,7 +53,7 @@ typedef struct xcontiki_os_lib_RingbufIndex__ringbufindex xcontiki_os_lib_Ringbu
  * \param r Pointer to ringbufindex
  * \param size Size of ring buffer
  */
-void xcontiki_os_lib_RingbufIndex__init(xcontiki_os_lib_RingbufIndex__ringbufindex_t *r, uint8_t size);
+void xcontiki_os_lib_RingbufIndex__init(xcontiki_os_lib_RingbufIndex__ringbufindex_t  *r, uint8_t size);
 
 /**
  * \brief Put one element to the ring buffer
@@ -61,7 +61,7 @@ void xcontiki_os_lib_RingbufIndex__init(xcontiki_os_lib_RingbufIndex__ringbufind
  * \retval 0 Failure; the ring buffer is full
  * \retval 1 Success; an element is added
  */
-bool xcontiki_os_lib_RingbufIndex__put(xcontiki_os_lib_RingbufIndex__ringbufindex_t *r);
+bool xcontiki_os_lib_RingbufIndex__put(xcontiki_os_lib_RingbufIndex__ringbufindex_t  *r);
 
 /**
  * \brief Check if there is space to put an element.
@@ -77,7 +77,7 @@ int xcontiki_os_lib_RingbufIndex__peek_put(const xcontiki_os_lib_RingbufIndex__r
  * \retval >= 0 The index of the first element
  * \retval -1 No element in the ring buffer
  */
-int xcontiki_os_lib_RingbufIndex__get(xcontiki_os_lib_RingbufIndex__ringbufindex_t *r);
+int xcontiki_os_lib_RingbufIndex__get(xcontiki_os_lib_RingbufIndex__ringbufindex_t  *r);
 
 /**
  * \brief Return the index of the first element which will be removed if calling
@@ -115,5 +115,58 @@ bool xcontiki_os_lib_RingbufIndex__full(const xcontiki_os_lib_RingbufIndex__ring
  * \retval 1 Empty
  */
 bool xcontiki_os_lib_RingbufIndex__empty(const xcontiki_os_lib_RingbufIndex__ringbufindex_t *r);
+
+#define XCONTIKI_OS_LIB_RINGBUFFERINDEX_NEW_STATIC(rbi, size_power_of_two)\
+\
+static xcontiki_os_lib_RingbufIndex__ringbufindex_t _##rbi;\
+\
+static void rbi##init(void) {\
+xcontiki_os_lib_RingbufIndex__init(&_##rbi, size_power_of_two);\
+}\
+\
+static bool rbi##put(void) {\
+    return xcontiki_os_lib_RingbufIndex__put(&_##rbi);\
+}\
+\
+static int rbi##peek_put(void) {\
+    return xcontiki_os_lib_RingbufIndex__peek_put(&_##rbi);\
+}\
+\
+static int rbi##get(void) {\
+    return xcontiki_os_lib_RingbufIndex__get(&_##rbi);\
+}\
+\
+static int rbi##peek_get(void) {\
+    return xcontiki_os_lib_RingbufIndex__peek_get(&_##rbi);\
+}\
+\
+static uint8_t size(void) {\
+    return xcontiki_os_lib_RingbufIndex__size(&_##rbi);\
+}\
+\
+static uint8_t elements(void) {\
+    return xcontiki_os_lib_RingbufIndex__elements(&_##rbi);\
+}\
+\
+static bool rbi##full(void) {\
+    return xcontiki_os_lib_RingbufIndex__full(&_##rbi);\
+}\
+\
+static bool rbi##empty(void) {\
+    return xcontiki_os_lib_RingbufIndex__empty(&_##rbi);\
+}\
+\
+static const struct {\
+    void (* init)(uint8_t);\
+    bool (* put)(void);\
+    int (* peek_put)(void);\
+    int (* get)(void);\
+    int (* peek_get)(void);\
+    uint8_t(* size)(void);\
+    uint8_t(* elements)(void);\
+    bool (* full)(void);\
+    bool (* empty)(void);\
+\
+} rbi = {rbi##init, rbi##put, rbi##peek_put, rbi##get, rbi##peek_get, rbi##size, rbi##elements, rbi##full, rbi##empty};
 
 #endif /* XCONTIKI_OS_LIB_RINGBUFINDEX_H */

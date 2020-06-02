@@ -87,7 +87,7 @@ typedef  struct xcontiki_os_lib_Ringbuf__ringbuf xcontiki_os_lib_Ringbuf__ringbu
  *             bytes.
  *
  */
-void xcontiki_os_lib_Ringbuf__init(xcontiki_os_lib_Ringbuf__ringbuf_t  __ram *r, uint8_t __ram *a,
+void xcontiki_os_lib_Ringbuf__init(xcontiki_os_lib_Ringbuf__ringbuf_t   *r, uint8_t  *a,
         uint8_t size_power_of_two);
 
 /**
@@ -101,7 +101,7 @@ void xcontiki_os_lib_Ringbuf__init(xcontiki_os_lib_Ringbuf__ringbuf_t  __ram *r,
  *             handler.
  *
  */
-bool xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r, uint8_t c);
+bool xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t  *r, uint8_t c);
 
 
 /**
@@ -114,48 +114,48 @@ bool xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r, u
  *             handler.
  *
  */
-uint8_t xcontiki_os_lib_Ringbuf__get(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r);
+uint8_t xcontiki_os_lib_Ringbuf__get(xcontiki_os_lib_Ringbuf__ringbuf_t  *r);
 
 /**
  * \brief      Get the size of a ring buffer
  * \param r    A pointer to a struct ringbuf to hold the state of the ring buffer
  * \return     The size of the buffer.
  */
-uint8_t xcontiki_os_lib_Ringbuf__size(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r);
+uint8_t xcontiki_os_lib_Ringbuf__size(xcontiki_os_lib_Ringbuf__ringbuf_t  *r);
 
 /**
  * \brief      Get the number of elements currently in the ring buffer
  * \param r    A pointer to a struct ringbuf to hold the state of the ring buffer
  * \return     The number of elements in the buffer.
  */
-uint8_t xcontiki_os_lib_Ringbuf__elements(xcontiki_os_lib_Ringbuf__ringbuf_t __ram *r);
+uint8_t xcontiki_os_lib_Ringbuf__elements(xcontiki_os_lib_Ringbuf__ringbuf_t  *r);
 
 #define XCONTIKI_OS_LIB_RINGBUF__NEW_STATIC(ringbuf, size_power_of_two)\
-static xcontiki_os_lib_Ringbuf__ringbuf_t ringbuf;\
+static xcontiki_os_lib_Ringbuf__ringbuf_t _##ringbuf;\
 static uint8_t ringbuf##array[size_power_of_two];\
 \
 static void ringbuf##init(void) {\
-  xcontiki_os_lib_Ringbuf__init(&ringbuf, ringbuf##array, size_power_of_two);\
+  xcontiki_os_lib_Ringbuf__init(&_##ringbuf, ringbuf##array, size_power_of_two);\
 }\
 static bool ringbuf##put(uint8_t c){\
-  return xcontiki_os_lib_Ringbuf__put(&ringbuf, c);\
+  return xcontiki_os_lib_Ringbuf__put(&_##ringbuf, c);\
 }\
 static uint8_t ringbuf##get(void){\
-  return xcontiki_os_lib_Ringbuf__get(&ringbuf);\
+  return xcontiki_os_lib_Ringbuf__get(&_##ringbuf);\
 }\
 static uint8_t ringbuf##size(void){\
   return size_power_of_two\;\
 }\
 static uint8_t ringbuf##elements(void){\
-  return xcontiki_os_lib_Ringbuf__elements(&ringbuf);\
+  return xcontiki_os_lib_Ringbuf__elements(&_##ringbuf);\
 }\
 static const struct {\
-  void (* const init)(void);\
-  bool (* const put)(uint8_t);\
-  uint8_t (* const get)(void);\
-  uint8_t (* const size)(void);\
-  uint8_t (* const elements)(void);\
-} = \
+  void (* init)(void);\
+  bool (* put)(uint8_t);\
+  uint8_t (* get)(void);\
+  uint8_t (* size)(void);\
+  uint8_t (* elements)(void);\
+} ringbuf = \
 { ringbuf##init, ringbuf##put, ringbuf##get, ringbuf##size, ringbuf##elements };\
 
 
