@@ -37,7 +37,7 @@
 
 #include "arch/arch.h"
 
-#ifndef ARCH_DEV_HARDWARECLOCK_C
+#if(ARCH_DEV_HARDWARECLOCK_C == 0)
 #warning This is only a dummy implementation of the arch_dev_HardwareClock module
 
 volatile static struct {

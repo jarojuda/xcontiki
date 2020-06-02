@@ -26,10 +26,10 @@
 
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
- * projects. 
+ * projects.
  */
 
-/* 
+/*
  * File:   arch_xcontiki_os_dev_Watchdog.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
@@ -37,8 +37,8 @@
 
 #include "xcontiki/xcontiki.h"
 
-#ifndef ARCH_XCONTIKI_OS_DEV_WATCHDOG_C
-#warning This is only a dummy implementation of the arch_xcontiki_os_dev_Watchdog module 
+#if(ARCH_XCONTIKI_OS_DEV_WATCHDOG_C == 0)
+#warning This is only a dummy implementation of the arch_xcontiki_os_dev_Watchdog module
 
 void arch_xcontiki_os_dev_Watchdog__init(void) {
 
