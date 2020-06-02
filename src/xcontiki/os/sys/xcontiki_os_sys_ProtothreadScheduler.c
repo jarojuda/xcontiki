@@ -35,9 +35,8 @@
  *
  */
 
-#ifndef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
-#warning Define the list of tasks as the set of X macros
-#else
+//Include only from other source file
+#ifdef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 
 #include "xcontiki/xcontiki.h"
 
