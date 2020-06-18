@@ -288,9 +288,7 @@ typedef struct {
  */
 #define XCONTIKI_OS_SYS_PROTOTHREAD__YIELD(pt)    \
   do {      \
-      pt.local_continuation = __LINE__;\
-      return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;\
-      case __LINE__:;\
+      pt.local_continuation = __LINE__; return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED; case __LINE__:;\
   } while(0)
 
 /**
@@ -306,9 +304,7 @@ typedef struct {
  */
 #define XCONTIKI_OS_SYS_PROTOTHREAD__YIELD_UNTIL(pt, cond)  \
   do {      \
-    pt.local_continuation = __LINE__; \
-    return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED; \
-    case __LINE__:; \
+    pt.local_continuation = __LINE__; return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED; case __LINE__:; \
     if( !(cond)) { \
       return XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED; \
     }  \
