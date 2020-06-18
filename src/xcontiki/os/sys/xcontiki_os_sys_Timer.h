@@ -90,7 +90,7 @@ typedef struct xcontiki_os_sys_Timer__timer xcontiki_os_sys_Timer__timer_t;
 void xcontiki_os_sys_Timer__set(struct xcontiki_os_sys_Timer__timer *t, arch_xcontiki_os_sys_Clock__time_t interval);
 void xcontiki_os_sys_Timer__reset(struct xcontiki_os_sys_Timer__timer *t);
 void xcontiki_os_sys_Timer__restart(struct xcontiki_os_sys_Timer__timer *t);
-bool xcontiki_os_sys_Timer__expired(struct xcontiki_os_sys_Timer__timer *t);
+bool xcontiki_os_sys_Timer__expired(struct xcontiki_os_sys_Timer__timer __ram *t);
 arch_xcontiki_os_sys_Clock__time_t xcontiki_os_sys_Timer__remaining(struct xcontiki_os_sys_Timer__timer *t);
 
 

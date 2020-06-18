@@ -127,27 +127,28 @@ xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_t *t) {
  *
  */
 bool
-xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t *t) {
-  //Hack to avoid XC8 error:(1466) registers unavailable for code generation of this expression
-  static xcontiki_os_sys_Timer__timer_t tmp_timer;
-  bool result;
+xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t __ram *t) {
+    //Hack to avoid XC8 error:(1466) registers unavailable for code generation of this expression
+    static xcontiki_os_sys_Timer__timer_t tmp_timer;
+    static xcontiki_os_sys_Timer__timer_t __ram *tmp_timer_ptr;
+    bool result;
 
-  if(t->expired){
-    return true;
-  }
+    if (t->expired) {
+        return true;
+    }
+    tmp_timer_ptr = &tmp_timer;
+    memcpy(tmp_timer_ptr, t, sizeof ( xcontiki_os_sys_Timer__timer_t));
+    arch_xcontiki_os_sys_Clock__time_t diff = (arch_xcontiki_os_sys_Clock__time() - tmp_timer.start);
+    if (diff >= tmp_timer.interval || diff < tmp_timer.previous_diff) {
+        tmp_timer.expired = true;
+        result = true;
+    } else {
+        result = false;
+    }
+    tmp_timer.previous_diff = diff;
+    memcpy(t, tmp_timer_ptr, sizeof ( xcontiki_os_sys_Timer__timer_t));
 
-  memcpy(&tmp_timer, t, sizeof( xcontiki_os_sys_Timer__timer_t));
-  arch_xcontiki_os_sys_Clock__time_t diff = (arch_xcontiki_os_sys_Clock__time() - tmp_timer.start);
-  if (diff >= tmp_timer.interval || diff < tmp_timer.previous_diff) {
-      tmp_timer.expired = true;
-      result= true;
-  } else {
-      result = false;
-  }
-  tmp_timer.previous_diff = diff;
-  memcpy(t, &tmp_timer, sizeof( xcontiki_os_sys_Timer__timer_t));
-
-  return result;
+    return result;
 }
 /*---------------------------------------------------------------------------*/
 
@@ -166,7 +167,7 @@ xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_t *t) {
     if (xcontiki_os_sys_Timer__expired(t)) {
         return 0;
     }
-    return (arch_xcontiki_os_sys_Clock__time_t)(t->interval - t->previous_diff);
+    return (arch_xcontiki_os_sys_Clock__time_t) (t->interval - t->previous_diff);
 }
 /*---------------------------------------------------------------------------*/
 
