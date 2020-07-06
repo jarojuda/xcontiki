@@ -53,7 +53,7 @@
  * Set a timer.
  *
  * This function is used to set a timer for a time sometime in the
- * future. The function timer_expired() will evaluate to true after
+ * future. The function xcontiki_os_sys_Timer__expired() will evaluate to true after
  * the timer has expired.
  *
  * \param t A pointer to the timer

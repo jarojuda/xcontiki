@@ -102,7 +102,7 @@ typedef struct {
  *
  * This macro is used to declare the starting point of a
  * protothread. It should be placed at the start of the function in
- * which the protothread runs. All C statements above the PT_BEGIN()
+ * which the protothread runs. All C statements above the XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN()
  * invokation will be executed each time the protothread is scheduled.
  *
  * \param pt A  protothread control structure.
@@ -115,7 +115,7 @@ typedef struct {
  * Declare the end of a protothread.
  *
  * This macro is used for declaring that a protothread ends. It must
- * always be used together with a matching PT_BEGIN() macro.
+ * always be used together with a matching XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN() macro.
  *
  * \param pt A protothread control structure.
  *
@@ -154,7 +154,7 @@ typedef struct {
  * Block and wait while condition is true.
  *
  * This function blocks and waits while condition is true. See
- * PT_WAIT_UNTIL().
+ * XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_UNTIL().
  *
  * \param pt A protothread control structure.
  * \param cond The condition.
@@ -219,7 +219,7 @@ typedef struct {
  * Restart the protothread.
  *
  * This macro will block and cause the running protothread to restart
- * its execution at the place of the PT_BEGIN() call.
+ * its execution at the place of the XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN() call.
  *
  * \param pt A pointer to the protothread control structure.
  *

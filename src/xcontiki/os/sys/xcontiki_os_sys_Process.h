@@ -201,7 +201,7 @@ typedef unsigned char xcontiki_os_sys_Process__num_events_t;
 /**
  * Spawn a protothread from the process.
  *
- * \param pt The protothread state (struct pt) for the new protothread
+ * \param pt The protothread state (xcontiki_os_sys_Protothread__pt_t) for the new protothread
  * \param thread The call to the protothread function.
  * \sa XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN()
  *

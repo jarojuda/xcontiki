@@ -119,7 +119,7 @@ again:
 
           /* Reset the process ID of the event timer, to signal that the
              etimer has expired. This is later checked in the
-             etimer_expired() function. */
+             xcontiki_os_sys_Timer__expired() function. */
           t->p = XCONTIKI_OS_SYS_PROCESS__NONE;
           if(u != NULL) {
             u->next = t->next;
