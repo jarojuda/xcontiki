@@ -36,10 +36,10 @@
     - src/**
   :include:
     - src
-    - src/generic_platform
-    - src/generic_platform/arch/xcontiki/os/sys
-    - src/generic_platform/arch/xcontiki/os/dev
-    - src/generic_platform/arch/dev
+    - src/xcontiki_generic_platform
+    - src/xcontiki_generic_platform/arch/xcontiki/os/sys
+    - src/xcontiki_generic_platform/arch/xcontiki/os/dev
+    - src/xcontiki_generic_platform/arch/dev
   :support:
     - test/support
 
