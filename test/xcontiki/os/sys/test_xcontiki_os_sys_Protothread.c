@@ -46,9 +46,9 @@ XCONTIKI_OS_SYS_PROTOTHREAD__THREAD task_for_test(void){
         stage_indicator = 3;
         XCONTIKI_OS_SYS_PROTOTHREAD__WAIT_THREAD(pt,child_task_for_test());
         stage_indicator = 4;
-        XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN(pt,child_pt,child_task_for_test());
-        stage_indicator = 5;
         XCONTIKI_OS_SYS_PROTOTHREAD__YIELD(pt);
+        stage_indicator = 5;
+        XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN(pt,child_pt,child_task_for_test());
         stage_indicator = 6;
         XCONTIKI_OS_SYS_PROTOTHREAD__YIELD_UNTIL(pt,counter>=5);
         stage_indicator = 7;
