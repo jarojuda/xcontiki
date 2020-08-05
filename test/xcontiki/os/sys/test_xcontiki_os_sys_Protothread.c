@@ -50,7 +50,7 @@ XCONTIKI_OS_SYS_PROTOTHREAD__THREAD task_for_test(void){
         stage_indicator = 5;
         XCONTIKI_OS_SYS_PROTOTHREAD__SPAWN(pt,child_pt,child_task_for_test());
         stage_indicator = 6;
-        XCONTIKI_OS_SYS_PROTOTHREAD__YIELD_UNTIL(pt,counter>=5);
+        XCONTIKI_OS_SYS_PROTOTHREAD__YIELD_UNTIL(pt,counter>=9);
         stage_indicator = 7;
         XCONTIKI_OS_SYS_PROTOTHREAD__EXIT(pt);
         stage_indicator = 8;
@@ -71,7 +71,7 @@ void test_whenLocalContinuationIsCorrupted_thenTaskShouldEnds_andLocalContinuati
 
 
 
-void test_waiting_for_condition(void){
+void test_protothread(void){
         counter=0;
         result = task_for_test();
         TEST_ASSERT_EQUAL(XCONTIKI_OS_SYS_PROTOTHREAD__WAITING, result);
@@ -91,7 +91,32 @@ void test_waiting_for_condition(void){
         TEST_ASSERT_EQUAL(1, child_stage_indicator);
 
         result = task_for_test();
-        TEST_ASSERT_EQUAL( XCONTIKI_OS_SYS_PROTOTHREAD__WAITING, result);
+        TEST_ASSERT_EQUAL( XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED, result);
         TEST_ASSERT_EQUAL(4, stage_indicator);
         TEST_ASSERT_EQUAL(2, child_stage_indicator);
+
+        result = task_for_test();
+        TEST_ASSERT_EQUAL( XCONTIKI_OS_SYS_PROTOTHREAD__WAITING, result);
+        TEST_ASSERT_EQUAL(5, stage_indicator);
+        TEST_ASSERT_EQUAL(1, child_stage_indicator);
+
+        result = task_for_test();
+        TEST_ASSERT_EQUAL( XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED, result);
+        TEST_ASSERT_EQUAL(6, stage_indicator);
+        TEST_ASSERT_EQUAL(2, child_stage_indicator);
+
+        result = task_for_test();
+        TEST_ASSERT_EQUAL( XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED, result);
+        TEST_ASSERT_EQUAL(6, stage_indicator);
+
+        result = task_for_test();
+        TEST_ASSERT_EQUAL( XCONTIKI_OS_SYS_PROTOTHREAD__EXITED, result);
+        TEST_ASSERT_EQUAL(7, stage_indicator);
+
+//again from start
+        result = task_for_test();
+        TEST_ASSERT_EQUAL( XCONTIKI_OS_SYS_PROTOTHREAD__WAITING, result);
+        TEST_ASSERT_EQUAL(3, stage_indicator);
+        TEST_ASSERT_EQUAL(1, child_stage_indicator);
+
 }
