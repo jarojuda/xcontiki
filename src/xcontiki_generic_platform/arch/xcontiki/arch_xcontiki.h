@@ -26,10 +26,10 @@
 
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
- * projects. 
+ * projects.
  */
 
-/* 
+/*
  * File:   arch_xcontiki.h
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
@@ -43,7 +43,8 @@ extern "C" {
 #endif
 
 #include "arch/xcontiki/os/arch_xcontiki_os.h"
-    
+#include "arch/xcontiki/dev/arch_xcontiki_dev.h"
+
 
 
 #ifdef __cplusplus
@@ -51,4 +52,3 @@ extern "C" {
 #endif
 
 #endif /* ARCH_XCONTIKI_H */
-

@@ -30,35 +30,27 @@
  */
 
 /*
- * File:   arch_xcontiki_os_dev_Watchdog.c
+ * File:   arch_xcontiki_dev_HardwareClock.h
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#include "xcontiki/xcontiki.h"
+#ifndef ARCH_XCONTIKI_DEV_HARDWARECLOCK_H
+#define ARCH_XCONTIKI_DEV_HARDWARECLOCK_H
 
-#if(ARCH_XCONTIKI_OS_DEV_WATCHDOG_C == 0)
-#warning This is only a dummy implementation of the arch_xcontiki_os_dev_Watchdog module
-
-void arch_xcontiki_os_dev_Watchdog__init(void) {
-
-}
-
-void arch_xcontiki_os_dev_Watchdog__start(void) {
-
-}
-
-/* Do not use this function from within an interrupt context */
-void arch_xcontiki_os_dev_Watchdog__periodic(void) {
-
-}
-
-void arch_xcontiki_os_dev_Watchdog__stop(void) {
-
-}
-
-void arch_xcontiki_os_dev_Watchdog__reboot(void) {
-
-}
-
+#ifdef __cplusplus
+extern "C" {
 #endif
+
+
+#define ARCH_XCONTIKI_DEV_HARDWARECLOCK__FREQUENCY (32768ull)
+
+void arch_xcontiki_dev_HardwareClock__init(void);
+uint16_t arch_xcontiki_dev_HardwareClock__get_timer(void);
+uint32_t arch_xcontiki_dev_HardwareClock__get_clock(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* ARCH_XCONTIKI_DEV_HARDWARECLOCK_H */
