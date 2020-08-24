@@ -82,7 +82,7 @@ extern "C" {
      *
      * \hideinitializer
      */
-#define ARCH_XCONTIKI_OS_SYS_CLOCK__SECOND ((arch_xcontiki_os_sys_Clock__time_t)ARCH_DEV_HARDWARECLOCK__FREQUENCY)
+#define ARCH_XCONTIKI_OS_SYS_CLOCK__SECOND ((arch_xcontiki_os_sys_Clock__time_t)ARCH_XCONTIKI_DEV_HARDWARECLOCK__FREQUENCY)
 
 
     /**

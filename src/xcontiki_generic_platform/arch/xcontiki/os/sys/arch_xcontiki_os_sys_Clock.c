@@ -43,12 +43,12 @@
 static volatile arch_xcontiki_os_sys_Clock__seconds_t dummy_clock_seconds;
 
 void arch_xcontiki_os_sys_Clock__init(void) {
-    arch_dev_HardwareClock__init();
+    arch_xcontiki_dev_HardwareClock__init();
     dummy_clock_seconds = 0;
 }
 
 arch_xcontiki_os_sys_Clock__time_t arch_xcontiki_os_sys_Clock__time(void) {
-    return (arch_xcontiki_os_sys_Clock__time_t) arch_dev_HardwareClock__get_clock();
+    return (arch_xcontiki_os_sys_Clock__time_t) arch_xcontiki_dev_HardwareClock__get_clock();
 }
 
 arch_xcontiki_os_sys_Clock__seconds_t arch_xcontiki_os_sys_Clock__seconds(void) {
@@ -81,7 +81,7 @@ void arch_xcontiki_os_sys_Clock__wait(arch_xcontiki_os_sys_Clock__time_t interva
             break;
         }
         prev_diff = diff;
-        arch_xcontiki_os_dev_Watchdog__periodic();
+        arch_xcontiki_dev_Watchdog__periodic();
     }
 }
 
@@ -91,15 +91,15 @@ void arch_xcontiki_os_sys_Clock__delay_usec(uint16_t dt) {
     uint16_t prev_diff;
     uint16_t interval;
 
-    start = arch_dev_HardwareClock__get_timer();
+    start = arch_xcontiki_dev_HardwareClock__get_timer();
 #if(ARCH_DEV_HARDWARECLOCK__FREQUENCY>32768ull)
 #error This method is suitable only for the clock frequency no greater than 32768 Hz   
 #endif
 
-    interval = ((dt * ARCH_DEV_HARDWARECLOCK__FREQUENCY)+(ARCH_DEV_HARDWARECLOCK__FREQUENCY / 2)) / 1000000ull;
+    interval = ((dt * ARCH_XCONTIKI_DEV_HARDWARECLOCK__FREQUENCY)+(ARCH_XCONTIKI_DEV_HARDWARECLOCK__FREQUENCY / 2)) / 1000000ull;
     prev_diff = 0;
     for (;;) {
-        diff = arch_dev_HardwareClock__get_timer() - start;
+        diff = arch_xcontiki_dev_HardwareClock__get_timer() - start;
         if (diff == prev_diff) {
             continue;
         }

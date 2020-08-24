@@ -47,12 +47,12 @@ volatile static struct {
 
 static uint16_t ticks;
 
-void arch_dev_HardwareClock__init(void) {
+void arch_xcontiki_dev_HardwareClock__init(void) {
     memset((void*) &hardware_timer_mock, 0, sizeof (hardware_timer_mock));
     ticks = 0;
 }
 
-uint16_t arch_dev_HardwareClock__get_timer(void) {
+uint16_t arch_xcontiki_dev_HardwareClock__get_timer(void) {
     hardware_timer_mock.timer++;
     if (0 == hardware_timer_mock.timer) {
         hardware_timer_mock.timer_overflow = 1;
@@ -60,14 +60,14 @@ uint16_t arch_dev_HardwareClock__get_timer(void) {
     return hardware_timer_mock.timer;
 }
 
-uint32_t arch_dev_HardwareClock__get_clock(void) {
+uint32_t arch_xcontiki_dev_HardwareClock__get_clock(void) {
     uint32_t tmp;
     do {
         if (hardware_timer_mock.timer_overflow) {
             ticks++;
             hardware_timer_mock.timer_overflow = 0;
         }
-        tmp = arch_dev_HardwareClock__get_timer();
+        tmp = arch_xcontiki_dev_HardwareClock__get_timer();
         tmp += ((uint32_t) ticks << 16ul);
     } while (hardware_timer_mock.timer_overflow);
     return tmp;

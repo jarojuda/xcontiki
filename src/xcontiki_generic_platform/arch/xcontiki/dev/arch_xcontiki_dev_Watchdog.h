@@ -41,8 +41,8 @@ extern "C" {
     void arch_xcontiki_dev_Watchdog__start(void);
 
     /* Do not use this function from within an interrupt context */
-    void arch_xcontiki_os_Watchdog__periodic(void);
-    void arch_xcontiki_os_Watchdog__stop(void);
+    void arch_xcontiki_dev_Watchdog__periodic(void);
+    void arch_xcontiki_dev_Watchdog__stop(void);
 
     void arch_xcontiki_dev_Watchdog__reboot(void);
 
