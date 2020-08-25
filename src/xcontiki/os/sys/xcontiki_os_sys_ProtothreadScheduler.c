@@ -79,6 +79,7 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD call_task(uint8_t task_number) {
         XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 
 #undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+        
     };
 
     switch (task_number) {
@@ -101,7 +102,7 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
     arch_xcontiki_os_sys_Clock__time_t diff;
 
     if (scheduler_first_run) {
-        for (i = 0; i <= number_of_tasks; i++) {
+        for (i = 0; i < number_of_tasks; i++) {
             last_states[i] = XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN;
             last_ticks[i] = 0;
         }

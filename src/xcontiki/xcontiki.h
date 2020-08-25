@@ -45,10 +45,12 @@ extern "C" {
 
 #include "arch/arch.h"
 #include "xcontiki/os/xcontiki_os.h"
-
+    
+    XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki__main(void);
+    void xcontiki__init(void);
+    
 #ifdef	__cplusplus
 }
 #endif
 
 #endif	/* XCONTIKI_H */
-
