@@ -35,7 +35,7 @@
  *
  */
 
-#include "arch/arch.h"
+#include "xcontiki/xcontiki.h"
 
 #if(ARCH_XCONTIKI_DEV_HARDWARECLOCK_C == 0)
 #warning This is only a dummy implementation of the arch_dev_HardwareClock module
