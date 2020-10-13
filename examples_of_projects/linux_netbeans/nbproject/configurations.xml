@@ -40,18 +40,15 @@
                      displayName="xcontiki_generic_platform"
                      projectFiles="true">
         <logicalFolder name="arch" displayName="arch" projectFiles="true">
-          <logicalFolder name="dev" displayName="dev" projectFiles="true">
-            <itemPath>../../src/xcontiki_generic_platform/arch/dev/arch_dev.h</itemPath>
-            <itemPath>../../src/xcontiki_generic_platform/arch/dev/arch_dev_HardwareClock.c</itemPath>
-            <itemPath>../../src/xcontiki_generic_platform/arch/dev/arch_dev_HardwareClock.h</itemPath>
-          </logicalFolder>
           <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
+            <logicalFolder name="dev" displayName="dev" projectFiles="true">
+              <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev.h</itemPath>
+              <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_HardwareClock.c</itemPath>
+              <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_HardwareClock.h</itemPath>
+              <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_Watchdog.c</itemPath>
+              <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_Watchdog.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="os" displayName="os" projectFiles="true">
-              <logicalFolder name="dev" displayName="dev" projectFiles="true">
-                <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h</itemPath>
-                <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c</itemPath>
-                <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h</itemPath>
-              </logicalFolder>
               <logicalFolder name="sys" displayName="sys" projectFiles="true">
                 <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys.h</itemPath>
                 <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/os/sys/arch_xcontiki_os_sys_Cc.h</itemPath>
@@ -62,7 +59,6 @@
             </logicalFolder>
             <itemPath>../../src/xcontiki_generic_platform/arch/xcontiki/arch_xcontiki.h</itemPath>
           </logicalFolder>
-          <itemPath>../../src/xcontiki_generic_platform/arch/arch.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>
@@ -183,47 +179,37 @@
       </item>
       <item path="../../src/xcontiki/xcontiki.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="../../src/xcontiki_generic_platform/arch/arch.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../src/xcontiki_generic_platform/arch/dev/arch_dev.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../src/xcontiki_generic_platform/arch/dev/arch_dev_HardwareClock.c"
-            ex="false"
-            tool="0"
-            flavor2="0">
-      </item>
-      <item path="../../src/xcontiki_generic_platform/arch/dev/arch_dev_HardwareClock.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="../../src/xcontiki_generic_platform/arch/xcontiki/arch_xcontiki.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/arch_xcontiki_os.h"
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c"
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_HardwareClock.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h"
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_HardwareClock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_Watchdog.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_Watchdog.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/arch_xcontiki_os.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -362,47 +348,37 @@
       </item>
       <item path="../../src/xcontiki/xcontiki.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="../../src/xcontiki_generic_platform/arch/arch.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../src/xcontiki_generic_platform/arch/dev/arch_dev.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../src/xcontiki_generic_platform/arch/dev/arch_dev_HardwareClock.c"
-            ex="false"
-            tool="0"
-            flavor2="0">
-      </item>
-      <item path="../../src/xcontiki_generic_platform/arch/dev/arch_dev_HardwareClock.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="../../src/xcontiki_generic_platform/arch/xcontiki/arch_xcontiki.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/arch_xcontiki_os.h"
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.c"
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_HardwareClock.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/dev/arch_xcontiki_os_dev_Watchdog.h"
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_HardwareClock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_Watchdog.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/dev/arch_xcontiki_dev_Watchdog.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki_generic_platform/arch/xcontiki/os/arch_xcontiki_os.h"
             ex="false"
             tool="3"
             flavor2="0">

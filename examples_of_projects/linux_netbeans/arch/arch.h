@@ -51,7 +51,7 @@ extern "C" {
 #define __ram
     
 #define __PACKED __attribute__((packed))     
-#include "arch/dev/arch_dev.h"
+
 #include "arch/xcontiki/arch_xcontiki.h"
 
     
