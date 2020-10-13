@@ -66,6 +66,7 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_t *t, arch_xcontiki_os_s
     t->start = arch_xcontiki_os_sys_Clock__time();
     t->previous_diff = 0;
     t->expired = (0 == interval);
+    t->set = true;
 }
 /*---------------------------------------------------------------------------*/
 
@@ -88,6 +89,9 @@ xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_t *t) {
         t->start += t->interval;
         t->previous_diff = 0;
         t->expired = (0 == t->interval);
+        if (false == t->expired) {
+            t->set = true;
+        }
     }
 }
 /*---------------------------------------------------------------------------*/
@@ -110,10 +114,37 @@ void
 xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_t *t) {
     t->start = arch_xcontiki_os_sys_Clock__time();
     t->previous_diff = 0;
-    t->expired = false;
     t->expired = (0 == t->interval);
+    if (false == t->expired) {
+        t->set = true;
+    }
 }
 /*---------------------------------------------------------------------------*/
+
+/**
+ * Set a timer.
+ * and
+ * Check if a timer has expired.
+ *
+ * This function tests if a timer has expired and returns true or
+ * false depending on its status.
+ *
+ * \param t A pointer to the timer
+ *
+ * \return Non-zero if the timer has expired, zero otherwise.
+ *
+ */
+bool
+xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_t __ram *t, arch_xcontiki_os_sys_Clock__time_t interval) {
+    bool result;
+
+    if (false == t->set) {
+        xcontiki_os_sys_Timer__set(t, interval);
+    }
+    result = xcontiki_os_sys_Timer__expired(t);
+
+    return result;
+}
 
 /**
  * Check if a timer has expired.
@@ -128,12 +159,13 @@ xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_t *t) {
  */
 bool
 xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t __ram *t) {
-    //Hack to avoid XC8 error:(1466) registers unavailable for code generation of this expression
+    //Workaround to avoid XC8 error:(1466) registers unavailable for code generation of this expression
     static xcontiki_os_sys_Timer__timer_t tmp_timer;
     static xcontiki_os_sys_Timer__timer_t __ram *tmp_timer_ptr;
     bool result;
 
     if (t->expired) {
+        t->set = false;
         return true;
     }
     tmp_timer_ptr = &tmp_timer;
@@ -144,6 +176,9 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t __ram *t) {
         result = true;
     } else {
         result = false;
+    }
+    if (true == result) {
+        tmp_timer.set = false;
     }
     tmp_timer.previous_diff = diff;
     memcpy(t, tmp_timer_ptr, sizeof ( xcontiki_os_sys_Timer__timer_t));
