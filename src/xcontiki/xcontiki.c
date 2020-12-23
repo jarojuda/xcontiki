@@ -46,4 +46,5 @@ static void init(void) {
     arch_xcontiki_dev_Watchdog__init();
     arch_xcontiki_dev_Watchdog__start();
     arch_xcontiki_os_sys_Clock__init();
+    xcontiki_os_sys_Process__initialize_the_process_module();
 }

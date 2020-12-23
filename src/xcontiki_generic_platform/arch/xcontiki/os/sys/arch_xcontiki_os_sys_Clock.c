@@ -37,7 +37,7 @@
 
 #include "xcontiki/xcontiki.h"
 
-#ifndef ARCH_XCONTIKI_OS_SYS_CLOCK_C
+#if(ARCH_XCONTIKI_OS_SYS_CLOCK_C == 0)
 #warning This is only a dummy implementation of the arch_xcontiki_os_sys_Clock module
 
 static volatile arch_xcontiki_os_sys_Clock__seconds_t dummy_clock_seconds;

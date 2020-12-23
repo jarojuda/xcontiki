@@ -50,4 +50,3 @@ extern "C" {
 #endif
 
 #endif /* ARCH_XCONTIKI_OS_SYS_H */
-

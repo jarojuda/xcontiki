@@ -30,7 +30,7 @@
  */
 
 /*
- * File:   arch_dev_HardwareClock.c
+ * File:   arch_xcontiki_dev_HardwareClock.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
