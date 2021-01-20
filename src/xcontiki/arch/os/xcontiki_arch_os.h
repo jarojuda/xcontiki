@@ -30,47 +30,23 @@
  */
 
 /*
- * File:   arch_xcontiki_dev_HardwareClock.c
+ * File:   xcontiki_arch_os.h
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#include "xcontiki/xcontiki.h"
+#ifndef XCONTIKI_ARCH_OS_H
+#define XCONTIKI_ARCH_OS_H
 
-#if(ARCH_XCONTIKI_DEV_HARDWARECLOCK_C == 0)
-#warning This is only a dummy implementation of the arch_dev_HardwareClock module
-
-volatile static struct {
-    uint16_t timer;
-    unsigned timer_overflow : 1;
-} hardware_timer_mock;
-
-static uint16_t ticks;
-
-void arch_xcontiki_dev_HardwareClock__init(void) {
-    memset((void*) &hardware_timer_mock, 0, sizeof (hardware_timer_mock));
-    ticks = 0;
-}
-
-uint16_t arch_xcontiki_dev_HardwareClock__get_timer(void) {
-    hardware_timer_mock.timer++;
-    if (0 == hardware_timer_mock.timer) {
-        hardware_timer_mock.timer_overflow = 1;
-    }
-    return hardware_timer_mock.timer;
-}
-
-uint32_t arch_xcontiki_dev_HardwareClock__get_clock(void) {
-    uint32_t tmp;
-    do {
-        if (hardware_timer_mock.timer_overflow) {
-            ticks++;
-            hardware_timer_mock.timer_overflow = 0;
-        }
-        tmp = arch_xcontiki_dev_HardwareClock__get_timer();
-        tmp += ((uint32_t) ticks << 16ul);
-    } while (hardware_timer_mock.timer_overflow);
-    return tmp;
-}
-
+#ifdef __cplusplus
+extern "C" {
 #endif
+
+#include "xcontiki/arch/os/sys/xcontiki_arch_os_sys.h"
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* XCONTIKI_ARCH_OS_H */

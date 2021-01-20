@@ -27,7 +27,7 @@ XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki__main(void) {
         first_run = false;
     }
 
-    arch_xcontiki_dev_Watchdog__periodic();
+    xcontiki_arch_dev_Watchdog__periodic();
     if (xcontiki_os_sys_Process__number_of_events_waiting() > 0) {
         xcontiki_os_sys_Process__process_next_event();
     }
@@ -43,8 +43,8 @@ void xcontiki__init(void) {
 }
 
 static void init(void) {
-    arch_xcontiki_dev_Watchdog__init();
-    arch_xcontiki_dev_Watchdog__start();
-    arch_xcontiki_os_sys_Clock__init();
+    xcontiki_arch_dev_Watchdog__init();
+    xcontiki_arch_dev_Watchdog__start();
+    xcontiki_arch_os_sys_Clock__init();
     xcontiki_os_sys_Process__initialize_the_process_module();
 }

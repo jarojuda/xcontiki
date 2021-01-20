@@ -26,31 +26,27 @@
 
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
- * projects.
+ * projects. 
  */
 
-/*
- * File:   arch_xcontiki_dev_HardwareClock.h
+/* 
+ * File:   xcontiki_arch_os_sys.h
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#ifndef ARCH_XCONTIKI_DEV_HARDWARECLOCK_H
-#define ARCH_XCONTIKI_DEV_HARDWARECLOCK_H
+#ifndef XCONTIKI_ARCH_OS_SYS_H
+#define XCONTIKI_ARCH_OS_SYS_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#include "xcontiki/arch/os/sys/xcontiki_arch_os_sys_Cc.h"  
 
-#define ARCH_XCONTIKI_DEV_HARDWARECLOCK__FREQUENCY (32768ull)
-
-void arch_xcontiki_dev_HardwareClock__init(void);
-uint16_t arch_xcontiki_dev_HardwareClock__get_timer(void);
-uint32_t arch_xcontiki_dev_HardwareClock__get_clock(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* ARCH_XCONTIKI_DEV_HARDWARECLOCK_H */
+#endif /* XCONTIKI_ARCH_OS_SYS_H */

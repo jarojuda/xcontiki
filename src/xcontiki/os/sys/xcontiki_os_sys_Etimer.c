@@ -49,21 +49,21 @@
 
 
 static struct xcontiki_os_sys_Etimer *timerlist;
-static arch_xcontiki_os_sys_Clock__time_t next_expiration;
+static xcontiki_arch_Clock__time_t next_expiration;
 
 XCONTIKI_OS_SYS_PROCESS(etimer_process, "Event timer");
 /*---------------------------------------------------------------------------*/
 static void
 update_time(void)
 {
-  arch_xcontiki_os_sys_Clock__time_t tdist;
-  arch_xcontiki_os_sys_Clock__time_t now;
+  xcontiki_arch_Clock__time_t tdist;
+  xcontiki_arch_Clock__time_t now;
   struct xcontiki_os_sys_Etimer *t;
 
   if(timerlist == NULL) {
     next_expiration = 0;
   } else {
-    now = arch_xcontiki_os_sys_Clock__time();
+    now = xcontiki_arch_os_sys_Clock__time();
     t = timerlist;
     /* Must calculate distance to next time into account due to wraps */
     tdist = t->timer.start + t->timer.interval - now;
@@ -173,14 +173,14 @@ add_timer(struct xcontiki_os_sys_Etimer *etimer)
 }
 /*---------------------------------------------------------------------------*/
 void
-xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, arch_xcontiki_os_sys_Clock__time_t interval)
+xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval)
 {
   xcontiki_os_sys_Timer__set(&et->timer, interval);
   add_timer(et);
 }
 /*---------------------------------------------------------------------------*/
 void
-xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etimer *et, arch_xcontiki_os_sys_Clock__time_t interval)
+xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval)
 {
   xcontiki_os_sys_Timer__reset(&et->timer);
   et->timer.interval = interval;
@@ -214,13 +214,13 @@ xcontiki_os_sys_Etimer__expired(struct xcontiki_os_sys_Etimer *et)
   return et->p == XCONTIKI_OS_SYS_PROCESS__NONE;
 }
 /*---------------------------------------------------------------------------*/
-arch_xcontiki_os_sys_Clock__time_t
+xcontiki_arch_Clock__time_t
 xcontiki_os_sys_Etimer__expiration_time(struct xcontiki_os_sys_Etimer *et)
 {
   return et->timer.start + et->timer.interval;
 }
 /*---------------------------------------------------------------------------*/
-arch_xcontiki_os_sys_Clock__time_t
+xcontiki_arch_Clock__time_t
 etimer_start_time(struct xcontiki_os_sys_Etimer *et)
 {
   return et->timer.start;
@@ -232,7 +232,7 @@ xcontiki_os_sys_Etimer__pending(void)
   return timerlist != NULL;
 }
 /*---------------------------------------------------------------------------*/
-arch_xcontiki_os_sys_Clock__time_t
+xcontiki_arch_Clock__time_t
 xcontiki_os_sys_Etimer__next_expiration_time(void)
 {
   return xcontiki_os_sys_Etimer__pending() ? next_expiration : 0;

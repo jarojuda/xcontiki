@@ -61,14 +61,14 @@
  *
  */
 void
-xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_t *t, arch_xcontiki_os_sys_Clock__time_t interval) {
+xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_t *t, xcontiki_arch_Clock__time_t interval) {
     if (0 == interval) {
         t->expired = true;
         t->interval = 0;
         t->set = false;
         return;
     }
-    t->start = arch_xcontiki_os_sys_Clock__time();
+    t->start = xcontiki_arch_os_sys_Clock__time();
     t->previous_diff = 0;
     t->set = true;
 }
@@ -116,7 +116,7 @@ xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_t *t) {
  */
 void
 xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_t *t) {
-    t->start = arch_xcontiki_os_sys_Clock__time();
+    t->start = xcontiki_arch_os_sys_Clock__time();
     t->previous_diff = 0;
     t->expired = (0 == t->interval);
     if (false == t->expired) {
@@ -139,7 +139,7 @@ xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_t *t) {
  *
  */
 bool
-xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_t __ram *t, arch_xcontiki_os_sys_Clock__time_t interval) {
+xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_t __ram *t, xcontiki_arch_Clock__time_t interval) {
     bool result;
 
     if (false == t->set) {
@@ -174,7 +174,7 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t __ram *t) {
     }
     tmp_timer_ptr = &tmp_timer;
     memcpy(tmp_timer_ptr, t, sizeof ( xcontiki_os_sys_Timer__timer_t));
-    arch_xcontiki_os_sys_Clock__time_t diff = (arch_xcontiki_os_sys_Clock__time() - tmp_timer.start);
+    xcontiki_arch_Clock__time_t diff = (xcontiki_arch_os_sys_Clock__time() - tmp_timer.start);
     if (diff >= tmp_timer.interval || diff < tmp_timer.previous_diff) {
         tmp_timer.expired = true;
         result = true;
@@ -201,12 +201,12 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t __ram *t) {
  * \return The time until the timer expires
  *
  */
-arch_xcontiki_os_sys_Clock__time_t
+xcontiki_arch_Clock__time_t
 xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_t *t) {
     if (xcontiki_os_sys_Timer__expired(t)) {
         return 0;
     }
-    return (arch_xcontiki_os_sys_Clock__time_t) (t->interval - t->previous_diff);
+    return (xcontiki_arch_Clock__time_t) (t->interval - t->previous_diff);
 }
 /*---------------------------------------------------------------------------*/
 

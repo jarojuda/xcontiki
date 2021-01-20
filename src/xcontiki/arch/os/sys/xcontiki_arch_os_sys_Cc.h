@@ -42,8 +42,8 @@
  * quirks and problems with some other C compilers.
  */
 
-#ifndef ARCH_XCONTIKI_OS_SYS_CC_H
-#define ARCH_XCONTIKI_OS_SYS_CC_H
+#ifndef XCONTIKI_ARCH_OS_SYS_CC_H
+#define XCONTIKI_ARCH_OS_SYS_CC_H
 
 /** \def CC_ACCESS_NOW(x)
  * This macro ensures that the access to a non-volatile variable can
@@ -54,7 +54,7 @@
  * extension
  */
 
-#define ARCH_XCONTIKI_OS_SYS_CC__ACCESS_NOW(type, variable) (*(volatile type *)&(variable))
+#define XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(type, variable) (*(volatile type *)&(variable))
 
 
-#endif /* ARCH_XCONTIKI_OS_SYS_CC_H */
+#endif /* XCONTIKI_ARCH_OS_SYS_CC_H */

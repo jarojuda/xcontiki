@@ -30,76 +30,76 @@
  */
 
 /*
- * File:   arch_xcontiki_os_sys_Clock.c
+ * File:   xcontiki_arch_os_sys_Clock.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
 #include "xcontiki/xcontiki.h"
 
-#if(ARCH_XCONTIKI_OS_SYS_CLOCK_C == 0)
-#warning This is only a dummy implementation of the arch_xcontiki_os_sys_Clock module
+#if(XCONTIKI_ARCH_OS_SYS_CLOCK_C == 0)
+#warning This is only a dummy implementation of the xcontiki_arch_os_sys_Clock module
 
-static volatile arch_xcontiki_os_sys_Clock__seconds_t dummy_clock_seconds;
+static volatile xCONTIKI_ARCH_CLOCK__SECONDs_t dummy_clock_seconds;
 
-void arch_xcontiki_os_sys_Clock__init(void) {
-    arch_xcontiki_dev_HardwareClock__init();
+void xcontiki_arch_os_sys_Clock__init(void) {
+    xcontiki_arch_dev_HardwareClock__init();
     dummy_clock_seconds = 0;
 }
 
-arch_xcontiki_os_sys_Clock__time_t arch_xcontiki_os_sys_Clock__time(void) {
-    return (arch_xcontiki_os_sys_Clock__time_t) arch_xcontiki_dev_HardwareClock__get_clock();
+xcontiki_arch_Clock__time_t xcontiki_arch_os_sys_Clock__time(void) {
+    return (xcontiki_arch_Clock__time_t) xcontiki_arch_dev_HardwareClock__get_clock();
 }
 
-arch_xcontiki_os_sys_Clock__seconds_t arch_xcontiki_os_sys_Clock__seconds(void) {
+xCONTIKI_ARCH_CLOCK__SECONDs_t xCONTIKI_ARCH_CLOCK__SECONDs(void) {
     return dummy_clock_seconds;
 }
 
-void arch_xcontiki_os_sys_Clock__set_seconds(arch_xcontiki_os_sys_Clock__seconds_t sec) {
+void xcontiki_arch_os_sys_Clock__set_seconds(xCONTIKI_ARCH_CLOCK__SECONDs_t sec) {
     dummy_clock_seconds = sec;
 }
 
 //Do not use it unless you know what you are doing.
 
-void arch_xcontiki_os_sys_Clock__wait(arch_xcontiki_os_sys_Clock__time_t interval) {
-    arch_xcontiki_os_sys_Clock__time_t start;
-    arch_xcontiki_os_sys_Clock__time_t diff;
-    arch_xcontiki_os_sys_Clock__time_t prev_diff;
+void xcontiki_arch_os_sys_Clock__wait(xcontiki_arch_Clock__time_t interval) {
+    xcontiki_arch_Clock__time_t start;
+    xcontiki_arch_Clock__time_t diff;
+    xcontiki_arch_Clock__time_t prev_diff;
 
     if (0 == interval) {
         return;
     }
-    start = arch_xcontiki_os_sys_Clock__time();
+    start = xcontiki_arch_os_sys_Clock__time();
     prev_diff = 0;
     for (;;) {
-        diff = arch_xcontiki_os_sys_Clock__time() - start;
+        diff = xcontiki_arch_os_sys_Clock__time() - start;
         if (diff == prev_diff) {
             continue;
         }
-        //Ensure that the loop will stop if the arch_xcontiki_os_sys_Clock__time() returns discontinuous values
+        //Ensure that the loop will stop if the xcontiki_arch_os_sys_Clock__time() returns discontinuous values
         if (diff >= interval || diff < prev_diff) {
             break;
         }
         prev_diff = diff;
-        arch_xcontiki_dev_Watchdog__periodic();
+        xcontiki_arch_dev_Watchdog__periodic();
     }
 }
 
-void arch_xcontiki_os_sys_Clock__delay_usec(uint16_t dt) {
+void xcontiki_arch_os_sys_Clock__delay_usec(uint16_t dt) {
     uint16_t start;
     uint16_t diff;
     uint16_t prev_diff;
     uint16_t interval;
 
-    start = arch_xcontiki_dev_HardwareClock__get_timer();
+    start = xcontiki_arch_dev_HardwareClock__get_timer();
 #if(ARCH_DEV_HARDWARECLOCK__FREQUENCY>32768ull)
 #error This method is suitable only for the clock frequency no greater than 32768 Hz   
 #endif
 
-    interval = ((dt * ARCH_XCONTIKI_DEV_HARDWARECLOCK__FREQUENCY)+(ARCH_XCONTIKI_DEV_HARDWARECLOCK__FREQUENCY / 2)) / 1000000ull;
+    interval = ((dt * XCONTIKI_ARCH_DEV_HARDWARECLOCK__FREQUENCY)+(XCONTIKI_ARCH_DEV_HARDWARECLOCK__FREQUENCY / 2)) / 1000000ull;
     prev_diff = 0;
     for (;;) {
-        diff = arch_xcontiki_dev_HardwareClock__get_timer() - start;
+        diff = xcontiki_arch_dev_HardwareClock__get_timer() - start;
         if (diff == prev_diff) {
             continue;
         }

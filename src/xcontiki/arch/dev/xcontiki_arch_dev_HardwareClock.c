@@ -30,25 +30,47 @@
  */
 
 /*
- * File:   arch_xcontiki.h
+ * File:   xcontiki_arch_dev_HardwareClock.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#ifndef ARCH_XCONTIKI_H
-#define ARCH_XCONTIKI_H
+#include "xcontiki/xcontiki.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#if(XCONTIKI_ARCH_DEV_HARDWARECLOCK_C == 0)
+#warning This is only a dummy implementation of the arch_dev_HardwareClock module
 
-#include "arch/xcontiki/os/arch_xcontiki_os.h"
-#include "arch/xcontiki/dev/arch_xcontiki_dev.h"
+volatile static struct {
+    uint16_t timer;
+    unsigned timer_overflow : 1;
+} hardware_timer_mock;
 
+static uint16_t ticks;
 
-
-#ifdef __cplusplus
+void xcontiki_arch_dev_HardwareClock__init(void) {
+    memset((void*) &hardware_timer_mock, 0, sizeof (hardware_timer_mock));
+    ticks = 0;
 }
-#endif
 
-#endif /* ARCH_XCONTIKI_H */
+uint16_t xcontiki_arch_dev_HardwareClock__get_timer(void) {
+    hardware_timer_mock.timer++;
+    if (0 == hardware_timer_mock.timer) {
+        hardware_timer_mock.timer_overflow = 1;
+    }
+    return hardware_timer_mock.timer;
+}
+
+uint32_t xcontiki_arch_dev_HardwareClock__get_clock(void) {
+    uint32_t tmp;
+    do {
+        if (hardware_timer_mock.timer_overflow) {
+            ticks++;
+            hardware_timer_mock.timer_overflow = 0;
+        }
+        tmp = xcontiki_arch_dev_HardwareClock__get_timer();
+        tmp += ((uint32_t) ticks << 16ul);
+    } while (hardware_timer_mock.timer_overflow);
+    return tmp;
+}
+
+#endif

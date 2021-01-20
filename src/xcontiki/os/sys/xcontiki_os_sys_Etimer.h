@@ -93,7 +93,7 @@ struct xcontiki_os_sys_Etimer {
  *             process that called the etimer_set() function.
  *
  */
-void xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, arch_xcontiki_os_sys_Clock__time_t interval);
+void xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval);
 
 /**
  * \brief      Reset an event timer with the same interval as was
@@ -124,7 +124,7 @@ void xcontiki_os_sys_Etimer__reset(struct xcontiki_os_sys_Etimer *et);
  *
  * \sa etimer_reset()
  */
-void xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etimer *et, arch_xcontiki_os_sys_Clock__time_t interval);
+void xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval);
 
 /**
  * \brief      Restart an event timer from the current point in time
@@ -172,7 +172,7 @@ void xcontiki_os_sys_Etimer__adjust(struct xcontiki_os_sys_Etimer *et, int td);
  *
  *             This function returns the expiration time for an event timer.
  */
-arch_xcontiki_os_sys_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(struct xcontiki_os_sys_Etimer *et);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(struct xcontiki_os_sys_Etimer *et);
 
 /**
  * \brief      Get the start time for the event timer.
@@ -182,7 +182,7 @@ arch_xcontiki_os_sys_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(struc
  *             This function returns the start time (when the timer
  *             was last set) for an event timer.
  */
-arch_xcontiki_os_sys_Clock__time_t etimer_start_time(struct xcontiki_os_sys_Etimer *et);
+xcontiki_arch_Clock__time_t etimer_start_time(struct xcontiki_os_sys_Etimer *et);
 
 /**
  * \brief      Check if an event timer has expired.
@@ -242,7 +242,7 @@ int xcontiki_os_sys_Etimer__pending(void);
  *             This functions returns next expiration time of all
  *             pending event timers.
  */
-arch_xcontiki_os_sys_Clock__time_t xcontiki_os_sys_Etimer__next_expiration_time(void);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__next_expiration_time(void);
 
 
 /** @} */

@@ -57,7 +57,7 @@ XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 
 #undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
 
-        static const arch_xcontiki_os_sys_Clock__time_t interval[number_of_tasks] = {
+        static const xcontiki_arch_Clock__time_t interval[number_of_tasks] = {
 #define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
      interval,
 
@@ -67,8 +67,8 @@ XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 };
 
 static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD last_states[number_of_tasks];
-static arch_xcontiki_os_sys_Clock__time_t last_ticks[number_of_tasks];
-static arch_xcontiki_os_sys_Clock__time_t prev_diff[number_of_tasks];
+static xcontiki_arch_Clock__time_t last_ticks[number_of_tasks];
+static xcontiki_arch_Clock__time_t prev_diff[number_of_tasks];
 
 static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD call_task(uint8_t task_number) {
 
@@ -99,7 +99,7 @@ static bool scheduler_first_run = true;
 
 static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
     static uint8_t i;
-    arch_xcontiki_os_sys_Clock__time_t diff;
+    xcontiki_arch_Clock__time_t diff;
 
     if (scheduler_first_run) {
         for (i = 0; i < number_of_tasks; i++) {
@@ -110,15 +110,15 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
     }
     for (i = 0; i < number_of_tasks; i++) {
         if (last_states[i] >= XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN) {
-            last_ticks[i] = arch_xcontiki_os_sys_Clock__time();
+            last_ticks[i] = xcontiki_arch_os_sys_Clock__time();
             prev_diff[i] = 0;
             last_states[i] = call_task(i);
         } else if (0 == interval[i] || last_states[i] < XCONTIKI_OS_SYS_PROTOTHREAD__EXITED) {
             last_states[i] = call_task(i);
         } else {
-            diff = arch_xcontiki_os_sys_Clock__time() - last_ticks[i];
+            diff = xcontiki_arch_os_sys_Clock__time() - last_ticks[i];
             if (diff >= interval[i] || diff < prev_diff[i]) {
-                last_ticks[i] = arch_xcontiki_os_sys_Clock__time();
+                last_ticks[i] = xcontiki_arch_os_sys_Clock__time();
                 prev_diff[i] = 0;
                 last_states[i] = call_task(i);
             } else {
