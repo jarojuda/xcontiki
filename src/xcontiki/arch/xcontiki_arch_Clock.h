@@ -66,16 +66,16 @@
  * @{
  */
 
-#ifndef XCONTIKI_ARCH_OS_SYS_CLOCK_H
-#define XCONTIKI_ARCH_OS_SYS_CLOCK_H
+#ifndef XCONTIKI_ARCH_CLOCK_H
+#define XCONTIKI_ARCH_CLOCK_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
     typedef uint32_t xcontiki_arch_Clock__time_t;
-    #define XCONTIKI_ARCH_OS_SYS_CLOCK__MAX UINT32_MAX
-    typedef uint32_t xCONTIKI_ARCH_CLOCK__SECONDs_t;
+    #define XCONTIKI_ARCH_CLOCK__MAX UINT32_MAX
+    typedef uint32_t xcontiki_arch_Clock__seconds_t;
 
     /**
      * A second, measured in system clock time.
@@ -92,7 +92,7 @@ extern "C" {
      * from the main() function of the system.
      *
      */
-    void xcontiki_arch_os_sys_Clock__init(void);
+    void xcontiki_arch_Clock__init(void);
 
 
     /**
@@ -102,7 +102,7 @@ extern "C" {
      *
      * \return The current clock time, measured in system ticks.
      */
-    xcontiki_arch_Clock__time_t xcontiki_arch_os_sys_Clock__time(void);
+    xcontiki_arch_Clock__time_t xcontiki_Clock__time(void);
 
 
     /**
@@ -113,14 +113,14 @@ extern "C" {
      *
      * \return The value.
      */
-    xCONTIKI_ARCH_CLOCK__SECONDs_t xCONTIKI_ARCH_CLOCK__SECONDs(void);
+    xcontiki_arch_Clock__seconds_t xcontiki_arch_Clock__get_seconds(void);
 
     /**
      * Set the value of the platform seconds.
      * \param sec   The value to set.
      *
      */
-    void xcontiki_arch_os_sys_Clock__set_seconds(xCONTIKI_ARCH_CLOCK__SECONDs_t sec);
+    void xcontiki_arch_Clock__set_seconds(xcontiki_arch_Clock__seconds_t sec);
 
     /**
      * Wait for a given number of ticks.
@@ -129,7 +129,7 @@ extern "C" {
       \param t   How many ticks.
      *
      */
-    void xcontiki_arch_os_sys_Clock__wait(xcontiki_arch_Clock__time_t t);
+    void xcontiki_arch_Clock__wait(xcontiki_arch_Clock__time_t t);
 
     /**
      * Delay a given number of microseconds.
@@ -137,11 +137,11 @@ extern "C" {
      *
      * \note Interrupts could increase the delay by a variable amount.
      */
-    void xcontiki_arch_os_sys_Clock__delay_usec(uint16_t dt);
+    void xcontiki_arch_Clock__delay_usec(uint16_t dt);
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* XCONTIKI_ARCH_OS_SYS_CLOCK_H */
+#endif /* XCONTIKI_ARCH_CLOCK_H */

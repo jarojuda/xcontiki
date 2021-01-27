@@ -37,31 +37,31 @@
 
 #include "xcontiki/xcontiki.h"
 
-#if(XCONTIKI_ARCH_OS_SYS_CLOCK_C == 0)
+#if(XCONTIKI_ARCH_CLOCK_C == 0)
 #warning This is only a dummy implementation of the xcontiki_arch_os_sys_Clock module
 
-static volatile xCONTIKI_ARCH_CLOCK__SECONDs_t dummy_clock_seconds;
+static volatile xcontiki_arch_Clock__seconds_t dummy_clock_seconds;
 
-void xcontiki_arch_os_sys_Clock__init(void) {
+void xcontiki_arch_Clock__init(void) {
     xcontiki_arch_dev_HardwareClock__init();
     dummy_clock_seconds = 0;
 }
 
-xcontiki_arch_Clock__time_t xcontiki_arch_os_sys_Clock__time(void) {
+xcontiki_arch_Clock__time_t xcontiki_arch_Clock__time(void) {
     return (xcontiki_arch_Clock__time_t) xcontiki_arch_dev_HardwareClock__get_clock();
 }
 
-xCONTIKI_ARCH_CLOCK__SECONDs_t xCONTIKI_ARCH_CLOCK__SECONDs(void) {
+xcontiki_arch_Clock__seconds_t xcontiki_arch_Clock__get_seconds(void) {
     return dummy_clock_seconds;
 }
 
-void xcontiki_arch_os_sys_Clock__set_seconds(xCONTIKI_ARCH_CLOCK__SECONDs_t sec) {
+void xcontiki_arch_Clock__set_seconds(xcontiki_arch_Clock__seconds_t sec) {
     dummy_clock_seconds = sec;
 }
 
 //Do not use it unless you know what you are doing.
 
-void xcontiki_arch_os_sys_Clock__wait(xcontiki_arch_Clock__time_t interval) {
+void xcontiki_arch_Clock__wait(xcontiki_arch_Clock__time_t interval) {
     xcontiki_arch_Clock__time_t start;
     xcontiki_arch_Clock__time_t diff;
     xcontiki_arch_Clock__time_t prev_diff;
@@ -69,10 +69,10 @@ void xcontiki_arch_os_sys_Clock__wait(xcontiki_arch_Clock__time_t interval) {
     if (0 == interval) {
         return;
     }
-    start = xcontiki_arch_os_sys_Clock__time();
+    start = xcontiki_arch_Clock__time();
     prev_diff = 0;
     for (;;) {
-        diff = xcontiki_arch_os_sys_Clock__time() - start;
+        diff = xcontiki_arch_Clock__time() - start;
         if (diff == prev_diff) {
             continue;
         }
@@ -85,7 +85,7 @@ void xcontiki_arch_os_sys_Clock__wait(xcontiki_arch_Clock__time_t interval) {
     }
 }
 
-void xcontiki_arch_os_sys_Clock__delay_usec(uint16_t dt) {
+void xcontiki_arch_Clock__delay_usec(uint16_t dt) {
     uint16_t start;
     uint16_t diff;
     uint16_t prev_diff;

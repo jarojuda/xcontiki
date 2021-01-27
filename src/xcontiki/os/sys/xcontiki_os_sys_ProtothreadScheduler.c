@@ -110,15 +110,15 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
     }
     for (i = 0; i < number_of_tasks; i++) {
         if (last_states[i] >= XCONTIKI_OS_SYS_PROTOTHREAD__FIRST_RUN) {
-            last_ticks[i] = xcontiki_arch_os_sys_Clock__time();
+            last_ticks[i] = xcontiki_arch_Clock__time();
             prev_diff[i] = 0;
             last_states[i] = call_task(i);
         } else if (0 == interval[i] || last_states[i] < XCONTIKI_OS_SYS_PROTOTHREAD__EXITED) {
             last_states[i] = call_task(i);
         } else {
-            diff = xcontiki_arch_os_sys_Clock__time() - last_ticks[i];
+            diff = xcontiki_arch_Clock__time() - last_ticks[i];
             if (diff >= interval[i] || diff < prev_diff[i]) {
-                last_ticks[i] = xcontiki_arch_os_sys_Clock__time();
+                last_ticks[i] = xcontiki_arch_Clock__time();
                 prev_diff[i] = 0;
                 last_states[i] = call_task(i);
             } else {

@@ -68,7 +68,7 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_t *t, xcontiki_arch_Cloc
         t->set = false;
         return;
     }
-    t->start = xcontiki_arch_os_sys_Clock__time();
+    t->start = xcontiki_arch_Clock__time();
     t->previous_diff = 0;
     t->set = true;
 }
@@ -116,7 +116,7 @@ xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_t *t) {
  */
 void
 xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_t *t) {
-    t->start = xcontiki_arch_os_sys_Clock__time();
+    t->start = xcontiki_arch_Clock__time();
     t->previous_diff = 0;
     t->expired = (0 == t->interval);
     if (false == t->expired) {
@@ -174,7 +174,7 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t __ram *t) {
     }
     tmp_timer_ptr = &tmp_timer;
     memcpy(tmp_timer_ptr, t, sizeof ( xcontiki_os_sys_Timer__timer_t));
-    xcontiki_arch_Clock__time_t diff = (xcontiki_arch_os_sys_Clock__time() - tmp_timer.start);
+    xcontiki_arch_Clock__time_t diff = (xcontiki_arch_Clock__time() - tmp_timer.start);
     if (diff >= tmp_timer.interval || diff < tmp_timer.previous_diff) {
         tmp_timer.expired = true;
         result = true;

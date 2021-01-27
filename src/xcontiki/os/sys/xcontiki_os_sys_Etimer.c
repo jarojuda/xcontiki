@@ -63,7 +63,7 @@ update_time(void)
   if(timerlist == NULL) {
     next_expiration = 0;
   } else {
-    now = xcontiki_arch_os_sys_Clock__time();
+    now = xcontiki_arch_Clock__time();
     t = timerlist;
     /* Must calculate distance to next time into account due to wraps */
     tdist = t->timer.start + t->timer.interval - now;
