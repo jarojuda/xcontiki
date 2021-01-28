@@ -66,11 +66,13 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_t *t, xcontiki_arch_Cloc
         t->expired = true;
         t->interval = 0;
         t->set = false;
-        return;
+    } else {
+    	t->start = xcontiki_arch_Clock__time();
+    	t->interval = interval;
+    	t->previous_diff = 0;
+    	t->set = true;
+    	t->expired = false;
     }
-    t->start = xcontiki_arch_Clock__time();
-    t->previous_diff = 0;
-    t->set = true;
 }
 /*---------------------------------------------------------------------------*/
 
