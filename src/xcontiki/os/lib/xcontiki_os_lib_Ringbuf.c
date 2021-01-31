@@ -42,8 +42,10 @@
 /*---------------------------------------------------------------------------*/
 void
 xcontiki_os_lib_Ringbuf__init(xcontiki_os_lib_Ringbuf__ringbuf_t  *r, uint8_t  *dataptr, uint8_t size) {
-    r->data = dataptr;
+    //if ((size != 0) && !(size & (size - 1))){
     r->mask = size - 1;
+    r->data = dataptr;
+
     r->put_ptr = 0;
     r->get_ptr = 0;
 }

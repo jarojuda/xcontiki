@@ -144,7 +144,7 @@ static uint8_t ringbuf##get(void){\
   return xcontiki_os_lib_Ringbuf__get(&_##ringbuf);\
 }\
 static uint8_t ringbuf##size(void){\
-  return size_power_of_two\;\
+  return size_power_of_two;\
 }\
 static uint8_t ringbuf##elements(void){\
   return xcontiki_os_lib_Ringbuf__elements(&_##ringbuf);\
