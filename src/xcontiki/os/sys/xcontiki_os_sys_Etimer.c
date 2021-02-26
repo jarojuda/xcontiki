@@ -51,7 +51,7 @@
 static struct xcontiki_os_sys_Etimer *timerlist;
 static xcontiki_arch_Clock__time_t next_expiration;
 
-XCONTIKI_OS_SYS_PROCESS(etimer_process, "Event timer");
+XCONTIKI_OS_SYS_PROCESS(xcontiki_os_sys_Etimer__process, "Event timer");
 /*---------------------------------------------------------------------------*/
 static void
 update_time(void)
@@ -76,7 +76,7 @@ update_time(void)
   }
 }
 /*---------------------------------------------------------------------------*/
-XCONTIKI_OS_SYS_PROCESS__THREAD(etimer_process, ev, data)
+XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data)
 {
   struct xcontiki_os_sys_Etimer *t, *u;
 
@@ -143,7 +143,7 @@ again:
 void
 xcontiki_os_sys_Etimer__request_poll(void)
 {
-  xcontiki_os_sys_Process__poll(&etimer_process);
+  xcontiki_os_sys_Process__poll(&xcontiki_os_sys_Etimer__process);
 }
 /*---------------------------------------------------------------------------*/
 static void

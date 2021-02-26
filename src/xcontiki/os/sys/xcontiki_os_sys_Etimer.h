@@ -247,7 +247,7 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__next_expiration_time(void);
 
 /** @} */
 
-XCONTIKI_OS_SYS_PROCESS__NAME(etimer_process);
+XCONTIKI_OS_SYS_PROCESS__NAME(xcontiki_os_sys_Etimer__process);
 #endif /* XCONTIKI_OS_SYS_ETIMER_H */
 /** @} */
 /** @} */
