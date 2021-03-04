@@ -116,11 +116,11 @@ bool xcontiki_os_lib_RingbufIndex__full(const xcontiki_os_lib_RingbufIndex__ring
  */
 bool xcontiki_os_lib_RingbufIndex__empty(const xcontiki_os_lib_RingbufIndex__ringbufindex_t *r);
 
-#define XCONTIKI_OS_LIB_RINGBUFFERINDEX_NEW_STATIC(rbi, size_power_of_two)\
+#define XCONTIKI_OS_LIB_RINGBUFFERINDEX_NEW_STATIC(rbi)\
 \
 static xcontiki_os_lib_RingbufIndex__ringbufindex_t _##rbi;\
 \
-static void rbi##init(void) {\
+static void rbi##init(uint8_t size_power_of_two) {\
 xcontiki_os_lib_RingbufIndex__init(&_##rbi, size_power_of_two);\
 }\
 \
@@ -140,11 +140,11 @@ static int rbi##peek_get(void) {\
     return xcontiki_os_lib_RingbufIndex__peek_get(&_##rbi);\
 }\
 \
-static uint8_t size(void) {\
+static uint8_t rbi##size(void) {\
     return xcontiki_os_lib_RingbufIndex__size(&_##rbi);\
 }\
 \
-static uint8_t elements(void) {\
+static uint8_t rbi##elements(void) {\
     return xcontiki_os_lib_RingbufIndex__elements(&_##rbi);\
 }\
 \
