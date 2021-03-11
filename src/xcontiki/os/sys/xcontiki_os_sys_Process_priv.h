@@ -78,7 +78,7 @@ static void call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Proc
 
 #if DEBUG
 #include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
+#define PRINTF(...)
 #else
 #define PRINTF(...)
 #endif
