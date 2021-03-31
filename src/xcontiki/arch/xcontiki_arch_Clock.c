@@ -40,15 +40,25 @@
 #if(XCONTIKI_ARCH_CLOCK_C == 0)
 #warning This is only a dummy implementation of the xcontiki_arch_os_sys_Clock module
 
+static volatile uint32_t hardware_timer_mock;
 static volatile xcontiki_arch_Clock__seconds_t dummy_clock_seconds;
 
+#ifndef TEST
+ static uint32_t get_timer(void) {
+    ++hardware_timer_mock;
+    return hardware_timer_mock;
+}
+#else
+uint32_t get_timer(void);
+#endif
+
 void xcontiki_arch_Clock__init(void) {
-    xcontiki_arch_dev_HardwareClock__init();
+    hardware_timer_mock= 0;
     dummy_clock_seconds = 0;
 }
 
 xcontiki_arch_Clock__time_t xcontiki_arch_Clock__time(void) {
-    return (xcontiki_arch_Clock__time_t) xcontiki_arch_dev_HardwareClock__get_clock();
+    return (xcontiki_arch_Clock__time_t)get_timer();
 }
 
 xcontiki_arch_Clock__seconds_t xcontiki_arch_Clock__get_seconds(void) {
@@ -85,21 +95,18 @@ void xcontiki_arch_Clock__wait(xcontiki_arch_Clock__time_t interval) {
     }
 }
 
-void xcontiki_arch_Clock__delay_usec(uint16_t dt) {
-    uint16_t start;
-    uint16_t diff;
-    uint16_t prev_diff;
-    uint16_t interval;
+void xcontiki_arch_Clock__delay_usec(uint32_t dt) {
+    uint32_t start;
+    uint32_t diff;
+    uint32_t prev_diff;
+    uint32_t interval;
 
-    start = xcontiki_arch_dev_HardwareClock__get_timer();
-#if(ARCH_DEV_HARDWARECLOCK__FREQUENCY>32768ull)
-#error This method is suitable only for the clock frequency no greater than 32768 Hz   
-#endif
+    start = get_timer();
 
-    interval = ((dt * XCONTIKI_ARCH_DEV_HARDWARECLOCK__FREQUENCY)+(XCONTIKI_ARCH_DEV_HARDWARECLOCK__FREQUENCY / 2)) / 1000000ull;
+    interval = ((dt * XCONTIKI_ARCH_CLOCK__FREQUENCY)+(XCONTIKI_ARCH_CLOCK__FREQUENCY / 2)) / 1000000ull;
     prev_diff = 0;
     for (;;) {
-        diff = xcontiki_arch_dev_HardwareClock__get_timer() - start;
+        diff = get_timer() - start;
         if (diff == prev_diff) {
             continue;
         }

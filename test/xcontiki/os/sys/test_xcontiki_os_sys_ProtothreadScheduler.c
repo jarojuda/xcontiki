@@ -2,14 +2,14 @@
 #include "xcontiki/xcontiki.h"
 #include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
 #include <string.h>
-#include "mock_arch_xcontiki_os_sys_Clock.h"
+#include "mock_xcontiki_arch_Clock.h"
 #include "mock_tasks_for_test.h"
 
 
 #define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST \
         XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task1_that_runs_everytime, 0) \
-        XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task2_started_in_the_meantime, ARCH_XCONTIKI_OS_SYS_CLOCK__MAX/2ull) \
-        XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task3_with_max_interval, ARCH_XCONTIKI_OS_SYS_CLOCK__MAX) \
+        XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task2_started_in_the_meantime, XCONTIKI_ARCH_CLOCK__MAX/2ull) \
+        XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task3_with_max_interval, XCONTIKI_ARCH_CLOCK__MAX) \
 
 
 #include "xcontiki/os/sys/xcontiki_os_sys_ProtothreadScheduler.c"
@@ -44,23 +44,23 @@ void static first_run_with_fake_tasks_returning_status(XCONTIKI_OS_SYS_PROTOTHRE
 
 void test_whenAfterReset_thenEveryTaskShouldBeStarted(void){
 
-        arch_xcontiki_os_sys_Clock__time_fake.return_val = 0;
+        xcontiki_arch_Clock__time_fake.return_val = 0;
         first_run_with_fake_tasks_returning_status(XCONTIKI_OS_SYS_PROTOTHREAD__ENDED);
 
         scheduler__init();
-        arch_xcontiki_os_sys_Clock__time_fake.return_val = ARCH_XCONTIKI_OS_SYS_CLOCK__MAX/2ull - 1ull;
+        xcontiki_arch_Clock__time_fake.return_val = XCONTIKI_ARCH_CLOCK__MAX/2ull - 1ull;
         first_run_with_fake_tasks_returning_status(XCONTIKI_OS_SYS_PROTOTHREAD__ENDED);
 
         scheduler__init();
-        arch_xcontiki_os_sys_Clock__time_fake.return_val = ARCH_XCONTIKI_OS_SYS_CLOCK__MAX/2ull;
+        xcontiki_arch_Clock__time_fake.return_val = XCONTIKI_ARCH_CLOCK__MAX/2ull;
         first_run_with_fake_tasks_returning_status(XCONTIKI_OS_SYS_PROTOTHREAD__ENDED);
 
         scheduler__init();
-        arch_xcontiki_os_sys_Clock__time_fake.return_val = ARCH_XCONTIKI_OS_SYS_CLOCK__MAX/2ull +1ull;
+        xcontiki_arch_Clock__time_fake.return_val = XCONTIKI_ARCH_CLOCK__MAX/2ull +1ull;
         first_run_with_fake_tasks_returning_status(XCONTIKI_OS_SYS_PROTOTHREAD__ENDED);
 
         scheduler__init();
-        arch_xcontiki_os_sys_Clock__time_fake.return_val = ARCH_XCONTIKI_OS_SYS_CLOCK__MAX;
+        xcontiki_arch_Clock__time_fake.return_val = XCONTIKI_ARCH_CLOCK__MAX;
         first_run_with_fake_tasks_returning_status(XCONTIKI_OS_SYS_PROTOTHREAD__ENDED);
 }
 
@@ -69,12 +69,12 @@ void test_whenTaskWasStarted_andItIsWaiting_thenTaskShouldRunImmediately(void){
 
         //after the first start
         //tasks are in progress, have not finished
-        arch_xcontiki_os_sys_Clock__time_fake.return_val =0ull;
+        xcontiki_arch_Clock__time_fake.return_val =0ull;
         first_run_with_fake_tasks_returning_status(XCONTIKI_OS_SYS_PROTOTHREAD__WAITING);
 
 
         //time forward by one tick
-        arch_xcontiki_os_sys_Clock__time_fake.return_val +=1ull;
+        xcontiki_arch_Clock__time_fake.return_val +=1ull;
         scheduler();
         //all tasks should start again regardless of the interval
         TEST_ASSERT_CALLED_TIMES(2, task1_that_runs_everytime);
@@ -86,14 +86,14 @@ void test_whenTaskWasStarted_andItIsYielded_thenTaskShouldRunImmediately(void){
 
         //after the first start
         //tasks are in progress, have not finished
-        arch_xcontiki_os_sys_Clock__time_fake.return_val =0ull;
+        xcontiki_arch_Clock__time_fake.return_val =0ull;
         task1_that_runs_everytime_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;
         task2_started_in_the_meantime_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;
         task3_with_max_interval_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;
         scheduler();
 
         //time forward by one tick
-        arch_xcontiki_os_sys_Clock__time_fake.return_val +=1ull;
+        xcontiki_arch_Clock__time_fake.return_val +=1ull;
         scheduler();
         //all tasks should start again regardless of the interval
         TEST_ASSERT_CALLED_TIMES(2, task1_that_runs_everytime);
@@ -106,7 +106,7 @@ void test_whenTaskWasStarted_andItIsEnded_thenTaskShouldRunAfterInterval(void){
 
         //after the first start
         //tasks are in progress, have not finished
-        arch_xcontiki_os_sys_Clock__time_fake.return_val =0ull;
+        xcontiki_arch_Clock__time_fake.return_val =0ull;
         task1_that_runs_everytime_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__ENDED;
         task2_started_in_the_meantime_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__ENDED;
         task3_with_max_interval_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__ENDED;
@@ -114,7 +114,7 @@ void test_whenTaskWasStarted_andItIsEnded_thenTaskShouldRunAfterInterval(void){
 
 
         //time forward by half of max interval - one tick
-        arch_xcontiki_os_sys_Clock__time_fake.return_val +=(ARCH_XCONTIKI_OS_SYS_CLOCK__MAX/2ull -1);
+        xcontiki_arch_Clock__time_fake.return_val +=(XCONTIKI_ARCH_CLOCK__MAX/2ull -1);
         scheduler();
         //this task should always run
         TEST_ASSERT_CALLED_TIMES(2, task1_that_runs_everytime);
@@ -124,7 +124,7 @@ void test_whenTaskWasStarted_andItIsEnded_thenTaskShouldRunAfterInterval(void){
         TEST_ASSERT_CALLED_TIMES(1, task3_with_max_interval);
 
         //time forward by one tick
-        arch_xcontiki_os_sys_Clock__time_fake.return_val += 1;
+        xcontiki_arch_Clock__time_fake.return_val += 1;
         scheduler();
         //this task should always run
         TEST_ASSERT_CALLED_TIMES(3, task1_that_runs_everytime);
@@ -134,7 +134,7 @@ void test_whenTaskWasStarted_andItIsEnded_thenTaskShouldRunAfterInterval(void){
         TEST_ASSERT_CALLED_TIMES(1, task3_with_max_interval);
 
         //time forward by another tick
-        arch_xcontiki_os_sys_Clock__time_fake.return_val += 1;
+        xcontiki_arch_Clock__time_fake.return_val += 1;
         scheduler();
         //this task should always run
         TEST_ASSERT_CALLED_TIMES(4, task1_that_runs_everytime);
@@ -145,7 +145,7 @@ void test_whenTaskWasStarted_andItIsEnded_thenTaskShouldRunAfterInterval(void){
 
 
         //time rewound to zero
-        arch_xcontiki_os_sys_Clock__time_fake.return_val = 0;
+        xcontiki_arch_Clock__time_fake.return_val = 0;
         scheduler();
         //this task should always run
         TEST_ASSERT_CALLED_TIMES(5, task1_that_runs_everytime);

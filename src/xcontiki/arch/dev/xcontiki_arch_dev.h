@@ -42,7 +42,6 @@
 extern "C" {
 #endif
 
-#include "xcontiki/arch/dev/xcontiki_arch_dev_HardwareClock.h"
 #include "xcontiki/arch/dev/xcontiki_arch_dev_Watchdog.h"
 
 

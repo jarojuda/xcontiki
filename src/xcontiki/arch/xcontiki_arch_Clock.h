@@ -74,15 +74,16 @@ extern "C" {
 #endif
 
     typedef uint32_t xcontiki_arch_Clock__time_t;
-    #define XCONTIKI_ARCH_CLOCK__MAX UINT32_MAX
+#define XCONTIKI_ARCH_CLOCK__MAX UINT32_MAX
     typedef uint32_t xcontiki_arch_Clock__seconds_t;
 
+#define XCONTIKI_ARCH_CLOCK__FREQUENCY (32768ul)
     /**
      * A second, measured in system clock time.
      *
      * \hideinitializer
      */
-#define XCONTIKI_ARCH_CLOCK__SECOND ((xcontiki_arch_Clock__time_t)XCONTIKI_ARCH_DEV_HARDWARECLOCK__FREQUENCY)
+#define XCONTIKI_ARCH_CLOCK__SECOND ((xcontiki_arch_Clock__time_t)XCONTIKI_ARCH_CLOCK__FREQUENCY)
 
 
     /**
@@ -102,7 +103,7 @@ extern "C" {
      *
      * \return The current clock time, measured in system ticks.
      */
-    xcontiki_arch_Clock__time_t xcontiki_Clock__time(void);
+    xcontiki_arch_Clock__time_t xcontiki_arch_Clock__time(void);
 
 
     /**
@@ -137,7 +138,7 @@ extern "C" {
      *
      * \note Interrupts could increase the delay by a variable amount.
      */
-    void xcontiki_arch_Clock__delay_usec(uint16_t dt);
+    void xcontiki_arch_Clock__delay_usec(uint32_t dt);
 
 
 #ifdef __cplusplus

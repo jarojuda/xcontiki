@@ -35,15 +35,23 @@
     - -:test/support
   :source:
     - src/**
+  :include:
+    - src
+    - src/xcontiki/arch
+    - src/xcontiki/os/sys
   :support:
     - test/support
   :libraries: []
+
+:files:
+  :source:
+    - -:src/xcontiki/xcontiki.c
 
 :defines:
   # in order to add common defines:
   #  1) remove the trailing [] from the :common: section
   #  2) add entries to the :common: section (e.g. :test: has TEST defined)
-  :common: &common_defines []
+  :common: &common_defines
   :test:
     - *common_defines
     - TEST
