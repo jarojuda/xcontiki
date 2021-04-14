@@ -35,15 +35,19 @@
  *
  */
 
-#ifndef XCONTIKI_ARCH_BUILD_H
-#define	XCONTIKI_ARCH_BUILD_H
+#ifndef XCONTIKI_ARCH_CONF_H
+#define	XCONTIKI_ARCH_CONF_H
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
+
+
+
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* XCONTIKI_ARCH_BUILD_H */
+#endif	/* XCONTIKI_ARCH_CONF_H */
+

@@ -52,6 +52,8 @@ extern "C" {
 #define __ram
 #define rom
 
+#include "xcontiki/arch/xcontiki_arch_build.h"
+#include "xcontiki/arch/xcontiki_arch_conf.h"
 #include "xcontiki/arch/os/xcontiki_arch_os.h"
 #include "xcontiki/arch/dev/xcontiki_arch_dev.h"
 #include "xcontiki/arch/xcontiki_arch_Clock.h"
