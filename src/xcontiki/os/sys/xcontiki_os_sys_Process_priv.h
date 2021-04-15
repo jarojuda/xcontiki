@@ -138,7 +138,7 @@ exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *
 static void
 call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data)
 {
-  int ret;
+  XCONTIKI_OS_SYS_PROTOTHREAD__THREAD ret;
 
 #if DEBUG
   if(p->state == STATE_CALLED) {
