@@ -77,6 +77,7 @@ xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_os_sy
   p->next = list_of_processes;
   list_of_processes = p;
   p->state = STATE_RUNNING;
+  p->marked_to_exit = false;
 
   PRINTF("process: starting '%s'\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p));
 

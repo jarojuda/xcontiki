@@ -329,7 +329,9 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name##_internal(\
 struct xcontiki_os_sys_Process {
     struct xcontiki_os_sys_Process *next;
     XCONTIKI_OS_SYS_PROTOTHREAD__THREAD(* thread)(xcontiki_os_sys_Process__event_t, xcontiki_os_sys_Process__data_t);
-    unsigned char state, needspoll;
+    unsigned char state;
+    unsigned needspoll :1;
+    unsigned marked_to_exit:1;
 };
 
 /**
