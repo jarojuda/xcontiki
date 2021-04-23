@@ -88,7 +88,7 @@ static void
 exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *fromprocess)
 {
   register struct xcontiki_os_sys_Process *q;
-  struct xcontiki_os_sys_Process *old_current = current_process_ptr;
+  struct xcontiki_os_sys_Process *old_current_process_ptr = current_process_ptr;
 
   PRINTF("process: exit_process '%s'\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p));
 
@@ -132,7 +132,7 @@ exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *
     }
   }
 
-  current_process_ptr = old_current;
+  current_process_ptr = old_current_process_ptr;
 }
 /*---------------------------------------------------------------------------*/
 static void
