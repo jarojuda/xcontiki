@@ -87,13 +87,83 @@ extern "C" {
 #define PRINTF(...)
 #endif
 
+    static void
+    exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *fromprocess) {
+        register struct xcontiki_os_sys_Process *q;
+        struct xcontiki_os_sys_Process *old_current_process_ptr;
+        XCONTIKI_OS_SYS_PROTOTHREAD__THREAD ret;
+
+        if (NULL == p->thread) {
+            return;
+        }
+        /* Make sure the process is in the process list before we try to
+        exit it. */
+        for (q = list_of_processes; q != p && q != NULL; q = q->next);
+        if (q == NULL) {
+            return;
+        }
+        old_current_process_ptr = current_process_ptr;
+        p->marked_to_exit = true;
+        static bool is_another_marked_to_exit;
+        do {
+            is_another_marked_to_exit = false;
+            for (p = list_of_processes; p != NULL; p = p->next) {
+                if (p->marked_to_exit) {
+                    if (xcontiki_os_sys_Process__is_running(p)) {
+                        /* Process was running */
+                        p->running = false;
+                        p->called = false;
+
+                        /*
+                         * Post a synchronous event to all processes to inform them that
+                         * this process is about to exit. This will allow services to
+                         * deallocate state associated with this process.
+                         */
+                        for (q = list_of_processes; q != NULL; q = q->next) {
+                            if (p != q) {
+                                if (q->running) {
+                                    current_process_ptr = q;
+                                    q->called = true;
+                                    ret = q->thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXITED, (xcontiki_os_sys_Process__data_t) p);
+                                    if (ret == XCONTIKI_OS_SYS_PROTOTHREAD__EXITED || ret == XCONTIKI_OS_SYS_PROTOTHREAD__ENDED) {
+                                        q->marked_to_exit = true;
+                                        is_another_marked_to_exit = true;
+                                    } else {
+                                        q->called = false;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (p->thread != NULL && p != fromprocess && fromprocess != NULL) {
+                            /* Post the exit event to the process that is about to exit. */
+                            current_process_ptr = p;
+                            p->thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, NULL);
+                        }
+                        fromprocess = NULL;
+                    }
+                    if (p == list_of_processes) {
+                        list_of_processes = list_of_processes->next;
+                    } else {
+                        for (q = list_of_processes; q != NULL; q = q->next) {
+                            if (q->next == p) {
+                                q->next = p->next;
+                                break;
+                            }
+                        }
+                    }
+                    p->marked_to_exit = false;
+                }
+            }
+        } while (is_another_marked_to_exit);
+        current_process_ptr = old_current_process_ptr;
+    }
+
     /*---------------------------------------------------------------------------*/
     static void
     call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data) {
 
         register struct xcontiki_os_sys_Process *q;
-        struct xcontiki_os_sys_Process *old_current_process_ptr;
-        struct xcontiki_os_sys_Process *fromprocess;
         XCONTIKI_OS_SYS_PROTOTHREAD__THREAD ret;
 
         if (NULL == p) {
@@ -109,7 +179,7 @@ extern "C" {
         }
 #endif /* DEBUG */
 
-        if (p->running && !p->called && !p->marked_to_exit) {
+        if (p->running && !p->called ) {
             PRINTF("process: calling process '%s' with event %d\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), ev);
             current_process_ptr = p;
             p->called = true;
@@ -117,80 +187,11 @@ extern "C" {
             if (ret == XCONTIKI_OS_SYS_PROTOTHREAD__EXITED ||
                     ret == XCONTIKI_OS_SYS_PROTOTHREAD__ENDED ||
                     ev == XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT) {
-                p->marked_to_exit;
-                fromprocess = NULL;
+                exit_process(p, p);
             } else {
                 p->called = false;
             }
         }
-
-        if (p->marked_to_exit) {
-            /* Make sure the process is in the process list before we try to
-   exit it. */
-            for (q = list_of_processes; q != p && q != NULL; q = q->next);
-            if (q == NULL) {
-                return;
-            }
-            old_current_process_ptr = current_process_ptr;
-            fromprocess = (struct xcontiki_os_sys_Process *) data;
-            p->marked_to_exit = true;
-            static bool is_another_marked_to_exit;
-            do {
-                is_another_marked_to_exit = false;
-                for (p = list_of_processes; p != NULL; p = p->next) {
-                    if (p->marked_to_exit) {
-                        if (xcontiki_os_sys_Process__is_running(p)) {
-                            /* Process was running */
-                            p->running = false;
-                            p->called = false;
-
-                            /*
-                             * Post a synchronous event to all processes to inform them that
-                             * this process is about to exit. This will allow services to
-                             * deallocate state associated with this process.
-                             */
-                            for (q = list_of_processes; q != NULL; q = q->next) {
-                                if (p != q) {
-                                    if (q->running) {
-                                        current_process_ptr = q;
-                                        q->called = true;
-                                        ret = q->thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXITED, (xcontiki_os_sys_Process__data_t) p);
-                                        if (ret == XCONTIKI_OS_SYS_PROTOTHREAD__EXITED || ret == XCONTIKI_OS_SYS_PROTOTHREAD__ENDED) {
-                                            q->marked_to_exit = true;
-                                            is_another_marked_to_exit = true;
-                                        } else {
-                                            q->called = false;
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (p->thread != NULL && p != fromprocess && fromprocess != NULL) {
-                                /* Post the exit event to the process that is about to exit. */
-                                current_process_ptr = p;
-                                p->thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, NULL);
-                            }
-                            fromprocess = NULL;
-                        }
-                        if (p == list_of_processes) {
-                            list_of_processes = list_of_processes->next;
-                        } else {
-                            for (q = list_of_processes; q != NULL; q = q->next) {
-                                if (q->next == p) {
-                                    q->next = p->next;
-                                    break;
-                                }
-                            }
-                        }
-                        p->marked_to_exit = false;
-                    }
-                }
-            } while (is_another_marked_to_exit);
-            current_process_ptr = old_current_process_ptr;
-        }
-
-
-
     }
 
     /*---------------------------------------------------------------------------*/

@@ -88,9 +88,7 @@ xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_os_sy
 /*---------------------------------------------------------------------------*/
 void
 xcontiki_os_sys_Process__exit(struct xcontiki_os_sys_Process *p) {
-    p->marked_to_exit = true;
-    call_process(p, XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, xcontiki_os_sys_Process__get_current_process());
-    //exit_process(p, xcontiki_os_sys_Process__get_current_process());
+    exit_process(p, xcontiki_os_sys_Process__get_current_process());
 }
 
 /*---------------------------------------------------------------------------*/
