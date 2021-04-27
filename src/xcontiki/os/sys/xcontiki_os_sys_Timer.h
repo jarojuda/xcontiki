@@ -81,41 +81,46 @@ struct __PACKED xcontiki_os_sys_Timer__timer {
     xcontiki_arch_Clock__time_t start;
     xcontiki_arch_Clock__time_t interval;
     xcontiki_arch_Clock__time_t previous_diff;
-    unsigned expired : 1;
-    unsigned set : 1;
+    unsigned expired   : 1;
+    unsigned running   : 1;
+    unsigned allocated :1;
 };
 
-typedef struct xcontiki_os_sys_Timer__timer xcontiki_os_sys_Timer__timer_t;
+#ifndef XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER
+#define XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER (32u)
+#endif
 
-void xcontiki_os_sys_Timer__set(struct xcontiki_os_sys_Timer__timer *t, xcontiki_arch_Clock__time_t interval);
-void xcontiki_os_sys_Timer__reset(struct xcontiki_os_sys_Timer__timer *t);
-void xcontiki_os_sys_Timer__restart(struct xcontiki_os_sys_Timer__timer *t);
-bool xcontiki_os_sys_Timer__expired(struct xcontiki_os_sys_Timer__timer __ram *t);
-bool xcontiki_os_sys_Timer__expired_after(struct xcontiki_os_sys_Timer__timer __ram *t, xcontiki_arch_Clock__time_t interval);
-xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__remaining(struct xcontiki_os_sys_Timer__timer *t);
+typedef uint8_t xcontiki_os_sys_Timer__timer_id_t;
+
+xcontiki_os_sys_Timer__timer_id_t xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t interval);
+void xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_id_t t);
+void xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_id_t t);
+bool xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t);
+bool xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t interval);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_id_t t);
 
 
 #define XCONTIKI_OS_SYS_TIMER__NEW_STATIC(timer) \
 \
-static xcontiki_os_sys_Timer__timer_t  _##timer;\
+static xcontiki_os_sys_Timer__timer_id_t  _##timer##_id;\
 static void timer##set(xcontiki_arch_Clock__time_t t){\
-    xcontiki_os_sys_Timer__set(&_##timer, t);\
+    _##timer##_id=xcontiki_os_sys_Timer__set(_##timer##_id, t);\
 }\
 static void timer##reset(void){\
-    xcontiki_os_sys_Timer__reset(&_##timer);\
+    xcontiki_os_sys_Timer__reset(_##timer##_id);\
 }\
 \
 static void timer##restart(void){\
-    xcontiki_os_sys_Timer__restart(&_##timer);\
+    xcontiki_os_sys_Timer__restart(_##timer##_id);\
 }\
 static bool timer##expired(void){\
-    return xcontiki_os_sys_Timer__expired(&_##timer);\
+    return xcontiki_os_sys_Timer__expired(_##timer##_id);\
 }\
 static bool timer##expired_after(xcontiki_arch_Clock__time_t t){\
-    return xcontiki_os_sys_Timer__expired_after(&_##timer, t);\
+    return xcontiki_os_sys_Timer__expired_after(_##timer##_id, t);\
 }\
 static xcontiki_arch_Clock__time_t timer##remaining(void){\
-    return xcontiki_os_sys_Timer__remaining(&_##timer);\
+    return xcontiki_os_sys_Timer__remaining(_##timer##_id);\
 }\
 \
 static const struct {\

@@ -182,7 +182,7 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(struct xcont
  *             This function returns the start time (when the timer
  *             was last set) for an event timer.
  */
-xcontiki_arch_Clock__time_t etimer_start_time(struct xcontiki_os_sys_Etimer *et);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__start_time(struct xcontiki_os_sys_Etimer *et);
 
 /**
  * \brief      Check if an event timer has expired.
@@ -232,17 +232,6 @@ void xcontiki_os_sys_Etimer__request_poll(void);
  *             timers that have not expired.
  */
 int xcontiki_os_sys_Etimer__pending(void);
-
-/**
- * \brief      Get next event timer expiration time.
- * \return     Next expiration time of all pending event timers.
- *             If there are no pending event timers this function
- *	       returns 0.
- *
- *             This functions returns next expiration time of all
- *             pending event timers.
- */
-xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__next_expiration_time(void);
 
 
 /** @} */

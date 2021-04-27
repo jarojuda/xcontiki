@@ -49,32 +49,9 @@
 
 
 static struct xcontiki_os_sys_Etimer *timerlist;
-static xcontiki_arch_Clock__time_t next_expiration;
 
 XCONTIKI_OS_SYS_PROCESS(xcontiki_os_sys_Etimer__process, "Event timer");
-/*---------------------------------------------------------------------------*/
-static void
-update_time(void)
-{
-  xcontiki_arch_Clock__time_t tdist;
-  xcontiki_arch_Clock__time_t now;
-  struct xcontiki_os_sys_Etimer *t;
 
-  if(timerlist == NULL) {
-    next_expiration = 0;
-  } else {
-    now = xcontiki_arch_Clock__time();
-    t = timerlist;
-    /* Must calculate distance to next time into account due to wraps */
-    tdist = t->timer.start + t->timer.interval - now;
-    for(t = t->next; t != NULL; t = t->next) {
-      if(t->timer.start + t->timer.interval - now < tdist) {
-        tdist = t->timer.start + t->timer.interval - now;
-      }
-    }
-    next_expiration = now + tdist;
-  }
-}
 /*---------------------------------------------------------------------------*/
 XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data)
 {
@@ -127,7 +104,6 @@ again:
             timerlist = t->next;
           }
           t->next = NULL;
-          update_time();
           goto again;
         } else {
           xcontiki_os_sys_Etimer__request_poll();
@@ -158,7 +134,6 @@ add_timer(struct xcontiki_os_sys_Etimer *etimer)
       if(t == etimer) {
         /* Timer already on list, bail out. */
         etimer->p = xcontiki_os_sys_Process__get_current_process();
-        update_time();
         return;
       }
     }
@@ -168,8 +143,6 @@ add_timer(struct xcontiki_os_sys_Etimer *etimer)
   etimer->p = xcontiki_os_sys_Process__get_current_process();
   etimer->next = timerlist;
   timerlist = etimer;
-
-  update_time();
 }
 /*---------------------------------------------------------------------------*/
 void
@@ -205,7 +178,6 @@ void
 xcontiki_os_sys_Etimer__adjust(struct xcontiki_os_sys_Etimer *et, int timediff)
 {
   et->timer.start += timediff;
-  update_time();
 }
 /*---------------------------------------------------------------------------*/
 int
@@ -221,7 +193,7 @@ xcontiki_os_sys_Etimer__expiration_time(struct xcontiki_os_sys_Etimer *et)
 }
 /*---------------------------------------------------------------------------*/
 xcontiki_arch_Clock__time_t
-etimer_start_time(struct xcontiki_os_sys_Etimer *et)
+xcontiki_os_sys_Etimer__start_time(struct xcontiki_os_sys_Etimer *et)
 {
   return et->timer.start;
 }
@@ -232,12 +204,6 @@ xcontiki_os_sys_Etimer__pending(void)
   return timerlist != NULL;
 }
 /*---------------------------------------------------------------------------*/
-xcontiki_arch_Clock__time_t
-xcontiki_os_sys_Etimer__next_expiration_time(void)
-{
-  return xcontiki_os_sys_Etimer__pending() ? next_expiration : 0;
-}
-/*---------------------------------------------------------------------------*/
 void
 xcontiki_os_sys_Etimer__stop(struct xcontiki_os_sys_Etimer *et)
 {
@@ -246,7 +212,6 @@ xcontiki_os_sys_Etimer__stop(struct xcontiki_os_sys_Etimer *et)
   /* First check if et is the first event timer on the list. */
   if(et == timerlist) {
     timerlist = timerlist->next;
-    update_time();
   } else {
     /* Else walk through the list and try to find the item before the
        et timer. */
@@ -258,8 +223,6 @@ xcontiki_os_sys_Etimer__stop(struct xcontiki_os_sys_Etimer *et)
          to remove. We point the items next pointer to the event after
          the removed item. */
       t->next = et->next;
-
-      update_time();
     }
   }
 
