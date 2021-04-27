@@ -74,7 +74,7 @@ xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t  *r, uint8_t c) 
      */
     XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(uint8_t, r->data[r->put_ptr]) = c;
     XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(uint8_t, r->put_ptr) = (r->put_ptr + 1) & r->mask;
-    return 1;
+    return true;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -106,7 +106,7 @@ xcontiki_os_lib_Ringbuf__get(xcontiki_os_lib_Ringbuf__ringbuf_t  *r) {
         XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(uint8_t, r->get_ptr) = (r->get_ptr + 1) & r->mask;
         return c;
     } else {
-        return -1;
+        return UINT8_MAX;
     }
 }
 

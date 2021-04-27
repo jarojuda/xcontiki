@@ -63,20 +63,23 @@
  *
  */
 xcontiki_os_sys_Timer__timer_id_t
-xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t interval) {
-    if(0==t){
+xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t intervl) {
+    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return 0;
+    }
+    if (0 == t) {
         t = allocate_new_timer();
     }
-    if (0 == interval) {
+    if (0 == intervl) {
         flags[t].expired = true;
         interval[t] = 0;
         flags[t].running = false;
     } else {
-    	start[t] = xcontiki_arch_Clock__time();
-    	interval[t] = interval;
-    	previous_diff[t] = 0;
-    	flags[t].running = true;
-    	flags[t].expired = false;
+        start[t] = xcontiki_arch_Clock__time();
+        interval[t] = intervl;
+        previous_diff[t] = 0;
+        flags[t].running = true;
+        flags[t].expired = false;
     }
     return t;
 }
@@ -97,6 +100,9 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Cl
  */
 void
 xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_id_t t) {
+    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
     if (xcontiki_os_sys_Timer__expired(t)) {
         start[t] += interval[t];
         previous_diff[t] = 0;
@@ -124,6 +130,9 @@ xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_id_t t) {
  */
 void
 xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_id_t t) {
+    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
     start[t] = xcontiki_arch_Clock__time();
     previous_diff[t] = 0;
     flags[t].expired = (0 == interval[t]);
@@ -147,9 +156,12 @@ xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_id_t t) {
  *
  */
 bool
-xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_id_t __ram t, xcontiki_arch_Clock__time_t interval) {
+xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t interval) {
     bool result;
 
+    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return true;
+    }
     if (false == flags[t].running) {
         xcontiki_os_sys_Timer__set(t, interval);
     }
@@ -173,6 +185,9 @@ bool
 xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t) {
     bool result;
 
+    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return true;
+    }
     if (flags[t].expired) {
         flags[t].running = false;
         return true;
@@ -205,6 +220,9 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t) {
  */
 xcontiki_arch_Clock__time_t
 xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_id_t t) {
+    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return 0;
+    }
     if (xcontiki_os_sys_Timer__expired(t)) {
         return 0;
     }

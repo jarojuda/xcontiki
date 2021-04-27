@@ -13,14 +13,14 @@ extern "C" {
 #endif
 
 
-    static xcontiki_arch_Clock__time_t start[XCONTIKI_OS_SYS_TIMER__CONF_TIMER_NUMBER];
-    static xcontiki_arch_Clock__time_t interval[XCONTIKI_OS_SYS_TIMER__CONF_TIMER_NUMBER];
-    static xcontiki_arch_Clock__time_t previous_diff[XCONTIKI_OS_SYS_TIMER__CONF_TIMER_NUMBER];
+    static xcontiki_arch_Clock__time_t start[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER];
+    static xcontiki_arch_Clock__time_t interval[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER];
+    static xcontiki_arch_Clock__time_t previous_diff[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER];
     static struct __PACKED {
         unsigned allocated : 1;
         unsigned running : 1;
         unsigned expired : 1;
-    } flags[XCONTIKI_OS_SYS_TIMER__CONF_TIMER_NUMBER];
+    } flags[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER];
 
 
     static xcontiki_os_sys_Timer__timer_id_t allocate_new_timer(void){
