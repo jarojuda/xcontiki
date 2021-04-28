@@ -57,6 +57,7 @@ extern "C" {
 #include "xcontiki/arch/os/xcontiki_arch_os.h"
 #include "xcontiki/arch/dev/xcontiki_arch_dev.h"
 #include "xcontiki/arch/xcontiki_arch_Clock.h"
+#include "xcontiki_arch_Sleepyhead.h"
 
 
 #ifdef __cplusplus

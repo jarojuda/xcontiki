@@ -63,6 +63,9 @@
 #ifndef XCONTIKI_OS_SYS_ETIMER_H
 #define XCONTIKI_OS_SYS_ETIMER_H
 
+#include "xcontiki_os_sys_Timer.h"
+
+
 /**
  * A timer.
  *
@@ -72,7 +75,7 @@
  * \hideinitializer
  */
 struct xcontiki_os_sys_Etimer {
-  struct xcontiki_os_sys_Timer__timer timer;
+  xcontiki_os_sys_Timer__timer_id_t timer;
   struct xcontiki_os_sys_Etimer *next;
   struct xcontiki_os_sys_Process *p;
 };

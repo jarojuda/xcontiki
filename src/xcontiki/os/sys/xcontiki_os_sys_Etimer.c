@@ -91,7 +91,7 @@ again:
     u = NULL;
 
     for(t = timerlist; t != NULL; t = t->next) {
-      if(xcontiki_os_sys_Timer__expired(&t->timer)) {
+      if(xcontiki_os_sys_Timer__expired(t->timer)) {
         if(xcontiki_os_sys_Process__post_event_via_queue(t->p, XCONTIKI_OS_SYS_PROCESS__EVENT_TIMER, t) == XCONTIKI_OS_SYS_PROCESS__ERR_OK) {
 
           /* Reset the process ID of the event timer, to signal that the
@@ -148,14 +148,14 @@ add_timer(struct xcontiki_os_sys_Etimer *etimer)
 void
 xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval)
 {
-  xcontiki_os_sys_Timer__set(&et->timer, interval);
+  xcontiki_os_sys_Timer__set(et->timer, interval);
   add_timer(et);
 }
 /*---------------------------------------------------------------------------*/
 void
 xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval)
 {
-  xcontiki_os_sys_Timer__reset(&et->timer);
+  xcontiki_os_sys_Timer__reset(et->timer);
   et->timer.interval = interval;
   add_timer(et);
 }
@@ -163,14 +163,14 @@ xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etimer *e
 void
 xcontiki_os_sys_Etimer__reset(struct xcontiki_os_sys_Etimer *et)
 {
-  xcontiki_os_sys_Timer__reset(&et->timer);
+  xcontiki_os_sys_Timer__reset(et->timer);
   add_timer(et);
 }
 /*---------------------------------------------------------------------------*/
 void
 xcontiki_os_sys_Etimer__restart(struct xcontiki_os_sys_Etimer *et)
 {
-  xcontiki_os_sys_Timer__restart(&et->timer);
+  xcontiki_os_sys_Timer__restart(et->timer);
   add_timer(et);
 }
 /*---------------------------------------------------------------------------*/

@@ -64,19 +64,22 @@
  */
 xcontiki_os_sys_Timer__timer_id_t
 xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t intervl) {
+    assert(t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
     if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return 0;
     }
     if (0 == t) {
         t = allocate_new_timer();
+        if (0 == t) { //No free timer?
+            return 0;
+        }
     }
+    interval[t] = intervl;
     if (0 == intervl) {
         flags[t].expired = true;
-        interval[t] = 0;
         flags[t].running = false;
     } else {
         start[t] = xcontiki_arch_Clock__time();
-        interval[t] = intervl;
         previous_diff[t] = 0;
         flags[t].running = true;
         flags[t].expired = false;
@@ -100,7 +103,8 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Cl
  */
 void
 xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_id_t t) {
-    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return;
     }
     if (xcontiki_os_sys_Timer__expired(t)) {
@@ -130,7 +134,8 @@ xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_id_t t) {
  */
 void
 xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_id_t t) {
-    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return;
     }
     start[t] = xcontiki_arch_Clock__time();
@@ -159,7 +164,8 @@ bool
 xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t interval) {
     bool result;
 
-    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return true;
     }
     if (false == flags[t].running) {
@@ -183,9 +189,9 @@ xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_id_t t, xconti
  */
 bool
 xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t) {
-    bool result;
 
-    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return true;
     }
     if (flags[t].expired) {
@@ -195,16 +201,12 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t) {
     xcontiki_arch_Clock__time_t diff = (xcontiki_arch_Clock__time() - start[t]);
     if (diff >= interval[t] || diff < previous_diff[t]) {
         flags[t].expired = true;
-        result = true;
-    } else {
-        result = false;
-    }
-    if (true == result) {
         flags[t].running = false;
+        return true;
+    } else {
+        previous_diff[t] = diff;
+        return false;
     }
-    previous_diff[t] = diff;
-
-    return result;
 }
 /*---------------------------------------------------------------------------*/
 
@@ -220,7 +222,8 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t) {
  */
 xcontiki_arch_Clock__time_t
 xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_id_t t) {
-    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return 0;
     }
     if (xcontiki_os_sys_Timer__expired(t)) {
@@ -228,6 +231,40 @@ xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_id_t t) {
     }
     return (xcontiki_arch_Clock__time_t) (interval[t] - previous_diff[t]);
 }
+
 /*---------------------------------------------------------------------------*/
+
+XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki_os_sys_Timer__sleepyhead_thread(void) {
+    static xcontiki_os_sys_Protothread__pt_t pt;
+
+    static xcontiki_os_sys_Timer__timer_id_t t;
+    static xcontiki_arch_Clock__time_t now;
+    static xcontiki_arch_Clock__time_t tdist;//time distance for the nearest expiration
+    static xcontiki_arch_Clock__time_t diff;
+
+    XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN(pt);
+
+    now = xcontiki_arch_Clock__time();
+    tdist = 0;
+    for (t = 1; t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER; t++) {
+        if (flags[t].running) {
+            diff = now - start[t];
+            if (diff >= interval[t] || diff < previous_diff[t]) {
+                flags[t].expired = true;
+                flags[t].running = false;
+            } else {
+                previous_diff[t] = diff;
+                diff = interval[t] - diff; //time distance to the next expiration
+                if (tdist < diff) {
+                    tdist = diff;
+                }
+            }
+        }
+    }
+
+    XCONTIKI_OS_SYS_PROTOTHREAD__END(pt);
+}
+
+
 
 /** @} */
