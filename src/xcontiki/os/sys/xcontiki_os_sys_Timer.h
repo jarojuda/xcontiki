@@ -77,14 +77,6 @@
  *
  * \hideinitializer
  */
-struct __PACKED xcontiki_os_sys_Timer__timer {
-    xcontiki_arch_Clock__time_t start;
-    xcontiki_arch_Clock__time_t interval;
-    xcontiki_arch_Clock__time_t previous_diff;
-    unsigned expired   : 1;
-    unsigned running   : 1;
-    unsigned allocated :1;
-};
 
 #ifndef XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER
 #define XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER (32u)

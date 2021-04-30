@@ -70,6 +70,7 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Cl
     }
     if (0 == t) {
         t = allocate_new_timer();
+        assert(t !=0 && "No free timers. Increase number of timers");
         if (0 == t) { //No free timer?
             return 0;
         }

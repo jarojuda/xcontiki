@@ -65,6 +65,13 @@
 
 #include "xcontiki_os_sys_Timer.h"
 
+#ifndef XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER
+#define XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER (32u)
+#endif
+
+typedef uint8_t xcontiki_os_sys_Etimer__etimer_id_t;
+#define xcontiki_os_sys_Etimer__etimer_id_t xcontiki_os_sys_Etimer__etimer_id_t
+
 
 /**
  * A timer.
