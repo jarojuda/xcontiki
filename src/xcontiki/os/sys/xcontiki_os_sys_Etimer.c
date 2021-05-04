@@ -49,36 +49,24 @@
 #define XCONTIKI_OS_SYS_ETIMER_PRIV_H
 #include "xcontiki_os_sys_Etimer_priv.h"
 
-
-
 XCONTIKI_OS_SYS_PROCESS(xcontiki_os_sys_Etimer__process, "Event timer");
 
 /*---------------------------------------------------------------------------*/
 XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data) {
-    struct xcontiki_os_sys_Etimer *t, *u;
+    static xcontiki_os_sys_Etimer__etimer_id_t et;
 
     XCONTIKI_OS_SYS_PROCESS__BEGIN();
-
-    timerlist = NULL;
 
     while (1) {
         XCONTIKI_OS_SYS_PROCESS__YIELD();
 
         if (ev == XCONTIKI_OS_SYS_PROCESS__EVENT_EXITED) {
             struct xcontiki_os_sys_Process *p = data;
-
-            while (timerlist != NULL && timerlist->p == p) {
-                timerlist = timerlist->next;
-            }
-
-            if (timerlist != NULL) {
-                t = timerlist;
-                while (t->next != NULL) {
-                    if (t->next->p == p) {
-                        t->next = t->next->next;
-                    } else {
-                        t = t->next;
-                    }
+            for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
+                if (flags[et].allocated && process_ptr[et] == p) {
+                    flags[et].allocated = 0;
+                    flags[et].running = 0;
+                    process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
                 }
             }
             continue;
@@ -86,30 +74,19 @@ XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data) {
             continue;
         }
 
-again:
-
-        u = NULL;
-
-        for (t = timerlist; t != NULL; t = t->next) {
-            if (xcontiki_os_sys_Timer__expired(t->timer)) {
-                if (xcontiki_os_sys_Process__post_event_via_queue(t->p, XCONTIKI_OS_SYS_PROCESS__EVENT_TIMER, t) == XCONTIKI_OS_SYS_PROCESS__ERR_OK) {
+        for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
+            if (flags[et].running && xcontiki_os_sys_Timer__expired(timer[et])) {
+                if (xcontiki_os_sys_Process__post_event_via_queue(process_ptr[et], XCONTIKI_OS_SYS_PROCESS__EVENT_TIMER, &timer[et]) == XCONTIKI_OS_SYS_PROCESS__ERR_OK) {
 
                     /* Reset the process ID of the event timer, to signal that the
                        etimer has expired. This is later checked in the
                        xcontiki_os_sys_Timer__expired() function. */
-                    t->p = XCONTIKI_OS_SYS_PROCESS__NONE;
-                    if (u != NULL) {
-                        u->next = t->next;
-                    } else {
-                        timerlist = t->next;
-                    }
-                    t->next = NULL;
-                    goto again;
+                    process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
+                    flags[et].running = 0;
                 } else {
                     xcontiki_os_sys_Etimer__request_poll();
                 }
             }
-            u = t;
         }
     }
 
@@ -125,8 +102,8 @@ xcontiki_os_sys_Etimer__request_poll(void) {
 /*---------------------------------------------------------------------------*/
 xcontiki_os_sys_Etimer__etimer_id_t
 xcontiki_os_sys_Etimer__set(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t interval) {
-    assert(et < XCONTIKI_OS_SYS_TIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
-    if (et >= XCONTIKI_OS_SYS_TIMER__CONF_ETIMERS_NUMBER) {
+    assert(et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
+    if (et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return 0;
     }
     if (0 == et) {
@@ -138,14 +115,18 @@ xcontiki_os_sys_Etimer__set(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arc
     }
     timer[et] = xcontiki_os_sys_Timer__set(timer[et], interval);
     add_timer(et);
+    return et;
 }
 
 /*---------------------------------------------------------------------------*/
 void
-xcontiki_os_sys_Etimer__reset_with_new_interval(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t interval) {
-
+xcontiki_os_sys_Etimer__reset_with_new_interval(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t intervl) {
+    assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+        return;
+    }
     xcontiki_os_sys_Timer__reset(timer[et]);
-    timer[et].interval = interval;
+    xcontiki_os_sys_Timer__set_interval(timer[et], intervl);
     add_timer(et);
 }
 
@@ -153,7 +134,7 @@ xcontiki_os_sys_Etimer__reset_with_new_interval(xcontiki_os_sys_Etimer__etimer_i
 void
 xcontiki_os_sys_Etimer__reset(xcontiki_os_sys_Etimer__etimer_id_t et) {
     assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
-    if (0 == et || t >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return;
     }
     xcontiki_os_sys_Timer__reset(timer[et]);
@@ -164,7 +145,7 @@ xcontiki_os_sys_Etimer__reset(xcontiki_os_sys_Etimer__etimer_id_t et) {
 void
 xcontiki_os_sys_Etimer__restart(xcontiki_os_sys_Etimer__etimer_id_t et) {
     assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
-    if (0 == et || t >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return;
     }
     xcontiki_os_sys_Timer__restart(timer[et]);
@@ -173,19 +154,19 @@ xcontiki_os_sys_Etimer__restart(xcontiki_os_sys_Etimer__etimer_id_t et) {
 
 /*---------------------------------------------------------------------------*/
 void
-xcontiki_os_sys_Etimer__adjust(xcontiki_os_sys_Etimer__etimer_id_t et, int timediff) {
+xcontiki_os_sys_Etimer__adjust(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t timediff) {
     assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
-    if (0 == et || t >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return;
     }
-    timer[et].start += timediff;
+    xcontiki_os_sys_Timer__set_start(timer[et], xcontiki_os_sys_Timer__get_start(timer[et]) + timediff);
 }
 
 /*---------------------------------------------------------------------------*/
-int
+bool
 xcontiki_os_sys_Etimer__expired(xcontiki_os_sys_Etimer__etimer_id_t et) {
     assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
-    if (0 == et || t >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return 1;
     }
     return process_ptr[et] == XCONTIKI_OS_SYS_PROCESS__NONE;
@@ -195,24 +176,24 @@ xcontiki_os_sys_Etimer__expired(xcontiki_os_sys_Etimer__etimer_id_t et) {
 xcontiki_arch_Clock__time_t
 xcontiki_os_sys_Etimer__expiration_time(xcontiki_os_sys_Etimer__etimer_id_t et) {
     assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
-    if (0 == et || t >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return 0;
     }
-    return timer[et].start + timer[et].interval;
+    return xcontiki_os_sys_Timer__get_start(timer[et]) + xcontiki_os_sys_Timer__get_interval(timer[et]);
 }
 
 /*---------------------------------------------------------------------------*/
 xcontiki_arch_Clock__time_t
 xcontiki_os_sys_Etimer__start_time(xcontiki_os_sys_Etimer__etimer_id_t et) {
-        assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
-    if (0 == et || t >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+    assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return 0;
     }
-    return timer[et].start;
+    return xcontiki_os_sys_Timer__get_start(timer[et]);
 }
 
 /*---------------------------------------------------------------------------*/
-int
+bool
 xcontiki_os_sys_Etimer__pending(void) {
     return timerlist != NULL;
 }
@@ -221,7 +202,7 @@ xcontiki_os_sys_Etimer__pending(void) {
 void
 xcontiki_os_sys_Etimer__stop(xcontiki_os_sys_Etimer__etimer_id_t et) {
     assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
-    if (0 == et || t >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return;
     }
     struct xcontiki_os_sys_Etimer *t;

@@ -70,7 +70,7 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Cl
     }
     if (0 == t) {
         t = allocate_new_timer();
-        assert(t !=0 && "No free timers. Increase number of timers");
+        assert(t != 0 && "No free timers. Increase number of timers");
         if (0 == t) { //No free timer?
             return 0;
         }
@@ -240,7 +240,7 @@ XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki_os_sys_Timer__sleepyhead_thread(voi
 
     static xcontiki_os_sys_Timer__timer_id_t t;
     static xcontiki_arch_Clock__time_t now;
-    static xcontiki_arch_Clock__time_t tdist;//time distance for the nearest expiration
+    static xcontiki_arch_Clock__time_t tdist; //time distance for the nearest expiration
     static xcontiki_arch_Clock__time_t diff;
 
     XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN(pt);
@@ -266,6 +266,32 @@ XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki_os_sys_Timer__sleepyhead_thread(voi
     XCONTIKI_OS_SYS_PROTOTHREAD__END(pt);
 }
 
+void xcontiki_os_sys_Timer__set_interval(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t intervl) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
+    interval[t] = intervl;
+}
 
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_interval(xcontiki_os_sys_Timer__timer_id_t t) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return 0;
+    }
+    return interval[t];
+}
+
+void xcontiki_os_sys_Timer__set_start(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t strt) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
+    start[t] = strt;
+}
+
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_start(xcontiki_os_sys_Timer__timer_id_t t) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return 0;
+    }
+    return start[t];
+}
 
 /** @} */

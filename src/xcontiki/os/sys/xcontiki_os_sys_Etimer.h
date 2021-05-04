@@ -103,7 +103,8 @@ struct xcontiki_os_sys_Etimer {
  *             process that called the etimer_set() function.
  *
  */
-void xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval);
+xcontiki_os_sys_Etimer__etimer_id_t
+xcontiki_os_sys_Etimer__set(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t interval);
 
 /**
  * \brief      Reset an event timer with the same interval as was
@@ -121,7 +122,7 @@ void xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, xcontiki_arc
  *
  * \sa etimer_restart()
  */
-void xcontiki_os_sys_Etimer__reset(struct xcontiki_os_sys_Etimer *et);
+void xcontiki_os_sys_Etimer__reset(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Reset an event timer with a new interval.
@@ -134,7 +135,7 @@ void xcontiki_os_sys_Etimer__reset(struct xcontiki_os_sys_Etimer *et);
  *
  * \sa etimer_reset()
  */
-void xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval);
+void xcontiki_os_sys_Etimer__reset_with_new_interval(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t interval);
 
 /**
  * \brief      Restart an event timer from the current point in time
@@ -151,7 +152,7 @@ void xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etim
  *
  * \sa etimer_reset()
  */
-void xcontiki_os_sys_Etimer__restart(struct xcontiki_os_sys_Etimer *et);
+void xcontiki_os_sys_Etimer__restart(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Adjust the expiration time for an event timer
@@ -173,7 +174,7 @@ void xcontiki_os_sys_Etimer__restart(struct xcontiki_os_sys_Etimer *et);
  * \sa etimer_set()
  * \sa etimer_reset()
  */
-void xcontiki_os_sys_Etimer__adjust(struct xcontiki_os_sys_Etimer *et, int td);
+void xcontiki_os_sys_Etimer__adjust(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t td);
 
 /**
  * \brief      Get the expiration time for the event timer.
@@ -182,7 +183,7 @@ void xcontiki_os_sys_Etimer__adjust(struct xcontiki_os_sys_Etimer *et, int td);
  *
  *             This function returns the expiration time for an event timer.
  */
-xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(struct xcontiki_os_sys_Etimer *et);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Get the start time for the event timer.
@@ -192,7 +193,7 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(struct xcont
  *             This function returns the start time (when the timer
  *             was last set) for an event timer.
  */
-xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__start_time(struct xcontiki_os_sys_Etimer *et);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__start_time(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Check if an event timer has expired.
@@ -202,7 +203,7 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__start_time(struct xcontiki_o
  *             This function tests if an event timer has expired and
  *             returns true or false depending on its status.
  */
-int xcontiki_os_sys_Etimer__expired(struct xcontiki_os_sys_Etimer *et);
+bool xcontiki_os_sys_Etimer__expired(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Stop a pending event timer.
@@ -214,7 +215,7 @@ int xcontiki_os_sys_Etimer__expired(struct xcontiki_os_sys_Etimer *et);
  *             emit any event when it expires.
  *
  */
-void xcontiki_os_sys_Etimer__stop(struct xcontiki_os_sys_Etimer *et);
+void xcontiki_os_sys_Etimer__stop(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /** @} */
 
@@ -241,7 +242,7 @@ void xcontiki_os_sys_Etimer__request_poll(void);
  *             This function checks if there are any active event
  *             timers that have not expired.
  */
-int xcontiki_os_sys_Etimer__pending(void);
+bool xcontiki_os_sys_Etimer__pending(void);
 
 
 /** @} */

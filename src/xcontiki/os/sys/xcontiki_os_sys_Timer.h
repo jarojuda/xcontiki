@@ -90,6 +90,10 @@ void xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_id_t t);
 bool xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t);
 bool xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t interval);
 xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_id_t t);
+void xcontiki_os_sys_Timer__set_interval(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t interval);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_interval(xcontiki_os_sys_Timer__timer_id_t t);
+void xcontiki_os_sys_Timer__set_start(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t start);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_start(xcontiki_os_sys_Timer__timer_id_t t);
 
 
 #define XCONTIKI_OS_SYS_TIMER__NEW_STATIC(timer) \
