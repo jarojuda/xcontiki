@@ -3,6 +3,7 @@
 Port of the Contiki OS for the XC compilers.
 
 The XC8 compiler for the 8-bit PIC microcontrollers does not compile the Contiki OS sources.
+Są problemy ze wskaźnikami do struktur, strukturami zawierającymi wskaźniki, a nawet tablicami struktur. 
 
 Even the simple program can generate such errors:
 
