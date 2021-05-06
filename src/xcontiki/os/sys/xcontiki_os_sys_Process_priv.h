@@ -59,13 +59,15 @@ extern "C" {
      * Structure used for keeping the queue of active events.
      */
     struct event_data {
-        xcontiki_os_sys_Process__event_t ev;
-        xcontiki_os_sys_Process__data_t data;
-        struct xcontiki_os_sys_Process *p;
+
     };
 
     static xcontiki_os_sys_Process__num_events_t nevents, fevent;
-    static struct event_data events[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
+    static xcontiki_os_sys_Process__event_t events_ev[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
+    static xcontiki_os_sys_Process__data_t events_data[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
+    static struct xcontiki_os_sys_Process *events_p[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
+    
+    
 
 #if XCONTIKI_OS_SYS_PROCESS__CONF_STATS
     static xcontiki_os_sys_Process__num_events_t maximum_number_of_events;
@@ -239,10 +241,10 @@ extern "C" {
         if (nevents > 0) {
 
             /* There are events that we should deliver. */
-            ev = events[fevent].ev;
+            ev = events_ev[fevent];
 
-            data = events[fevent].data;
-            receiver = events[fevent].p;
+            data = events_data[fevent];
+            receiver = events_p[fevent];
 
             /* Since we have seen the new event, we move pointer upwards
                and decrease the number of events. */
