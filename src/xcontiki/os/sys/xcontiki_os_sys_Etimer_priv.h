@@ -30,7 +30,6 @@ extern "C" {
     static struct __PACKED {
         unsigned allocated : 1;
         unsigned running : 1;
-        unsigned expired : 1;
     } flags[XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER] = {0};
 
     static xcontiki_os_sys_Etimer__etimer_id_t allocate_new_etimer(void) {

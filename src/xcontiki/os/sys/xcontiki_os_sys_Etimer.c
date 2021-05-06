@@ -49,6 +49,7 @@
 #define XCONTIKI_OS_SYS_ETIMER_PRIV_H
 #include "xcontiki_os_sys_Etimer_priv.h"
 
+
 XCONTIKI_OS_SYS_PROCESS(xcontiki_os_sys_Etimer__process, "Event timer");
 
 /*---------------------------------------------------------------------------*/
@@ -125,8 +126,8 @@ xcontiki_os_sys_Etimer__reset_with_new_interval(xcontiki_os_sys_Etimer__etimer_i
     if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return;
     }
-    xcontiki_os_sys_Timer__reset(timer[et]);
     xcontiki_os_sys_Timer__set_interval(timer[et], intervl);
+    xcontiki_os_sys_Timer__reset(timer[et]);
     add_timer(et);
 }
 
@@ -169,7 +170,7 @@ xcontiki_os_sys_Etimer__expired(xcontiki_os_sys_Etimer__etimer_id_t et) {
     if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return 1;
     }
-    return process_ptr[et] == XCONTIKI_OS_SYS_PROCESS__NONE;
+    return false == flags[et].running ;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -195,7 +196,13 @@ xcontiki_os_sys_Etimer__start_time(xcontiki_os_sys_Etimer__etimer_id_t et) {
 /*---------------------------------------------------------------------------*/
 bool
 xcontiki_os_sys_Etimer__pending(void) {
-    return timerlist != NULL;
+    xcontiki_os_sys_Etimer__etimer_id_t et;
+    for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
+        if (flags[et].running) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -205,29 +212,10 @@ xcontiki_os_sys_Etimer__stop(xcontiki_os_sys_Etimer__etimer_id_t et) {
     if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return;
     }
-    struct xcontiki_os_sys_Etimer *t;
-
-    /* First check if et is the first event timer on the list. */
-    if (et == timerlist) {
-        timerlist = timerlist->next;
-    } else {
-        /* Else walk through the list and try to find the item before the
-           et timer. */
-        for (t = timerlist; t != NULL && t->next != et; t = t->next) {
-        }
-
-        if (t != NULL) {
-            /* We've found the item before the event timer that we are about
-               to remove. We point the items next pointer to the event after
-               the removed item. */
-            t->next = et->next;
-        }
-    }
-
-    /* Remove the next pointer from the item to be removed. */
-    et->next = NULL;
+    
     /* Set the timer as expired */
-    et->p = XCONTIKI_OS_SYS_PROCESS__NONE;
+    flags[et].running = false;
+    process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
 }
 /*---------------------------------------------------------------------------*/
 /** @} */
