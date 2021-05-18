@@ -152,7 +152,7 @@ xcontiki_os_sys_Process__post_event_via_queue(struct xcontiki_os_sys_Process *p,
     snum = (xcontiki_os_sys_Process__num_events_t) (fevent + nevents) % XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS;
     events_ev[snum] = ev;
     events_data[snum] = data;
-    events_p[snum] = p;
+    events_destination_process_ptr[snum] = p;
     ++nevents;
 
 #if XCONTIKI_OS_SYS_PROCESS__CONF_STATS

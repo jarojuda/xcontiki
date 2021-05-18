@@ -47,9 +47,9 @@ void setUp(void){
         process_1_internals_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;
         process_2_internals_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;
         process_3_internals_fake.return_val = XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED;
-        xcontiki_os_sys_Process__start(&process_1, NULL);
-        xcontiki_os_sys_Process__start(&process_2, NULL);
-        xcontiki_os_sys_Process__start(&process_3, NULL);
+        xcontiki_os_sys_Process__start(&process_1, 0);
+        xcontiki_os_sys_Process__start(&process_2, 0);
+        xcontiki_os_sys_Process__start(&process_3, 0);
 }
 
 void tearDown(void){
@@ -96,9 +96,9 @@ void test_process_start(void){
         TEST_ASSERT_EQUAL(1, process_3_counter);
 
         //Start next time. No effect is expected.
-        xcontiki_os_sys_Process__start(&process_1, NULL);
-        xcontiki_os_sys_Process__start(&process_2, NULL);
-        xcontiki_os_sys_Process__start(&process_3, NULL);
+        xcontiki_os_sys_Process__start(&process_1, 0);
+        xcontiki_os_sys_Process__start(&process_2, 0);
+        xcontiki_os_sys_Process__start(&process_3, 0);
         TEST_ASSERT_CALLED_TIMES(1, process_1_internals);
         TEST_ASSERT_CALLED_TIMES(1, process_2_internals);
         TEST_ASSERT_CALLED_TIMES(1, process_3_internals);
@@ -145,7 +145,7 @@ void test_process_exit(void){
 
 void test_process_post_broadcast_event(void){
         const char* msg="Message";
-        xcontiki_os_sys_Process__post_event_via_queue(XCONTIKI_OS_SYS_PROCESS__BROADCAST, XCONTIKI_OS_SYS_PROCESS__EVENT_MSG, (void*)msg);
+        xcontiki_os_sys_Process__post_event_via_queue(XCONTIKI_OS_SYS_PROCESS__BROADCAST, XCONTIKI_OS_SYS_PROCESS__EVENT_MSG, (xcontiki_os_sys_Process__data_t)msg);
         xcontiki_os_sys_Process__process_next_event();
         TEST_ASSERT_CALLED_TIMES(2, process_1_internals);
         TEST_ASSERT_EQUAL(XCONTIKI_OS_SYS_PROCESS__EVENT_MSG, process_1_internals_fake.arg0_val);

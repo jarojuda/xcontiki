@@ -63,7 +63,7 @@
 #ifndef XCONTIKI_OS_SYS_ETIMER_H
 #define XCONTIKI_OS_SYS_ETIMER_H
 
-#include "xcontiki_os_sys_Timer.h"
+#include "xcontiki/os/sys/xcontiki_os_sys_Timer.h"
 
 #ifndef XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER
 #define XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER (32u)

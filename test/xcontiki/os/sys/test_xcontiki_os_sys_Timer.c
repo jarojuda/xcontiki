@@ -1,7 +1,6 @@
 #include "unity.h"
 #include "xcontiki/xcontiki.h"
 #include "xcontiki/os/sys/xcontiki_os_sys_Timer.h"
-#include "xcontiki/os/lib/xcontiki_os_lib_assert.h"
 #include "mock_xcontiki_arch_Clock.h"
 
 

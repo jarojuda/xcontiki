@@ -56,7 +56,7 @@
 #include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
 
 typedef unsigned char xcontiki_os_sys_Process__event_t;
-typedef void * xcontiki_os_sys_Process__data_t;
+typedef uintptr_t xcontiki_os_sys_Process__data_t;
 typedef unsigned char xcontiki_os_sys_Process__num_events_t;
 
 /**
@@ -345,7 +345,7 @@ struct xcontiki_os_sys_Process {
  *
  * \param p A pointer to a process structure.
  *
- * \param data An argument pointer that can be passed to the new
+ * \param data An argument that can be passed to the new
  * process
  *
  */

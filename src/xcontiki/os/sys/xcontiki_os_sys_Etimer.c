@@ -55,14 +55,15 @@ XCONTIKI_OS_SYS_PROCESS(xcontiki_os_sys_Etimer__process, "Event timer");
 /*---------------------------------------------------------------------------*/
 XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data) {
     static xcontiki_os_sys_Etimer__etimer_id_t et;
-
+    static struct xcontiki_os_sys_Process *p = _OMNITARGET;
+    
     XCONTIKI_OS_SYS_PROCESS__BEGIN();
 
     while (1) {
         XCONTIKI_OS_SYS_PROCESS__YIELD();
 
         if (ev == XCONTIKI_OS_SYS_PROCESS__EVENT_EXITED) {
-            struct xcontiki_os_sys_Process *p = data;
+            p = (struct xcontiki_os_sys_Process *)data;
             for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
                 if (flags[et].allocated && process_ptr[et] == p) {
                     flags[et].allocated = 0;
@@ -77,7 +78,7 @@ XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data) {
 
         for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
             if (flags[et].running && xcontiki_os_sys_Timer__expired(timer[et])) {
-                if (xcontiki_os_sys_Process__post_event_via_queue(process_ptr[et], XCONTIKI_OS_SYS_PROCESS__EVENT_TIMER, &timer[et]) == XCONTIKI_OS_SYS_PROCESS__ERR_OK) {
+                if (xcontiki_os_sys_Process__post_event_via_queue(process_ptr[et], XCONTIKI_OS_SYS_PROCESS__EVENT_TIMER, (xcontiki_os_sys_Process__data_t)et) == XCONTIKI_OS_SYS_PROCESS__ERR_OK) {
 
                     /* Reset the process ID of the event timer, to signal that the
                        etimer has expired. This is later checked in the

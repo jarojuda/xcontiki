@@ -48,5 +48,5 @@ static void init(void) {
     xcontiki_arch_dev_Watchdog__start();
     xcontiki_arch_Clock__init();
     xcontiki_os_sys_Process__initialize_the_process_module();
-    xcontiki_os_sys_Process__start(&xcontiki_os_sys_Etimer__process, NULL);
+    xcontiki_os_sys_Process__start(&xcontiki_os_sys_Etimer__process, 0);
 }

@@ -75,6 +75,7 @@
   :includes:
     - <stdbool.h>
     - <stdint.h>
+    - "xcontiki/xcontiki.h"
 
 # Add -gcov to the plugins list to make sure of the gcov plugin
 # You will need to have gcov and gcovr both installed to make it work.

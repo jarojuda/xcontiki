@@ -50,24 +50,20 @@ extern "C" {
     /*
      * Pointer to the currently running process structure.
      */
-    static struct xcontiki_os_sys_Process *list_of_processes = NULL;
-    static struct xcontiki_os_sys_Process *current_process_ptr = NULL;
+    static struct xcontiki_os_sys_Process *list_of_processes = _OMNITARGET;
+    static struct xcontiki_os_sys_Process *current_process_ptr = _OMNITARGET;
 
     static xcontiki_os_sys_Process__event_t lastevent;
 
     /*
-     * Structure used for keeping the queue of active events.
+     * Arrays used for keeping the queue of active events.
      */
-    struct event_data {
-
-    };
-
     static xcontiki_os_sys_Process__num_events_t nevents, fevent;
     static xcontiki_os_sys_Process__event_t events_ev[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
     static xcontiki_os_sys_Process__data_t events_data[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
-    static struct xcontiki_os_sys_Process *events_p[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
-    
-    
+    static struct xcontiki_os_sys_Process *events_destination_process_ptr[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS]={_OMNITARGET};
+
+
 
 #if XCONTIKI_OS_SYS_PROCESS__CONF_STATS
     static xcontiki_os_sys_Process__num_events_t maximum_number_of_events;
@@ -140,7 +136,7 @@ extern "C" {
                         if (p->thread != NULL && p != fromprocess && fromprocess != NULL) {
                             /* Post the exit event to the process that is about to exit. */
                             current_process_ptr = p;
-                            p->thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, NULL);
+                            p->thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, 0);
                         }
                         fromprocess = NULL;
                     }
@@ -212,7 +208,7 @@ extern "C" {
             if (p->needspoll) {
                 p->running = true;
                 p->needspoll = 0;
-                call_process(p, XCONTIKI_OS_SYS_PROCESS__EVENT_POLL, NULL);
+                call_process(p, XCONTIKI_OS_SYS_PROCESS__EVENT_POLL, 0);
             }
         }
     }
@@ -244,7 +240,7 @@ extern "C" {
             ev = events_ev[fevent];
 
             data = events_data[fevent];
-            receiver = events_p[fevent];
+            receiver = events_destination_process_ptr[fevent];
 
             /* Since we have seen the new event, we move pointer upwards
                and decrease the number of events. */

@@ -4,9 +4,7 @@
  *
  */
 
-#include "xcontiki_os_sys_Process.h"
-
-
+#include "xcontiki/os/sys/xcontiki_os_sys_Process.h"
 
 
 #ifndef XCONTIKI_OS_SYS_ETIMER_PRIV_H

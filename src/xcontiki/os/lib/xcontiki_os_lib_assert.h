@@ -32,7 +32,7 @@
 #define ASSERT_H_
 
 #undef assert
-#ifdef NDEBUG
+#if defined(NDEBUG) || defined(TEST)
 #define assert(e) ((void)0)
 #else
 #define assert(e) ((e) ? (void)0 : _xassert(__FILE__, __LINE__))

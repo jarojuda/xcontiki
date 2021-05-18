@@ -51,7 +51,11 @@ extern "C" {
 #define __rom
 #define __ram
 #define rom
-
+    
+#ifndef _OMNITARGET
+#define _OMNITARGET ((void *)UINTPTR_MAX)
+#endif
+    
 #include "xcontiki/arch/xcontiki_arch_build.h"
 #include "xcontiki/arch/xcontiki_arch_conf.h"
 #include "xcontiki/arch/os/xcontiki_arch_os.h"
