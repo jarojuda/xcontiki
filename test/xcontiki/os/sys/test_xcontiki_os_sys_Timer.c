@@ -77,3 +77,7 @@ void test_whenTheTimerHasExpired_thenTheTimerShouldRemainExpired(void){
         TEST_ASSERT_TRUE(tmr.expired());
 
 }
+
+void test_timer_remove(void){
+  TEST_FAIL_MESSAGE("Define timer remove test");
+}

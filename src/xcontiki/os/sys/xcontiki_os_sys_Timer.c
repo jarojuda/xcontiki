@@ -233,6 +233,28 @@ xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_id_t t) {
     return (xcontiki_arch_Clock__time_t) (interval[t] - previous_diff[t]);
 }
 
+/**
+ * Remove the timer.
+ *
+ * This function removess the timer.
+
+ * \param t A pointer to the timer.
+ * \sa timer_restart()
+ */
+void
+xcontiki_os_sys_Timer__remove(xcontiki_os_sys_Timer__timer_id_t t) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
+    flags[t].allocated = false;
+    flags[t].expired = true;
+    flags[t].running = false;
+}
+/*---------------------------------------------------------------------------*/
+
+
+
 /*---------------------------------------------------------------------------*/
 
 XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki_os_sys_Timer__sleepyhead_thread(void) {

@@ -1,11 +1,8 @@
-/* 
+/*
  * File:   xcontiki_os_sys_Etimer_priv.h
  * Author: jarojuda
  *
  */
-
-#include "xcontiki/os/sys/xcontiki_os_sys_Process.h"
-
 
 #ifndef XCONTIKI_OS_SYS_ETIMER_PRIV_H
 #error 	Include only from the source file xcontiki_os_sys_Etimer.c
@@ -56,12 +53,12 @@ extern "C" {
 
         xcontiki_os_sys_Etimer__request_poll();
         process_ptr[et] = xcontiki_os_sys_Process__get_current_process();
+        flags[et].allocated = true;
         flags[et].running = true;
-        
+
     }
 
 
 #ifdef	__cplusplus
 }
 #endif
-

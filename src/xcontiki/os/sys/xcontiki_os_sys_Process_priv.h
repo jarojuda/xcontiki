@@ -24,9 +24,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "xcontiki_os_sys_Process.h"
-
-
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
  * projects.

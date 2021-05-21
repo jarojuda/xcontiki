@@ -56,7 +56,7 @@ XCONTIKI_OS_SYS_PROCESS(xcontiki_os_sys_Etimer__process, "Event timer");
 XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data) {
     static xcontiki_os_sys_Etimer__etimer_id_t et;
     static struct xcontiki_os_sys_Process *p = _OMNITARGET;
-    
+
     XCONTIKI_OS_SYS_PROCESS__BEGIN();
 
     while (1) {
@@ -213,10 +213,24 @@ xcontiki_os_sys_Etimer__stop(xcontiki_os_sys_Etimer__etimer_id_t et) {
     if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return;
     }
-    
+
     /* Set the timer as expired */
     flags[et].running = false;
     process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
+}
+/*---------------------------------------------------------------------------*/
+void
+xcontiki_os_sys_Etimer__remove(xcontiki_os_sys_Etimer__etimer_id_t et) {
+    assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+        return;
+    }
+
+    /* Set the timer as expired */
+    flags[et].allocated=false;
+    flags[et].running = false;
+    process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
+    xcontiki_os_sys_Timer__remove(timer[et]);
 }
 /*---------------------------------------------------------------------------*/
 /** @} */

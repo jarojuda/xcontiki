@@ -1,11 +1,8 @@
-/* 
+/*
  * File:   xcontiki_os_sys_Timer_priv.h
  * Author: jarojuda
  *
  */
-
-#include "xcontiki_os_sys_Timer.h"
-
 
 #ifndef XCONTIKI_OS_SYS_TIMER_PRIV_H
 #error Include only from the xcontiki_os_sys_Timer.c file
@@ -73,10 +70,10 @@ extern "C" {
         }
     }
 
-    
-    
-    
-    
+
+
+
+
 
 
 #ifdef	__cplusplus
