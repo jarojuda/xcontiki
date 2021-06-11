@@ -66,9 +66,7 @@ XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data) {
             p = (struct xcontiki_os_sys_Process *)data;
             for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
                 if (flags[et].allocated && process_ptr[et] == p) {
-                    flags[et].allocated = 0;
-                    flags[et].running = 0;
-                    process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
+                    xcontiki_os_sys_Etimer__remove(et);
                 }
             }
             continue;
@@ -232,5 +230,15 @@ xcontiki_os_sys_Etimer__remove(xcontiki_os_sys_Etimer__etimer_id_t et) {
     process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
     xcontiki_os_sys_Timer__remove(timer[et]);
 }
+/*---------------------------------------------------------------------------*/
+bool
+xcontiki_os_sys_Etimer__is_allocated(xcontiki_os_sys_Etimer__etimer_id_t et) {
+    assert(et != 0 && et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER && "Wrong event timer id");
+    if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
+        return false;
+    }
+    return (0 != flags[et].allocated) ;
+}
+
 /*---------------------------------------------------------------------------*/
 /** @} */

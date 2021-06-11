@@ -236,7 +236,7 @@ xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_id_t t) {
 /**
  * Remove the timer.
  *
- * This function removess the timer.
+ * This function removes the timer.
 
  * \param t A pointer to the timer.
  * \sa timer_restart()
@@ -315,5 +315,23 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_start(xcontiki_os_sys_Tim
     }
     return start[t];
 }
+
+
+/**
+ * Check if timer was allocated
+ *
+
+ * \param t An id of the timer.
+ * \sa timer__set()
+ */
+bool
+xcontiki_os_sys_Timer__is_allocated(xcontiki_os_sys_Timer__timer_id_t t) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return false;
+    }
+    return (0!=flags[t].allocated);
+}
+
 
 /** @} */

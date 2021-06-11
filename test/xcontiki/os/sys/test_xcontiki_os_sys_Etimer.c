@@ -57,6 +57,11 @@ XCONTIKI_OS_SYS_PROCESS__THREAD(process_1, ev, data){
 
         XCONTIKI_OS_SYS_PROCESS__BEGIN();
 
+        event_timer_for_test.set(XCONTIKI_ARCH_CLOCK__SECOND);
+        while(1){
+            XCONTIKI_OS_SYS_PROCESS__WAIT_EVENT();
+        }
+
         XCONTIKI_OS_SYS_PROCESS__END();
 }
 
@@ -79,7 +84,13 @@ void test_when_EtimerExpired_thenItShouldGenerateEvent(void){
 
 }
 
-
 void test_when_ProcessIsExiting_then_EtimerShouldBeRemoved(void){
-  TEST_FAIL_MESSAGE("Define Etimer test");
+
+        RESET_FAKE(xcontiki_os_sys_Timer__remove);
+        xcontiki_os_sys_Process__get_current_process_fake.return_val = &process_1;
+        event_timer_for_test.set(XCONTIKI_ARCH_CLOCK__SECOND);
+        xcontiki_os_sys_Etimer__process.thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXITED, (xcontiki_os_sys_Process__data_t)&process_1);
+        TEST_ASSERT_CALLED(xcontiki_os_sys_Timer__remove);
+        TEST_ASSERT_FALSE(event_timer_for_test.is_allocated());
+        
 }

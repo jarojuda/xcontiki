@@ -95,6 +95,7 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_interval(xcontiki_os_sys_
 void xcontiki_os_sys_Timer__set_start(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t start);
 xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_start(xcontiki_os_sys_Timer__timer_id_t t);
 void xcontiki_os_sys_Timer__remove(xcontiki_os_sys_Timer__timer_id_t t);
+bool xcontiki_os_sys_Timer__is_allocated(xcontiki_os_sys_Timer__timer_id_t t);
 
 #define XCONTIKI_OS_SYS_TIMER__NEW_STATIC(timer) \
 \
@@ -121,6 +122,10 @@ static void timer##remove(void){\
     xcontiki_os_sys_Timer__remove(_##timer##_id);\
 }\
 \
+static bool timer##is_allocated(void){\
+    return xcontiki_os_sys_Timer__is_allocated(_##timer##_id);\
+}\
+\
 static const struct {\
     void (* const set)(xcontiki_arch_Clock__time_t);\
     void (* const reset)(void);\
@@ -129,6 +134,7 @@ static const struct {\
     bool (* const expired_after)(xcontiki_arch_Clock__time_t);\
     xcontiki_arch_Clock__time_t (* const remaining)(void);\
     void (* const remove)(void);\
+    bool (* const is_allocated)(void);\
 } timer = {\
     timer##set,\
     timer##reset,\
@@ -136,10 +142,9 @@ static const struct {\
     timer##expired,\
     timer##expired_after,\
     timer##remaining,\
-    timer##remove\
+    timer##remove,\
+    timer##is_allocated,\
 };\
-
-
 
 
 #endif /* XCONTIKI_OS_SYS_TIMER_H */

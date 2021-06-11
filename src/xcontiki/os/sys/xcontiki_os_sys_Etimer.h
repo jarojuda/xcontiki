@@ -241,6 +241,17 @@ void xcontiki_os_sys_Etimer__request_poll(void);
 bool xcontiki_os_sys_Etimer__pending(void);
 
 
+/**
+ * \brief      Check if an event timer was initialized.
+ * \param et   An id of the event timer
+ * \return     Non-zero if the timer was allocated, zero otherwise.
+ *
+ *             This function tests if an event timer was initialized and
+ *             returns true or false depending on its status.
+ */
+bool xcontiki_os_sys_Etimer__is_allocated(xcontiki_os_sys_Etimer__etimer_id_t et);
+
+
 /** @} */
 
 XCONTIKI_OS_SYS_PROCESS__NAME(xcontiki_os_sys_Etimer__process);
@@ -285,6 +296,10 @@ static xcontiki_os_sys_Etimer__etimer_id_t etimer##id(void){\
     return _##etimer##_id;\
 }\
 \
+static bool etimer##is_allocated(void){\
+    return xcontiki_os_sys_Etimer__is_allocated(_##etimer##_id);\
+}\
+\
 static const struct {\
     void (* const set)(xcontiki_arch_Clock__time_t);\
     void (* const reset)(void);\
@@ -296,6 +311,7 @@ static const struct {\
     bool (* const expired)(void);\
     void (* const stop)(void);\
     xcontiki_os_sys_Etimer__etimer_id_t (* const id)(void);\
+    bool (* const is_allocated)(void);\
 } etimer = {\
     etimer##set,\
     etimer##reset,\
@@ -306,7 +322,8 @@ static const struct {\
     etimer##start_time,\
     etimer##expired,\
     etimer##stop,\
-    etimer##id\
+    etimer##id,\
+    etimer##is_allocated,\
 };\
 
 
