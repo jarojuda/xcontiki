@@ -20,7 +20,7 @@
 static bool first_run = true;
 static void init(void);
 
-XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki__main(void) {
+xcontiki_os_sys_Protothread__state_t xcontiki__main(void) {
 
     if (first_run) {
         init();

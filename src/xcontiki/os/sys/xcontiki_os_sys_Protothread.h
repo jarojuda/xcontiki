@@ -86,15 +86,18 @@ typedef struct {
  */
 
 /**
- * Declaration of a protothread.
+ * Definition of type: state of a protothread.
  *
- * This macro is used to declare a protothread. All protothreads must
- * be declared with this macro.
+ * This type is used to declare a protothread. All protothreads must
+ * return this type.
  *
  *
  * \hideinitializer
  */
-#define XCONTIKI_OS_SYS_PROTOTHREAD__THREAD char
+typedef char xcontiki_os_sys_Protothread__state_t;
+#define xcontiki_os_sys_Protothread__state_t xcontiki_os_sys_Protothread__state_t
+
+
 
 /**
  * Declare the start of a protothread inside the C function

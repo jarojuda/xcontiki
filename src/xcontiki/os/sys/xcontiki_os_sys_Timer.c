@@ -257,7 +257,7 @@ xcontiki_os_sys_Timer__remove(xcontiki_os_sys_Timer__timer_id_t t) {
 
 /*---------------------------------------------------------------------------*/
 
-XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki_os_sys_Timer__sleepyhead_thread(void) {
+xcontiki_os_sys_Protothread__state_t xcontiki_os_sys_Timer__sleepyhead_thread(void) {
     static xcontiki_os_sys_Protothread__pt_t pt;
 
     static xcontiki_os_sys_Timer__timer_id_t t;

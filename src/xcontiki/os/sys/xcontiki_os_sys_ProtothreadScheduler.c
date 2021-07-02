@@ -36,6 +36,13 @@
  */
 
 //Include only from other source file
+
+#ifdef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER_C
+#error xcontiki_os_sys_ProtothreadScheduler.c include only once
+#endif
+#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER_C
+
+
 #ifdef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 
 #include "xcontiki/xcontiki.h"
@@ -51,7 +58,7 @@ enum {
 };
 
 #define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
-    XCONTIKI_OS_SYS_PROTOTHREAD__THREAD task (void);
+    xcontiki_os_sys_Protothread__state_t task (void);
 
 XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 
@@ -66,11 +73,11 @@ XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
 #undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
 };
 
-static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD last_states[number_of_tasks];
+static xcontiki_os_sys_Protothread__state_t last_states[number_of_tasks];
 static xcontiki_arch_Clock__time_t last_ticks[number_of_tasks];
 static xcontiki_arch_Clock__time_t prev_diff[number_of_tasks];
 
-static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD call_task(uint8_t task_number) {
+static xcontiki_os_sys_Protothread__state_t call_task(uint8_t task_number) {
 
     enum {
 #define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
@@ -97,7 +104,7 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD call_task(uint8_t task_number) {
 
 static bool scheduler_first_run = true;
 
-static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
+static xcontiki_os_sys_Protothread__state_t scheduler(void) {
     static uint8_t i;
     xcontiki_arch_Clock__time_t diff;
 
@@ -126,7 +133,7 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD scheduler(void) {
             }
         }
     }
-    XCONTIKI_OS_SYS_PROTOTHREAD__THREAD result;
+    xcontiki_os_sys_Protothread__state_t result;
     result = XCONTIKI_OS_SYS_PROTOTHREAD__ENDED;
     for (i = 0; i < number_of_tasks; i++) {
         if (XCONTIKI_OS_SYS_PROTOTHREAD__YIELDED == last_states[i]) {

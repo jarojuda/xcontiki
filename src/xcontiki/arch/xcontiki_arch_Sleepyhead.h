@@ -7,8 +7,6 @@
 #ifndef XCONTIKI_ARCH_SLEEPYHEAD_H
 #define	XCONTIKI_ARCH_SLEEPYHEAD_H
 
-#include "xcontiki_arch_Clock.h"
-
 
 #ifdef	__cplusplus
 extern "C" {

@@ -86,7 +86,7 @@ extern "C" {
     exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *fromprocess) {
         register struct xcontiki_os_sys_Process *q;
         struct xcontiki_os_sys_Process *old_current_process_ptr;
-        XCONTIKI_OS_SYS_PROTOTHREAD__THREAD ret;
+        xcontiki_os_sys_Protothread__state_t ret;
 
         if (NULL == p->thread) {
             return;
@@ -159,7 +159,7 @@ extern "C" {
     call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data) {
 
         register struct xcontiki_os_sys_Process *q;
-        XCONTIKI_OS_SYS_PROTOTHREAD__THREAD ret;
+        xcontiki_os_sys_Protothread__state_t ret;
 
         if (NULL == p) {
             return;
