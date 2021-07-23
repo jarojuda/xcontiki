@@ -25,14 +25,14 @@ extern "C" {
     static struct __PACKED {
         unsigned allocated : 1;
         unsigned running : 1;
-    } flags[XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER] = {0};
+    } timer_flags[XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER] = {0};
 
     static xcontiki_os_sys_Etimer__etimer_id_t allocate_new_etimer(void) {
         xcontiki_os_sys_Etimer__etimer_id_t i;
         for (i = 1; i < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; i++) {
-            if (0 == flags[i].allocated) {
-                flags[i].allocated = 1;
-                flags[i].running = 0;
+            if (0 == timer_flags[i].allocated) {
+                timer_flags[i].allocated = 1;
+                timer_flags[i].running = 0;
                 process_ptr[i] = XCONTIKI_OS_SYS_PROCESS__NONE;
                 break;
             }
@@ -53,8 +53,8 @@ extern "C" {
 
         xcontiki_os_sys_Etimer__request_poll();
         process_ptr[et] = xcontiki_os_sys_Process__get_current_process();
-        flags[et].allocated = true;
-        flags[et].running = true;
+        timer_flags[et].allocated = true;
+        timer_flags[et].running = true;
 
     }
 

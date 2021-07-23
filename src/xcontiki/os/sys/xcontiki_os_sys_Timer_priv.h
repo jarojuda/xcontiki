@@ -24,17 +24,17 @@ extern "C" {
     static xcontiki_arch_Clock__time_t interval[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER];
     static xcontiki_arch_Clock__time_t previous_diff[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER];
 
-    static struct __PACKED {
+    static struct {
         unsigned allocated : 1;
         unsigned running : 1;
         unsigned expired : 1;
-    } flags[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER] = {0};
+    } timer_flags[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER] = {0};
 
     static xcontiki_os_sys_Timer__timer_id_t allocate_new_timer(void) {
         xcontiki_os_sys_Timer__timer_id_t i;
         for (i = 1; i < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER; i++) {
-            if (0 == flags[i].allocated) {
-                flags[i].allocated = 1;
+            if (0 == timer_flags[i].allocated) {
+                timer_flags[i].allocated = 1;
                 break;
             }
         }
@@ -58,11 +58,11 @@ extern "C" {
 
         now = xcontiki_arch_Clock__time();
         for (t = 1; t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER; t++) {
-            if (flags[t].running) {
+            if (timer_flags[t].running) {
                 diff = now - start[t];
                 if (diff >= interval[t] || diff < previous_diff[t]) {
-                    flags[t].expired = true;
-                    flags[t].running = false;
+                    timer_flags[t].expired = true;
+                    timer_flags[t].running = false;
                 } else {
                     previous_diff[t] = diff;
                 }

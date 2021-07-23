@@ -113,6 +113,9 @@ static bool timer##expired(void){\
     return xcontiki_os_sys_Timer__expired(_##timer##_id);\
 }\
 static bool timer##expired_after(xcontiki_arch_Clock__time_t t){\
+    if( ! xcontiki_os_sys_Timer__is_allocated(_##timer##_id)){\
+        _##timer##_id=xcontiki_os_sys_Timer__set(_##timer##_id, t);\
+    }\
     return xcontiki_os_sys_Timer__expired_after(_##timer##_id, t);\
 }\
 static xcontiki_arch_Clock__time_t timer##remaining(void){\

@@ -77,13 +77,13 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Cl
     }
     interval[t] = intervl;
     if (0 == intervl) {
-        flags[t].expired = true;
-        flags[t].running = false;
+        timer_flags[t].expired = true;
+        timer_flags[t].running = false;
     } else {
         start[t] = xcontiki_arch_Clock__time();
         previous_diff[t] = 0;
-        flags[t].running = true;
-        flags[t].expired = false;
+        timer_flags[t].running = true;
+        timer_flags[t].expired = false;
     }
     return t;
 }
@@ -111,9 +111,9 @@ xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_id_t t) {
     if (xcontiki_os_sys_Timer__expired(t)) {
         start[t] += interval[t];
         previous_diff[t] = 0;
-        flags[t].expired = (0 == interval[t]);
-        if (false == flags[t].expired) {
-            flags[t].running = true;
+        timer_flags[t].expired = (0 == interval[t]);
+        if (false == timer_flags[t].expired) {
+            timer_flags[t].running = true;
         }
     }
 }
@@ -141,9 +141,9 @@ xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_id_t t) {
     }
     start[t] = xcontiki_arch_Clock__time();
     previous_diff[t] = 0;
-    flags[t].expired = (0 == interval[t]);
-    if (false == flags[t].expired) {
-        flags[t].running = true;
+    timer_flags[t].expired = (0 == interval[t]);
+    if (false == timer_flags[t].expired) {
+        timer_flags[t].running = true;
     }
 }
 /*---------------------------------------------------------------------------*/
@@ -169,7 +169,7 @@ xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_id_t t, xconti
     if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return true;
     }
-    if (false == flags[t].running) {
+    if (false == timer_flags[t].running) {
         xcontiki_os_sys_Timer__set(t, interval);
     }
     result = xcontiki_os_sys_Timer__expired(t);
@@ -195,14 +195,14 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t) {
     if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return true;
     }
-    if (flags[t].expired) {
-        flags[t].running = false;
+    if (timer_flags[t].expired) {
+        timer_flags[t].running = false;
         return true;
     }
     xcontiki_arch_Clock__time_t diff = (xcontiki_arch_Clock__time() - start[t]);
     if (diff >= interval[t] || diff < previous_diff[t]) {
-        flags[t].expired = true;
-        flags[t].running = false;
+        timer_flags[t].expired = true;
+        timer_flags[t].running = false;
         return true;
     } else {
         previous_diff[t] = diff;
@@ -247,9 +247,9 @@ xcontiki_os_sys_Timer__remove(xcontiki_os_sys_Timer__timer_id_t t) {
     if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return;
     }
-    flags[t].allocated = false;
-    flags[t].expired = true;
-    flags[t].running = false;
+    timer_flags[t].allocated = false;
+    timer_flags[t].expired = true;
+    timer_flags[t].running = false;
 }
 /*---------------------------------------------------------------------------*/
 
@@ -270,11 +270,11 @@ xcontiki_os_sys_Protothread__state_t xcontiki_os_sys_Timer__sleepyhead_thread(vo
     now = xcontiki_arch_Clock__time();
     tdist = 0;
     for (t = 1; t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER; t++) {
-        if (flags[t].running) {
+        if (timer_flags[t].running) {
             diff = now - start[t];
             if (diff >= interval[t] || diff < previous_diff[t]) {
-                flags[t].expired = true;
-                flags[t].running = false;
+                timer_flags[t].expired = true;
+                timer_flags[t].running = false;
             } else {
                 previous_diff[t] = diff;
                 diff = interval[t] - diff; //time distance to the next expiration
@@ -326,11 +326,10 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_start(xcontiki_os_sys_Tim
  */
 bool
 xcontiki_os_sys_Timer__is_allocated(xcontiki_os_sys_Timer__timer_id_t t) {
-    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
     if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return false;
     }
-    return (0!=flags[t].allocated);
+    return (0!=timer_flags[t].allocated);
 }
 
 
