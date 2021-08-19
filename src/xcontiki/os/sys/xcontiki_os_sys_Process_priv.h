@@ -158,7 +158,6 @@ extern "C" {
     static void
     call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data) {
 
-        register struct xcontiki_os_sys_Process *q;
         xcontiki_os_sys_Protothread__state_t ret;
 
         if (NULL == p) {
