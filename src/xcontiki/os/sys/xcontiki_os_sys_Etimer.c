@@ -65,7 +65,7 @@ XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data) {
         if (ev == XCONTIKI_OS_SYS_PROCESS__EVENT_EXITED) {
             p = (struct xcontiki_os_sys_Process *)data;
             for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
-                if (timer_flags[et].allocated && process_ptr[et] == p) {
+                if (etimer_flags[et].allocated && process_ptr[et] == p) {
                     xcontiki_os_sys_Etimer__remove(et);
                 }
             }
@@ -75,14 +75,14 @@ XCONTIKI_OS_SYS_PROCESS__THREAD(xcontiki_os_sys_Etimer__process, ev, data) {
         }
 
         for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
-            if (timer_flags[et].running && xcontiki_os_sys_Timer__expired(timer[et])) {
+            if (etimer_flags[et].running && xcontiki_os_sys_Timer__expired(timer[et])) {
                 if (xcontiki_os_sys_Process__post_event_via_queue(process_ptr[et], XCONTIKI_OS_SYS_PROCESS__EVENT_TIMER, (xcontiki_os_sys_Process__data_t)et) == XCONTIKI_OS_SYS_PROCESS__ERR_OK) {
 
                     /* Reset the process ID of the event timer, to signal that the
                        etimer has expired. This is later checked in the
                        xcontiki_os_sys_Timer__expired() function. */
                     process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
-                    timer_flags[et].running = 0;
+                    etimer_flags[et].running = 0;
                 } else {
                     xcontiki_os_sys_Etimer__request_poll();
                 }
@@ -169,7 +169,7 @@ xcontiki_os_sys_Etimer__expired(xcontiki_os_sys_Etimer__etimer_id_t et) {
     if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return 1;
     }
-    return false == timer_flags[et].running ;
+    return false == etimer_flags[et].running ;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -197,7 +197,7 @@ bool
 xcontiki_os_sys_Etimer__pending(void) {
     xcontiki_os_sys_Etimer__etimer_id_t et;
     for (et = 1; et < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER; et++) {
-        if (timer_flags[et].running) {
+        if (etimer_flags[et].running) {
             return true;
         }
     }
@@ -213,7 +213,7 @@ xcontiki_os_sys_Etimer__stop(xcontiki_os_sys_Etimer__etimer_id_t et) {
     }
 
     /* Set the timer as expired */
-    timer_flags[et].running = false;
+    etimer_flags[et].running = false;
     process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
 }
 /*---------------------------------------------------------------------------*/
@@ -225,8 +225,8 @@ xcontiki_os_sys_Etimer__remove(xcontiki_os_sys_Etimer__etimer_id_t et) {
     }
 
     /* Set the timer as expired */
-    timer_flags[et].allocated=false;
-    timer_flags[et].running = false;
+    etimer_flags[et].allocated=false;
+    etimer_flags[et].running = false;
     process_ptr[et] = XCONTIKI_OS_SYS_PROCESS__NONE;
     xcontiki_os_sys_Timer__remove(timer[et]);
 }
@@ -237,7 +237,7 @@ xcontiki_os_sys_Etimer__is_allocated(xcontiki_os_sys_Etimer__etimer_id_t et) {
     if (0 == et || et >= XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
         return false;
     }
-    return (0 != timer_flags[et].allocated) ;
+    return (0 != etimer_flags[et].allocated) ;
 }
 
 /*---------------------------------------------------------------------------*/
