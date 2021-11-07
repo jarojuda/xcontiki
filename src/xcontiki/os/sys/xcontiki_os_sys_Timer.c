@@ -148,34 +148,6 @@ xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_id_t t) {
 }
 /*---------------------------------------------------------------------------*/
 
-/**
- * Set a timer.
- * and
- * Check if a timer has expired.
- *
- * This function tests if a timer has expired and returns true or
- * false depending on its status.
- *
- * \param t A pointer to the timer
- *
- * \return Non-zero if the timer has expired, zero otherwise.
- *
- */
-bool
-xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t interval) {
-    bool result;
-
-    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
-    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
-        return true;
-    }
-    if (false == timer_flags[t].running) {
-        xcontiki_os_sys_Timer__set(t, interval);
-    }
-    result = xcontiki_os_sys_Timer__expired(t);
-
-    return result;
-}
 
 /**
  * Check if a timer has expired.
