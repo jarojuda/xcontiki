@@ -1,4 +1,5 @@
 #include "unity.h"
+#include "xcontiki/xcontiki.h"
 #include "xcontiki/arch/xcontiki_arch_Clock.h"
 #include "mock_xcontiki_arch_dev_Watchdog.h"
 #include "mock_get_timer_for_test.h"
