@@ -46,7 +46,5 @@
  */
 int main(int argc, char** argv) {
     
-    void test_whenMaxIntervalIsSet_thenClockWaitShouldNotLoopForever(void);
-    test_whenMaxIntervalIsSet_thenClockWaitShouldNotLoopForever();
     return (EXIT_SUCCESS);
 }

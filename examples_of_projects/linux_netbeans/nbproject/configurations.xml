@@ -15,6 +15,7 @@
       <logicalFolder name="xcontiki" displayName="xcontiki" projectFiles="true">
         <logicalFolder name="arch" displayName="arch" projectFiles="true">
           <logicalFolder name="dev" displayName="dev" projectFiles="true">
+            <itemPath>../../src/xcontiki/arch/dev/xcontiki_arch_dev.c</itemPath>
             <itemPath>../../src/xcontiki/arch/dev/xcontiki_arch_dev.h</itemPath>
             <itemPath>../../src/xcontiki/arch/dev/xcontiki_arch_dev_Watchdog.c</itemPath>
             <itemPath>../../src/xcontiki/arch/dev/xcontiki_arch_dev_Watchdog.h</itemPath>
@@ -40,11 +41,14 @@
             <itemPath>../../src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.h</itemPath>
             <itemPath>../../src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c</itemPath>
             <itemPath>../../src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.h</itemPath>
+            <itemPath>../../src/xcontiki/os/lib/xcontiki_os_lib_assert.c</itemPath>
+            <itemPath>../../src/xcontiki/os/lib/xcontiki_os_lib_assert.h</itemPath>
           </logicalFolder>
           <logicalFolder name="sys" displayName="sys" projectFiles="true">
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys.h</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer.h</itemPath>
+            <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer_priv.h</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Process.c</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Process.h</itemPath>
             <itemPath>../../src/xcontiki/os/sys/xcontiki_os_sys_Process_priv.h</itemPath>
@@ -99,6 +103,11 @@
           </incDir>
         </cTool>
       </compileType>
+      <item path="../../src/xcontiki/arch/dev/xcontiki_arch_dev.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="../../src/xcontiki/arch/dev/xcontiki_arch_dev.h"
             ex="false"
             tool="3"
@@ -184,6 +193,16 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib_assert.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib_assert.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="../../src/xcontiki/os/sys/xcontiki_os_sys.h"
             ex="false"
             tool="3"
@@ -195,6 +214,11 @@
             flavor2="0">
       </item>
       <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer_priv.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -280,6 +304,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="../../src/xcontiki/arch/dev/xcontiki_arch_dev.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="../../src/xcontiki/arch/dev/xcontiki_arch_dev.h"
             ex="false"
             tool="3"
@@ -365,6 +394,16 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib_assert.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/lib/xcontiki_os_lib_assert.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="../../src/xcontiki/os/sys/xcontiki_os_sys.h"
             ex="false"
             tool="3"
@@ -376,6 +415,11 @@
             flavor2="0">
       </item>
       <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../src/xcontiki/os/sys/xcontiki_os_sys_Etimer_priv.h"
             ex="false"
             tool="3"
             flavor2="0">
