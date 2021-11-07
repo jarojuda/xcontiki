@@ -46,6 +46,8 @@
 
 #include "xcontiki/xcontiki.h"
 
+#define XCONTIKI_OS_SYS_TIMER_PRIV_H
+#include "xcontiki_os_sys_Timer_priv.h"
 
 /*---------------------------------------------------------------------------*/
 
@@ -60,19 +62,30 @@
  * \param interval The interval before the timer expires.
  *
  */
-void
-xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_t *t, xcontiki_arch_Clock__time_t interval) {
-    if (0 == interval) {
-        t->expired = true;
-        t->interval = 0;
-        t->set = false;
-    } else {
-    	t->start = xcontiki_arch_Clock__time();
-    	t->interval = interval;
-    	t->previous_diff = 0;
-    	t->set = true;
-    	t->expired = false;
+xcontiki_os_sys_Timer__timer_id_t
+xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t intervl) {
+    assert(t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return 0;
     }
+    if (0 == t) {
+        t = allocate_new_timer();
+        assert(t != 0 && "No free timers. Increase number of timers");
+        if (0 == t) { //No free timer?
+            return 0;
+        }
+    }
+    interval[t] = intervl;
+    if (0 == intervl) {
+        timer_flags[t].expired = true;
+        timer_flags[t].running = false;
+    } else {
+        start[t] = xcontiki_arch_Clock__time();
+        previous_diff[t] = 0;
+        timer_flags[t].running = true;
+        timer_flags[t].expired = false;
+    }
+    return t;
 }
 /*---------------------------------------------------------------------------*/
 
@@ -90,13 +103,17 @@ xcontiki_os_sys_Timer__set(xcontiki_os_sys_Timer__timer_t *t, xcontiki_arch_Cloc
  * \sa timer_restart()
  */
 void
-xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_t *t) {
+xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_id_t t) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
     if (xcontiki_os_sys_Timer__expired(t)) {
-        t->start += t->interval;
-        t->previous_diff = 0;
-        t->expired = (0 == t->interval);
-        if (false == t->expired) {
-            t->set = true;
+        start[t] += interval[t];
+        previous_diff[t] = 0;
+        timer_flags[t].expired = (0 == interval[t]);
+        if (false == timer_flags[t].expired) {
+            timer_flags[t].running = true;
         }
     }
 }
@@ -117,40 +134,20 @@ xcontiki_os_sys_Timer__reset(xcontiki_os_sys_Timer__timer_t *t) {
  * \sa timer_reset()
  */
 void
-xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_t *t) {
-    t->start = xcontiki_arch_Clock__time();
-    t->previous_diff = 0;
-    t->expired = (0 == t->interval);
-    if (false == t->expired) {
-        t->set = true;
+xcontiki_os_sys_Timer__restart(xcontiki_os_sys_Timer__timer_id_t t) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
+    start[t] = xcontiki_arch_Clock__time();
+    previous_diff[t] = 0;
+    timer_flags[t].expired = (0 == interval[t]);
+    if (false == timer_flags[t].expired) {
+        timer_flags[t].running = true;
     }
 }
 /*---------------------------------------------------------------------------*/
 
-/**
- * Set a timer.
- * and
- * Check if a timer has expired.
- *
- * This function tests if a timer has expired and returns true or
- * false depending on its status.
- *
- * \param t A pointer to the timer
- *
- * \return Non-zero if the timer has expired, zero otherwise.
- *
- */
-bool
-xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_t __ram *t, xcontiki_arch_Clock__time_t interval) {
-    bool result;
-
-    if (false == t->set) {
-        xcontiki_os_sys_Timer__set(t, interval);
-    }
-    result = xcontiki_os_sys_Timer__expired(t);
-
-    return result;
-}
 
 /**
  * Check if a timer has expired.
@@ -164,32 +161,25 @@ xcontiki_os_sys_Timer__expired_after(xcontiki_os_sys_Timer__timer_t __ram *t, xc
  *
  */
 bool
-xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t __ram *t) {
-    //Workaround to avoid XC8 error:(1466) registers unavailable for code generation of this expression
-    static xcontiki_os_sys_Timer__timer_t tmp_timer;
-    static xcontiki_os_sys_Timer__timer_t __ram *tmp_timer_ptr;
-    bool result;
+xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_id_t t) {
 
-    if (t->expired) {
-        t->set = false;
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
         return true;
     }
-    tmp_timer_ptr = &tmp_timer;
-    memcpy(tmp_timer_ptr, t, sizeof ( xcontiki_os_sys_Timer__timer_t));
-    xcontiki_arch_Clock__time_t diff = (xcontiki_arch_Clock__time() - tmp_timer.start);
-    if (diff >= tmp_timer.interval || diff < tmp_timer.previous_diff) {
-        tmp_timer.expired = true;
-        result = true;
+    if (timer_flags[t].expired) {
+        timer_flags[t].running = false;
+        return true;
+    }
+    xcontiki_arch_Clock__time_t diff = (xcontiki_arch_Clock__time() - start[t]);
+    if (diff >= interval[t] || diff < previous_diff[t]) {
+        timer_flags[t].expired = true;
+        timer_flags[t].running = false;
+        return true;
     } else {
-        result = false;
+        previous_diff[t] = diff;
+        return false;
     }
-    if (true == result) {
-        tmp_timer.set = false;
-    }
-    tmp_timer.previous_diff = diff;
-    memcpy(t, tmp_timer_ptr, sizeof ( xcontiki_os_sys_Timer__timer_t));
-
-    return result;
 }
 /*---------------------------------------------------------------------------*/
 
@@ -204,12 +194,115 @@ xcontiki_os_sys_Timer__expired(xcontiki_os_sys_Timer__timer_t __ram *t) {
  *
  */
 xcontiki_arch_Clock__time_t
-xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_t *t) {
+xcontiki_os_sys_Timer__remaining(xcontiki_os_sys_Timer__timer_id_t t) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return 0;
+    }
     if (xcontiki_os_sys_Timer__expired(t)) {
         return 0;
     }
-    return (xcontiki_arch_Clock__time_t) (t->interval - t->previous_diff);
+    return (xcontiki_arch_Clock__time_t) (interval[t] - previous_diff[t]);
+}
+
+/**
+ * Remove the timer.
+ *
+ * This function removes the timer.
+
+ * \param t A pointer to the timer.
+ * \sa timer_restart()
+ */
+void
+xcontiki_os_sys_Timer__remove(xcontiki_os_sys_Timer__timer_id_t t) {
+    assert(t != 0 && t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER && "Wrong timer id");
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
+    timer_flags[t].allocated = false;
+    timer_flags[t].expired = true;
+    timer_flags[t].running = false;
 }
 /*---------------------------------------------------------------------------*/
+
+
+
+/*---------------------------------------------------------------------------*/
+
+xcontiki_os_sys_Protothread__state_t xcontiki_os_sys_Timer__sleepyhead_thread(void) {
+    static xcontiki_os_sys_Protothread__pt_t pt;
+
+    static xcontiki_os_sys_Timer__timer_id_t t;
+    static xcontiki_arch_Clock__time_t now;
+    static xcontiki_arch_Clock__time_t tdist; //time distance for the nearest expiration
+    static xcontiki_arch_Clock__time_t diff;
+
+    XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN(pt);
+
+    now = xcontiki_arch_Clock__time();
+    tdist = 0;
+    for (t = 1; t < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER; t++) {
+        if (timer_flags[t].running) {
+            diff = now - start[t];
+            if (diff >= interval[t] || diff < previous_diff[t]) {
+                timer_flags[t].expired = true;
+                timer_flags[t].running = false;
+            } else {
+                previous_diff[t] = diff;
+                diff = interval[t] - diff; //time distance to the next expiration
+                if (tdist < diff) {
+                    tdist = diff;
+                }
+            }
+        }
+    }
+
+    XCONTIKI_OS_SYS_PROTOTHREAD__END(pt);
+}
+
+void xcontiki_os_sys_Timer__set_interval(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t intervl) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
+    interval[t] = intervl;
+}
+
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_interval(xcontiki_os_sys_Timer__timer_id_t t) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return 0;
+    }
+    return interval[t];
+}
+
+void xcontiki_os_sys_Timer__set_start(xcontiki_os_sys_Timer__timer_id_t t, xcontiki_arch_Clock__time_t strt) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return;
+    }
+    start[t] = strt;
+}
+
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Timer__get_start(xcontiki_os_sys_Timer__timer_id_t t) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return 0;
+    }
+    return start[t];
+}
+
+
+/**
+ * Check if timer was allocated
+ *
+
+ * \param t An id of the timer.
+ * \sa timer__set()
+ */
+bool
+xcontiki_os_sys_Timer__is_allocated(xcontiki_os_sys_Timer__timer_id_t t) {
+    if (0 == t || t >= XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
+        return false;
+    }
+    return (0!=timer_flags[t].allocated);
+}
+
 
 /** @} */

@@ -47,16 +47,21 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 
-#define __PACKED __attribute__((packed)) 
+#define __PACKED __attribute__((packed))
 #define __rom
 #define __ram
 #define rom
+
+#ifndef _OMNITARGET
+#define _OMNITARGET ((void *)UINTPTR_MAX)
+#endif
 
 #include "xcontiki/arch/xcontiki_arch_build.h"
 #include "xcontiki/arch/xcontiki_arch_conf.h"
 #include "xcontiki/arch/os/xcontiki_arch_os.h"
 #include "xcontiki/arch/dev/xcontiki_arch_dev.h"
 #include "xcontiki/arch/xcontiki_arch_Clock.h"
+#include "xcontiki/arch/xcontiki_arch_Sleepyhead.h"
 
 
 #ifdef __cplusplus

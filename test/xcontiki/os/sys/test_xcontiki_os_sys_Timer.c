@@ -5,7 +5,10 @@
 
 
 void setUp(void){
-
+        int i;
+        for(i=0; i<XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER; i++) {
+                xcontiki_os_sys_Timer__remove(i);
+        }
 }
 
 void tearDown(void){
@@ -75,5 +78,27 @@ void test_whenTheTimerHasExpired_thenTheTimerShouldRemainExpired(void){
         TEST_ASSERT_TRUE(tmr.expired());
         TEST_ASSERT_TRUE(tmr.expired());
         TEST_ASSERT_TRUE(tmr.expired());
+
+}
+
+void test_timer_remove(void){
+
+    xcontiki_os_sys_Timer__timer_id_t test_timer_id_1;
+    xcontiki_os_sys_Timer__timer_id_t test_timer_id_2;
+
+    test_timer_id_1 = 0;
+    test_timer_id_2 = 0;
+
+    test_timer_id_1  = xcontiki_os_sys_Timer__set(test_timer_id_1, XCONTIKI_ARCH_CLOCK__SECOND);
+    test_timer_id_2  = xcontiki_os_sys_Timer__set(test_timer_id_2, XCONTIKI_ARCH_CLOCK__SECOND);
+
+    TEST_ASSERT_NOT_EQUAL(0, test_timer_id_1);
+    TEST_ASSERT_NOT_EQUAL(0, test_timer_id_2);
+
+    xcontiki_os_sys_Timer__remove(test_timer_id_1);
+    xcontiki_os_sys_Timer__remove(test_timer_id_2);
+
+    TEST_ASSERT_FALSE(xcontiki_os_sys_Timer__is_allocated(test_timer_id_1));
+    TEST_ASSERT_FALSE(xcontiki_os_sys_Timer__is_allocated(test_timer_id_2));
 
 }

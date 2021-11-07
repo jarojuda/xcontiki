@@ -46,7 +46,7 @@ extern "C" {
 #include "xcontiki/arch/xcontiki_arch.h"
 #include "xcontiki/os/xcontiki_os.h"
     
-    XCONTIKI_OS_SYS_PROTOTHREAD__THREAD xcontiki__main(void);
+    xcontiki_os_sys_Protothread__state_t xcontiki__main(void);
     void xcontiki__init(void);
     
 #ifdef	__cplusplus

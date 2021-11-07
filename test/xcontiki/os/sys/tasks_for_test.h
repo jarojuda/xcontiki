@@ -3,10 +3,10 @@
 
 #include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
 
-XCONTIKI_OS_SYS_PROTOTHREAD__THREAD task1_that_runs_everytime(void);
+xcontiki_os_sys_Protothread__state_t task1_that_runs_everytime(void);
 
-XCONTIKI_OS_SYS_PROTOTHREAD__THREAD task2_started_in_the_meantime(void);
+xcontiki_os_sys_Protothread__state_t task2_started_in_the_meantime(void);
 
-XCONTIKI_OS_SYS_PROTOTHREAD__THREAD task3_with_max_interval(void);
+xcontiki_os_sys_Protothread__state_t task3_with_max_interval(void);
 
 #endif

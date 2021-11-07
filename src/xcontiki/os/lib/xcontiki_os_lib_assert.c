@@ -37,13 +37,14 @@
 #endif
 
 void
-_xassert(const char *file, int lineno)
-{
-  PRINTF("Assertion failed: file %s, line %d.\n", file, lineno);
+_xassert(const char *file, int lineno) {
+    PRINTF("Assertion failed: file %s, line %d.\n", file, lineno);
+
+    NOP();
 
 #if !ASSERT_RETURNS
-  PRINTF("The firmware will stop running\n");
-  PRINTF("A watchdog timer may restart this device\n");
-  while(1);
+    PRINTF("The firmware will stop running\n");
+    PRINTF("A watchdog timer may restart this device\n");
+    while (1);
 #endif
 }

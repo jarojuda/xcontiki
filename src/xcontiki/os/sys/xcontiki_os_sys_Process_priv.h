@@ -24,9 +24,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "xcontiki_os_sys_Process.h"
-
-
 /* Based on the Contiki http://contiki-os.org
  * and the Contiki-NG  http://www.contiki-ng.org/
  * projects.
@@ -50,22 +47,20 @@ extern "C" {
     /*
      * Pointer to the currently running process structure.
      */
-    static struct xcontiki_os_sys_Process *list_of_processes = NULL;
-    static struct xcontiki_os_sys_Process *current_process_ptr = NULL;
+    static struct xcontiki_os_sys_Process *list_of_processes = _OMNITARGET;
+    static struct xcontiki_os_sys_Process *current_process_ptr = _OMNITARGET;
 
     static xcontiki_os_sys_Process__event_t lastevent;
 
     /*
-     * Structure used for keeping the queue of active events.
+     * Arrays used for keeping the queue of active events.
      */
-    struct event_data {
-        xcontiki_os_sys_Process__event_t ev;
-        xcontiki_os_sys_Process__data_t data;
-        struct xcontiki_os_sys_Process *p;
-    };
-
     static xcontiki_os_sys_Process__num_events_t nevents, fevent;
-    static struct event_data events[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
+    static xcontiki_os_sys_Process__event_t events_ev[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
+    static xcontiki_os_sys_Process__data_t events_data[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS];
+    static struct xcontiki_os_sys_Process *events_destination_process_ptr[XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS]={_OMNITARGET};
+
+
 
 #if XCONTIKI_OS_SYS_PROCESS__CONF_STATS
     static xcontiki_os_sys_Process__num_events_t maximum_number_of_events;
@@ -91,7 +86,7 @@ extern "C" {
     exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *fromprocess) {
         register struct xcontiki_os_sys_Process *q;
         struct xcontiki_os_sys_Process *old_current_process_ptr;
-        XCONTIKI_OS_SYS_PROTOTHREAD__THREAD ret;
+        xcontiki_os_sys_Protothread__state_t ret;
 
         if (NULL == p->thread) {
             return;
@@ -138,7 +133,7 @@ extern "C" {
                         if (p->thread != NULL && p != fromprocess && fromprocess != NULL) {
                             /* Post the exit event to the process that is about to exit. */
                             current_process_ptr = p;
-                            p->thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, NULL);
+                            p->thread(XCONTIKI_OS_SYS_PROCESS__EVENT_EXIT, 0);
                         }
                         fromprocess = NULL;
                     }
@@ -163,8 +158,7 @@ extern "C" {
     static void
     call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data) {
 
-        register struct xcontiki_os_sys_Process *q;
-        XCONTIKI_OS_SYS_PROTOTHREAD__THREAD ret;
+        xcontiki_os_sys_Protothread__state_t ret;
 
         if (NULL == p) {
             return;
@@ -210,7 +204,7 @@ extern "C" {
             if (p->needspoll) {
                 p->running = true;
                 p->needspoll = 0;
-                call_process(p, XCONTIKI_OS_SYS_PROCESS__EVENT_POLL, NULL);
+                call_process(p, XCONTIKI_OS_SYS_PROCESS__EVENT_POLL, 0);
             }
         }
     }
@@ -239,10 +233,10 @@ extern "C" {
         if (nevents > 0) {
 
             /* There are events that we should deliver. */
-            ev = events[fevent].ev;
+            ev = events_ev[fevent];
 
-            data = events[fevent].data;
-            receiver = events[fevent].p;
+            data = events_data[fevent];
+            receiver = events_destination_process_ptr[fevent];
 
             /* Since we have seen the new event, we move pointer upwards
                and decrease the number of events. */

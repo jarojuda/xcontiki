@@ -63,19 +63,15 @@
 #ifndef XCONTIKI_OS_SYS_ETIMER_H
 #define XCONTIKI_OS_SYS_ETIMER_H
 
-/**
- * A timer.
- *
- * This structure is used for declaring a timer. The timer must be set
- * with etimer_set() before it can be used.
- *
- * \hideinitializer
- */
-struct xcontiki_os_sys_Etimer {
-  struct xcontiki_os_sys_Timer__timer timer;
-  struct xcontiki_os_sys_Etimer *next;
-  struct xcontiki_os_sys_Process *p;
-};
+#include "xcontiki/os/sys/xcontiki_os_sys_Timer.h"
+
+#ifndef XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER
+#define XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER (32u)
+#endif
+
+typedef uint8_t xcontiki_os_sys_Etimer__etimer_id_t;
+#define xcontiki_os_sys_Etimer__etimer_id_t xcontiki_os_sys_Etimer__etimer_id_t
+
 
 /**
  * \name Functions called from application programs
@@ -93,7 +89,8 @@ struct xcontiki_os_sys_Etimer {
  *             process that called the etimer_set() function.
  *
  */
-void xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval);
+xcontiki_os_sys_Etimer__etimer_id_t
+xcontiki_os_sys_Etimer__set(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t interval);
 
 /**
  * \brief      Reset an event timer with the same interval as was
@@ -111,7 +108,7 @@ void xcontiki_os_sys_Etimer__set(struct xcontiki_os_sys_Etimer *et, xcontiki_arc
  *
  * \sa etimer_restart()
  */
-void xcontiki_os_sys_Etimer__reset(struct xcontiki_os_sys_Etimer *et);
+void xcontiki_os_sys_Etimer__reset(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Reset an event timer with a new interval.
@@ -124,7 +121,7 @@ void xcontiki_os_sys_Etimer__reset(struct xcontiki_os_sys_Etimer *et);
  *
  * \sa etimer_reset()
  */
-void xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etimer *et, xcontiki_arch_Clock__time_t interval);
+void xcontiki_os_sys_Etimer__reset_with_new_interval(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t interval);
 
 /**
  * \brief      Restart an event timer from the current point in time
@@ -141,7 +138,7 @@ void xcontiki_os_sys_Etimer__reset_with_new_interval(struct xcontiki_os_sys_Etim
  *
  * \sa etimer_reset()
  */
-void xcontiki_os_sys_Etimer__restart(struct xcontiki_os_sys_Etimer *et);
+void xcontiki_os_sys_Etimer__restart(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Adjust the expiration time for an event timer
@@ -163,7 +160,7 @@ void xcontiki_os_sys_Etimer__restart(struct xcontiki_os_sys_Etimer *et);
  * \sa etimer_set()
  * \sa etimer_reset()
  */
-void xcontiki_os_sys_Etimer__adjust(struct xcontiki_os_sys_Etimer *et, int td);
+void xcontiki_os_sys_Etimer__adjust(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arch_Clock__time_t td);
 
 /**
  * \brief      Get the expiration time for the event timer.
@@ -172,7 +169,7 @@ void xcontiki_os_sys_Etimer__adjust(struct xcontiki_os_sys_Etimer *et, int td);
  *
  *             This function returns the expiration time for an event timer.
  */
-xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(struct xcontiki_os_sys_Etimer *et);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Get the start time for the event timer.
@@ -182,7 +179,7 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(struct xcont
  *             This function returns the start time (when the timer
  *             was last set) for an event timer.
  */
-xcontiki_arch_Clock__time_t etimer_start_time(struct xcontiki_os_sys_Etimer *et);
+xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__start_time(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Check if an event timer has expired.
@@ -192,7 +189,7 @@ xcontiki_arch_Clock__time_t etimer_start_time(struct xcontiki_os_sys_Etimer *et)
  *             This function tests if an event timer has expired and
  *             returns true or false depending on its status.
  */
-int xcontiki_os_sys_Etimer__expired(struct xcontiki_os_sys_Etimer *et);
+bool xcontiki_os_sys_Etimer__expired(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Stop a pending event timer.
@@ -204,7 +201,17 @@ int xcontiki_os_sys_Etimer__expired(struct xcontiki_os_sys_Etimer *et);
  *             emit any event when it expires.
  *
  */
-void xcontiki_os_sys_Etimer__stop(struct xcontiki_os_sys_Etimer *et);
+void xcontiki_os_sys_Etimer__stop(xcontiki_os_sys_Etimer__etimer_id_t et);
+
+/**
+ * \brief      Remove a event timer.
+ * \param et   A pointer to the pending event timer.
+ *
+ *             This function removes an event timer. 
+ *
+ */
+void xcontiki_os_sys_Etimer__remove(xcontiki_os_sys_Etimer__etimer_id_t et);
+
 
 /** @} */
 
@@ -231,23 +238,95 @@ void xcontiki_os_sys_Etimer__request_poll(void);
  *             This function checks if there are any active event
  *             timers that have not expired.
  */
-int xcontiki_os_sys_Etimer__pending(void);
+bool xcontiki_os_sys_Etimer__pending(void);
+
 
 /**
- * \brief      Get next event timer expiration time.
- * \return     Next expiration time of all pending event timers.
- *             If there are no pending event timers this function
- *	       returns 0.
+ * \brief      Check if an event timer was initialized.
+ * \param et   An id of the event timer
+ * \return     Non-zero if the timer was allocated, zero otherwise.
  *
- *             This functions returns next expiration time of all
- *             pending event timers.
+ *             This function tests if an event timer was initialized and
+ *             returns true or false depending on its status.
  */
-xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__next_expiration_time(void);
+bool xcontiki_os_sys_Etimer__is_allocated(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 
 /** @} */
 
 XCONTIKI_OS_SYS_PROCESS__NAME(xcontiki_os_sys_Etimer__process);
+
+#define XCONTIKI_OS_SYS_ETIMER__NEW_STATIC(etimer) \
+\
+static xcontiki_os_sys_Etimer__etimer_id_t  _##etimer##_id;\
+static void etimer##set(xcontiki_arch_Clock__time_t t){\
+    _##etimer##_id=xcontiki_os_sys_Etimer__set(_##etimer##_id, t);\
+}\
+static void etimer##reset(void){\
+    xcontiki_os_sys_Etimer__reset(_##etimer##_id);\
+}\
+\
+static void etimer##reset_with_new_interval(xcontiki_arch_Clock__time_t t){\
+    xcontiki_os_sys_Etimer__reset_with_new_interval(_##etimer##_id, t);\
+}\
+\
+static void etimer##restart(void){\
+    xcontiki_os_sys_Etimer__restart(_##etimer##_id);\
+}\
+static void etimer##adjust(xcontiki_arch_Clock__time_t t){\
+    xcontiki_os_sys_Etimer__adjust(_##etimer##_id, t);\
+}\
+\
+static xcontiki_arch_Clock__time_t etimer##expiration_time(void){\
+    return xcontiki_os_sys_Etimer__expiration_time(_##etimer##_id);\
+}\
+\
+static xcontiki_arch_Clock__time_t etimer##start_time(void){\
+    return xcontiki_os_sys_Etimer__start_time(_##etimer##_id);\
+}\
+\
+static bool etimer##expired(void){\
+    return xcontiki_os_sys_Etimer__expired(_##etimer##_id);\
+}\
+static void etimer##stop(void){\
+    xcontiki_os_sys_Etimer__stop(_##etimer##_id);\
+}\
+\
+static xcontiki_os_sys_Etimer__etimer_id_t etimer##id(void){\
+    return _##etimer##_id;\
+}\
+\
+static bool etimer##is_allocated(void){\
+    return xcontiki_os_sys_Etimer__is_allocated(_##etimer##_id);\
+}\
+\
+static const struct {\
+    void (* const set)(xcontiki_arch_Clock__time_t);\
+    void (* const reset)(void);\
+    void (* const reset_with_new_interval)(xcontiki_arch_Clock__time_t);\
+    void (* const restart)(void);\
+    void (* const adjust)(xcontiki_arch_Clock__time_t);\
+    xcontiki_arch_Clock__time_t (* const expiration_time)(void);\
+    xcontiki_arch_Clock__time_t (* const start_time)(void);\
+    bool (* const expired)(void);\
+    void (* const stop)(void);\
+    xcontiki_os_sys_Etimer__etimer_id_t (* const id)(void);\
+    bool (* const is_allocated)(void);\
+} etimer = {\
+    etimer##set,\
+    etimer##reset,\
+    etimer##reset_with_new_interval,\
+    etimer##restart,\
+    etimer##adjust,\
+    etimer##expiration_time,\
+    etimer##start_time,\
+    etimer##expired,\
+    etimer##stop,\
+    etimer##id,\
+    etimer##is_allocated,\
+};\
+
+
 #endif /* XCONTIKI_OS_SYS_ETIMER_H */
 /** @} */
 /** @} */

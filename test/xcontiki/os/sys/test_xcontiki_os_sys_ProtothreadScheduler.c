@@ -30,7 +30,7 @@ void reset_all_fakes(void){
 }
 
 
-void static first_run_with_fake_tasks_returning_status(XCONTIKI_OS_SYS_PROTOTHREAD__THREAD status){
+void static first_run_with_fake_tasks_returning_status(xcontiki_os_sys_Protothread__state_t status){
         reset_all_fakes();
         task1_that_runs_everytime_fake.return_val = status;
         task2_started_in_the_meantime_fake.return_val = status;

@@ -56,7 +56,7 @@
 #include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
 
 typedef unsigned char xcontiki_os_sys_Process__event_t;
-typedef void * xcontiki_os_sys_Process__data_t;
+typedef uintptr_t xcontiki_os_sys_Process__data_t;
 typedef unsigned char xcontiki_os_sys_Process__num_events_t;
 
 /**
@@ -271,21 +271,21 @@ typedef unsigned char xcontiki_os_sys_Process__num_events_t;
  */
 #define XCONTIKI_OS_SYS_PROCESS__THREAD(name, ev, data) \
                 static\
-                XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name##_internal(\
+                xcontiki_os_sys_Protothread__state_t process_thread_##name##_internal(\
                                         xcontiki_os_sys_Process__event_t,\
 				                                xcontiki_os_sys_Process__data_t);\
                 static xcontiki_os_sys_Protothread__pt_t process_pt;\
                 static \
-                XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(\
+                xcontiki_os_sys_Protothread__state_t process_thread_##name(\
 				       xcontiki_os_sys_Process__event_t ev,\
 				       xcontiki_os_sys_Process__data_t data){\
-               static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_state;\
+               static xcontiki_os_sys_Protothread__state_t process_thread_state;\
                process_pt = process_thread_##name##_pt;\
                process_thread_state = process_thread_##name##_internal(ev,data);\
                process_thread_##name##_pt=process_pt;\
                return process_thread_state;\
              }\
-static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name##_internal(\
+static xcontiki_os_sys_Protothread__state_t process_thread_##name##_internal(\
                                         xcontiki_os_sys_Process__event_t ev,\
 				        xcontiki_os_sys_Process__data_t data)
 
@@ -314,7 +314,7 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name##_internal(\
  */
 
 #define XCONTIKI_OS_SYS_PROCESS(name, strname)    \
-  static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name(\
+  static xcontiki_os_sys_Protothread__state_t process_thread_##name(\
                                         xcontiki_os_sys_Process__event_t,\
                                         xcontiki_os_sys_Process__data_t);   \
   static xcontiki_os_sys_Protothread__pt_t process_thread_##name##_pt={0}; \
@@ -328,7 +328,7 @@ static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD process_thread_##name##_internal(\
 
 struct xcontiki_os_sys_Process {
     struct xcontiki_os_sys_Process *next;
-    XCONTIKI_OS_SYS_PROTOTHREAD__THREAD(* thread)(xcontiki_os_sys_Process__event_t, xcontiki_os_sys_Process__data_t);
+    xcontiki_os_sys_Protothread__state_t(* thread)(xcontiki_os_sys_Process__event_t, xcontiki_os_sys_Process__data_t);
     unsigned running:1;
     unsigned called:1;
     unsigned needspoll :1;
@@ -345,7 +345,7 @@ struct xcontiki_os_sys_Process {
  *
  * \param p A pointer to a process structure.
  *
- * \param data An argument pointer that can be passed to the new
+ * \param data An argument that can be passed to the new
  * process
  *
  */

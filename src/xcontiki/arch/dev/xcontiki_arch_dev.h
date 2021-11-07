@@ -35,18 +35,20 @@
  *
  */
 
-#ifndef ARCH_DEV_H
-#define ARCH_DEV_H
+#ifndef XCONTIKI_ARCH_DEV_H
+#define XCONTIKI_ARCH_DEV_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "xcontiki/arch/dev/xcontiki_arch_dev_Watchdog.h"
-
+#include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
+    void xcontiki_arch_dev__init(void);
+    xcontiki_os_sys_Protothread__state_t xcontiki_arch_dev__threads(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* ARCH_DEV_H */
+#endif /* XCONTIKI_ARCH_DEV_H */

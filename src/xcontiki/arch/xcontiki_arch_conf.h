@@ -42,6 +42,17 @@
 extern "C" {
 #endif
 
+    typedef uint32_t xcontiki_arch_Clock__time_t;
+#define XCONTIKI_ARCH_CLOCK__MAX UINT32_MAX
+    typedef uint32_t xcontiki_arch_Clock__seconds_t;
+
+#define XCONTIKI_ARCH_CLOCK__FREQUENCY (32768ul)
+    /**
+     * A second, measured in system clock time.
+     *
+     * \hideinitializer
+     */
+#define XCONTIKI_ARCH_CLOCK__SECOND ((xcontiki_arch_Clock__time_t)XCONTIKI_ARCH_CLOCK__FREQUENCY)
 
 
 
