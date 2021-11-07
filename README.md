@@ -15,10 +15,7 @@ if (diff >= t->interval || diff < t->previous_diff) {
     return true;
 }
 ```
-
-
-error: (1466) registers unavailable for code generation of this expression
-
+_error: (1466) registers unavailable for code generation of this expression_
 ```c
 while(t->next != NULL) {
           if(t->next->p == p) {
@@ -28,8 +25,7 @@ while(t->next != NULL) {
           }
         }
 ```
-
-error: (712) can't generate code for this expression
+_error: (712) can't generate code for this expression_
 
 
 
