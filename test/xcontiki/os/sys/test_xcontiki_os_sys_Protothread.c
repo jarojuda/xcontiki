@@ -9,7 +9,7 @@ static xcontiki_os_sys_Protothread__pt_t pt;
 static xcontiki_os_sys_Protothread__pt_t child_pt;
 static bool condition;
 static uint8_t counter;
-static XCONTIKI_OS_SYS_PROTOTHREAD__THREAD result;
+static xcontiki_os_sys_Protothread__state_t result;
 static uint8_t stage_indicator;
 static uint8_t child_stage_indicator;
 
@@ -23,7 +23,7 @@ void setUp(void){
 void tearDown(void){
 }
 
-XCONTIKI_OS_SYS_PROTOTHREAD__THREAD child_task_for_test(void){
+xcontiki_os_sys_Protothread__state_t child_task_for_test(void){
 
         XCONTIKI_OS_SYS_PROTOTHREAD__BEGIN(child_pt);
         child_stage_indicator = 1;
@@ -34,7 +34,7 @@ XCONTIKI_OS_SYS_PROTOTHREAD__THREAD child_task_for_test(void){
 
 
 
-XCONTIKI_OS_SYS_PROTOTHREAD__THREAD task_for_test(void){
+xcontiki_os_sys_Protothread__state_t task_for_test(void){
 
         counter++;
 
