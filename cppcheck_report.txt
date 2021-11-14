@@ -1,0 +1,1544 @@
+src/xcontiki/arch/xcontiki_arch_Clock.c:100:14: style: The scope of the variable 'diff' can be reduced. [variableScope]
+    uint32_t diff;
+             ^
+src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c:83:13: style: The scope of the variable 'c' can be reduced. [variableScope]
+    uint8_t c;
+            ^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:90:9: style: The scope of the variable 'get_ptr' can be reduced. [variableScope]
+    int get_ptr;
+        ^
+src/xcontiki/os/sys/xcontiki_os_sys_Process.c:132:5: style:inconclusive: Found duplicate branches for 'if' and 'else'. [duplicateBranch]
+    if (xcontiki_os_sys_Process__get_current_process() == NULL) {
+    ^
+src/xcontiki/os/sys/xcontiki_os_sys_Process.c:135:7: note: Found duplicate branches for 'if' and 'else'.
+    } else {
+      ^
+src/xcontiki/os/sys/xcontiki_os_sys_Process.c:132:5: note: Found duplicate branches for 'if' and 'else'.
+    if (xcontiki_os_sys_Process__get_current_process() == NULL) {
+    ^
+src/xcontiki/os/sys/xcontiki_os_sys_Process_priv.h:222:41: style: The scope of the variable 'receiver' can be reduced. [variableScope]
+        struct xcontiki_os_sys_Process *receiver;
+                                        ^
+src/xcontiki/os/sys/xcontiki_os_sys_ProtothreadScheduler.c:55:0: information: Skipping configuration 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' since the value of 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+^
+src/xcontiki/os/sys/xcontiki_os_sys_ProtothreadScheduler.c:63:0: information: Skipping configuration 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' since the value of 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+^
+src/xcontiki/os/sys/xcontiki_os_sys_ProtothreadScheduler.c:71:0: information: Skipping configuration 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' since the value of 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+^
+src/xcontiki/os/sys/xcontiki_os_sys_ProtothreadScheduler.c:86:0: information: Skipping configuration 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' since the value of 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+        XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+^
+src/xcontiki/os/sys/xcontiki_os_sys_ProtothreadScheduler.c:96:0: information: Skipping configuration 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' since the value of 'XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+            XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Process.c:20:9: style: Statements following return, break, continue, goto or throw will never be executed. [unreachableCode]
+        XCONTIKI_OS_SYS_PROCESS__END();
+        ^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Process.c:31:9: style: Statements following return, break, continue, goto or throw will never be executed. [unreachableCode]
+        XCONTIKI_OS_SYS_PROCESS__END();
+        ^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Process.c:42:9: style: Statements following return, break, continue, goto or throw will never be executed. [unreachableCode]
+        XCONTIKI_OS_SYS_PROCESS__END();
+        ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/examples/embedded_ui/UI_test_ansic.c:18:1: style:inconclusive: Function 'SYSTEM_register_irq' argument 2 names different: declaration 'irq' definition 'arg1'. [funcArgNamesDifferent]
+FAKE_VOID_FUNC2(SYSTEM_register_irq, irq_func_t, unsigned int);
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/examples/embedded_ui/SYSTEM.h:19:51: note: Function 'SYSTEM_register_irq' argument 2 names different: declaration 'irq' definition 'arg1'.
+void SYSTEM_register_irq(irq_func_t, unsigned int irq);
+                                                  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/examples/embedded_ui/UI_test_ansic.c:18:1: note: Function 'SYSTEM_register_irq' argument 2 names different: declaration 'irq' definition 'arg1'.
+FAKE_VOID_FUNC2(SYSTEM_register_irq, irq_func_t, unsigned int);
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 of 45 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:551:3: warning: Member variable 'GTestFlagSaver::pretty_' is not initialized in the constructor. [uninitMemberVar]
+  GTestFlagSaver() {
+  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:1007:10: performance:inconclusive: Technically the member function 'testing::internal::UnitTestImpl::CurrentOsStackTraceExceptTop' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+  String CurrentOsStackTraceExceptTop(int skip_count);
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2063:22: note: Technically the member function 'testing::internal::UnitTestImpl::CurrentOsStackTraceExceptTop' can be static (but you may consider moving to unnamed namespace).
+String UnitTestImpl::CurrentOsStackTraceExceptTop(int skip_count) {
+                     ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:1007:10: note: Technically the member function 'testing::internal::UnitTestImpl::CurrentOsStackTraceExceptTop' can be static (but you may consider moving to unnamed namespace).
+  String CurrentOsStackTraceExceptTop(int skip_count);
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:1108:7: style:inconclusive: Technically the member function 'testing::internal::UnitTestImpl::FilterTests' can be const. [functionConst]
+  int FilterTests(ReactionToSharding shard_tests);
+      ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5681:19: note: Technically the member function 'testing::internal::UnitTestImpl::FilterTests' can be const.
+int UnitTestImpl::FilterTests(ReactionToSharding shard_tests) {
+                  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:1108:7: note: Technically the member function 'testing::internal::UnitTestImpl::FilterTests' can be const.
+  int FilterTests(ReactionToSharding shard_tests);
+      ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:1111:8: style:inconclusive: Technically the member function 'testing::internal::UnitTestImpl::ListTestsMatchingFilter' can be const. [functionConst]
+  void ListTestsMatchingFilter();
+       ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5735:20: note: Technically the member function 'testing::internal::UnitTestImpl::ListTestsMatchingFilter' can be const.
+void UnitTestImpl::ListTestsMatchingFilter() {
+                   ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:1111:8: note: Technically the member function 'testing::internal::UnitTestImpl::ListTestsMatchingFilter' can be const.
+  void ListTestsMatchingFilter();
+       ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:833:18: style: The function 'CurrentStackTrace' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual String CurrentStackTrace(int max_depth, int skip_count);
+                 ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:818:18: note: Virtual function in base class
+  virtual String CurrentStackTrace(int max_depth, int skip_count) = 0;
+                 ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:833:18: note: Function in derived class
+  virtual String CurrentStackTrace(int max_depth, int skip_count);
+                 ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:834:16: style: The function 'UponLeavingGTest' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void UponLeavingGTest();
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:823:16: note: Virtual function in base class
+  virtual void UponLeavingGTest() = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:834:16: note: Function in derived class
+  virtual void UponLeavingGTest();
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5099:34: error: Null pointer dereference: static_cast<volatile int*>(NULL) [nullPointer]
+      *static_cast<volatile int*>(NULL) = 1;
+                                 ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4278:1: style:inconclusive: Function 'OnTestProgramStart' argument 1 names different: declaration 'unit_test' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REPEATER_METHOD_(OnTestProgramStart, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4213:51: note: Function 'OnTestProgramStart' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+  virtual void OnTestProgramStart(const UnitTest& unit_test);
+                                                  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4278:1: note: Function 'OnTestProgramStart' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+GTEST_REPEATER_METHOD_(OnTestProgramStart, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4279:1: style:inconclusive: Function 'OnEnvironmentsSetUpStart' argument 1 names different: declaration 'unit_test' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REPEATER_METHOD_(OnEnvironmentsSetUpStart, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4215:57: note: Function 'OnEnvironmentsSetUpStart' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+  virtual void OnEnvironmentsSetUpStart(const UnitTest& unit_test);
+                                                        ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4279:1: note: Function 'OnEnvironmentsSetUpStart' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+GTEST_REPEATER_METHOD_(OnEnvironmentsSetUpStart, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4280:1: style:inconclusive: Function 'OnTestCaseStart' argument 1 names different: declaration 'test_case' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REPEATER_METHOD_(OnTestCaseStart, TestCase)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4217:48: note: Function 'OnTestCaseStart' argument 1 names different: declaration 'test_case' definition 'parameter'.
+  virtual void OnTestCaseStart(const TestCase& test_case);
+                                               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4280:1: note: Function 'OnTestCaseStart' argument 1 names different: declaration 'test_case' definition 'parameter'.
+GTEST_REPEATER_METHOD_(OnTestCaseStart, TestCase)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4281:1: style:inconclusive: Function 'OnTestStart' argument 1 names different: declaration 'test_info' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REPEATER_METHOD_(OnTestStart, TestInfo)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4218:44: note: Function 'OnTestStart' argument 1 names different: declaration 'test_info' definition 'parameter'.
+  virtual void OnTestStart(const TestInfo& test_info);
+                                           ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4281:1: note: Function 'OnTestStart' argument 1 names different: declaration 'test_info' definition 'parameter'.
+GTEST_REPEATER_METHOD_(OnTestStart, TestInfo)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4282:1: style:inconclusive: Function 'OnTestPartResult' argument 1 names different: declaration 'result' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REPEATER_METHOD_(OnTestPartResult, TestPartResult)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4219:55: note: Function 'OnTestPartResult' argument 1 names different: declaration 'result' definition 'parameter'.
+  virtual void OnTestPartResult(const TestPartResult& result);
+                                                      ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4282:1: note: Function 'OnTestPartResult' argument 1 names different: declaration 'result' definition 'parameter'.
+GTEST_REPEATER_METHOD_(OnTestPartResult, TestPartResult)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4283:1: style:inconclusive: Function 'OnEnvironmentsTearDownStart' argument 1 names different: declaration 'unit_test' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REPEATER_METHOD_(OnEnvironmentsTearDownStart, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4222:60: note: Function 'OnEnvironmentsTearDownStart' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+  virtual void OnEnvironmentsTearDownStart(const UnitTest& unit_test);
+                                                           ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4283:1: note: Function 'OnEnvironmentsTearDownStart' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+GTEST_REPEATER_METHOD_(OnEnvironmentsTearDownStart, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4284:1: style:inconclusive: Function 'OnEnvironmentsSetUpEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REVERSE_REPEATER_METHOD_(OnEnvironmentsSetUpEnd, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4216:55: note: Function 'OnEnvironmentsSetUpEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+  virtual void OnEnvironmentsSetUpEnd(const UnitTest& unit_test);
+                                                      ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4284:1: note: Function 'OnEnvironmentsSetUpEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+GTEST_REVERSE_REPEATER_METHOD_(OnEnvironmentsSetUpEnd, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4285:1: style:inconclusive: Function 'OnEnvironmentsTearDownEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REVERSE_REPEATER_METHOD_(OnEnvironmentsTearDownEnd, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4223:58: note: Function 'OnEnvironmentsTearDownEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+  virtual void OnEnvironmentsTearDownEnd(const UnitTest& unit_test);
+                                                         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4285:1: note: Function 'OnEnvironmentsTearDownEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+GTEST_REVERSE_REPEATER_METHOD_(OnEnvironmentsTearDownEnd, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4286:1: style:inconclusive: Function 'OnTestEnd' argument 1 names different: declaration 'test_info' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REVERSE_REPEATER_METHOD_(OnTestEnd, TestInfo)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4220:42: note: Function 'OnTestEnd' argument 1 names different: declaration 'test_info' definition 'parameter'.
+  virtual void OnTestEnd(const TestInfo& test_info);
+                                         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4286:1: note: Function 'OnTestEnd' argument 1 names different: declaration 'test_info' definition 'parameter'.
+GTEST_REVERSE_REPEATER_METHOD_(OnTestEnd, TestInfo)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4287:1: style:inconclusive: Function 'OnTestCaseEnd' argument 1 names different: declaration 'test_case' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REVERSE_REPEATER_METHOD_(OnTestCaseEnd, TestCase)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4221:46: note: Function 'OnTestCaseEnd' argument 1 names different: declaration 'test_case' definition 'parameter'.
+  virtual void OnTestCaseEnd(const TestCase& test_case);
+                                             ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4287:1: note: Function 'OnTestCaseEnd' argument 1 names different: declaration 'test_case' definition 'parameter'.
+GTEST_REVERSE_REPEATER_METHOD_(OnTestCaseEnd, TestCase)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4288:1: style:inconclusive: Function 'OnTestProgramEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'. [funcArgNamesDifferent]
+GTEST_REVERSE_REPEATER_METHOD_(OnTestProgramEnd, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4225:49: note: Function 'OnTestProgramEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+  virtual void OnTestProgramEnd(const UnitTest& unit_test);
+                                                ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4288:1: note: Function 'OnTestProgramEnd' argument 1 names different: declaration 'unit_test' definition 'parameter'.
+GTEST_REVERSE_REPEATER_METHOD_(OnTestProgramEnd, UnitTest)
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5607:30: style:inconclusive: Function 'ShouldShard' argument 1 names different: declaration 'total_shards_str' definition 'total_shards_env'. [funcArgNamesDifferent]
+bool ShouldShard(const char* total_shards_env,
+                             ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:650:41: note: Function 'ShouldShard' argument 1 names different: declaration 'total_shards_str' definition 'total_shards_env'.
+GTEST_API_ bool ShouldShard(const char* total_shards_str,
+                                        ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5607:30: note: Function 'ShouldShard' argument 1 names different: declaration 'total_shards_str' definition 'total_shards_env'.
+bool ShouldShard(const char* total_shards_env,
+                             ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5608:30: style:inconclusive: Function 'ShouldShard' argument 2 names different: declaration 'shard_index_str' definition 'shard_index_env'. [funcArgNamesDifferent]
+                 const char* shard_index_env,
+                             ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:651:41: note: Function 'ShouldShard' argument 2 names different: declaration 'shard_index_str' definition 'shard_index_env'.
+                            const char* shard_index_str,
+                                        ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5608:30: note: Function 'ShouldShard' argument 2 names different: declaration 'shard_index_str' definition 'shard_index_env'.
+                 const char* shard_index_env,
+                             ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5652:37: style:inconclusive: Function 'Int32FromEnvOrDie' argument 1 names different: declaration 'env_var' definition 'var'. [funcArgNamesDifferent]
+Int32 Int32FromEnvOrDie(const char* var, Int32 default_val) {
+                                    ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:657:48: note: Function 'Int32FromEnvOrDie' argument 1 names different: declaration 'env_var' definition 'var'.
+GTEST_API_ Int32 Int32FromEnvOrDie(const char* env_var, Int32 default_val);
+                                               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5652:37: note: Function 'Int32FromEnvOrDie' argument 1 names different: declaration 'env_var' definition 'var'.
+Int32 Int32FromEnvOrDie(const char* var, Int32 default_val) {
+                                    ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6985:20: style: Condition 'thread_count!=1' is always true [knownConditionTrueFalse]
+  if (thread_count != 1) {
+                   ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6984:45: note: Assignment 'thread_count=GetThreadCount()', assigned value is 0
+  const size_t thread_count = GetThreadCount();
+                                            ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6985:20: note: Condition 'thread_count!=1' is always true
+  if (thread_count != 1) {
+                   ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:7175:30: style: Variable 'child_pid' is reassigned a value before the old one has been used. [redundantAssignment]
+  if (use_fork && (child_pid = fork()) == 0) {
+                             ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:7167:15: note: child_pid is assigned
+    child_pid = clone(&ExecDeathTestChildMain, stack_top, SIGCHLD, &args);
+              ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:7175:30: note: child_pid is overwritten
+  if (use_fork && (child_pid = fork()) == 0) {
+                             ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6953:48: style:inconclusive: Function 'ForkingDeathTest' argument 1 names different: declaration 'statement' definition 'a_statement'. [funcArgNamesDifferent]
+ForkingDeathTest::ForkingDeathTest(const char* a_statement, const RE* a_regex)
+                                               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6939:32: note: Function 'ForkingDeathTest' argument 1 names different: declaration 'statement' definition 'a_statement'.
+  ForkingDeathTest(const char* statement, const RE* regex);
+                               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6953:48: note: Function 'ForkingDeathTest' argument 1 names different: declaration 'statement' definition 'a_statement'.
+ForkingDeathTest::ForkingDeathTest(const char* a_statement, const RE* a_regex)
+                                               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6953:71: style:inconclusive: Function 'ForkingDeathTest' argument 2 names different: declaration 'regex' definition 'a_regex'. [funcArgNamesDifferent]
+ForkingDeathTest::ForkingDeathTest(const char* a_statement, const RE* a_regex)
+                                                                      ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6939:53: note: Function 'ForkingDeathTest' argument 2 names different: declaration 'regex' definition 'a_regex'.
+  ForkingDeathTest(const char* statement, const RE* regex);
+                                                    ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6953:71: note: Function 'ForkingDeathTest' argument 2 names different: declaration 'regex' definition 'a_regex'.
+ForkingDeathTest::ForkingDeathTest(const char* a_statement, const RE* a_regex)
+                                                                      ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:7144:33: error: Uninitialized variable: dummy [uninitvar]
+  return StackLowerThanAddress(&dummy);
+                                ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6356:0: information: Skipping configuration 'GTEST_HAS_DEATH_TEST;WCOREDUMP' since the value of 'WCOREDUMP' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+  if (WCOREDUMP(exit_code)) {
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5841:13: style: Condition 'IsTrue(false)' is always false [knownConditionTrueFalse]
+  if (IsTrue(false))
+            ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-main.cc:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 of 57 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:740:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& /* t */) { return *this; }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:757:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:760:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_1_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:792:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:795:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_2_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:833:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:836:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_3_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:872:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:875:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_4_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:914:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:917:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_5_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:959:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:962:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_6_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1006:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1009:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_7_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1056:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1059:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_8_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1108:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const tuple& t) { return CopyFrom(t); }
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f0_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f1_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f2_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f3_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f4_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f5_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f6_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f7_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1111:10: warning:inconclusive: Member variable 'tuple::f8_' is not assigned a value in 'tuple::operator='. [operatorEqVarError]
+  tuple& operator=(const GTEST_9_TUPLE_(U)& t) {
+         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:9043:1: style: The class 'linked_ptr_internal' does not have a constructor although it has private member variables. [noConstructor]
+class linked_ptr_internal {
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10259:5: warning:inconclusive: Member variable 'Iterator::value_' is not assigned in the copy constructor. Should it be copied? [uninitMemberVarPrivate]
+    Iterator(const Iterator& other)
+    ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17949:42: style: Unused private function: 'Environment::Setup' [unusedPrivateFunction]
+  virtual Setup_should_be_spelled_SetUp* Setup() { return NULL; }
+                                         ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:2464:8: performance:inconclusive: Technically the member function 'testing::internal::Mutex::AssertHeld' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+  void AssertHeld() const {}
+       ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:9075:8: style:inconclusive: Technically the member function 'testing::internal::linked_ptr_internal::depart' can be const. [functionConst]
+  bool depart() {
+       ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18703:20: performance:inconclusive: Technically the member function 'testing::WithParamInterface::GetParam' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+  const ParamType& GetParam() const { return *parameter_; }
+                   ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:790:3: style: Class 'tuple' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  tuple(const ::std::pair<U0, U1>& p) : f0_(p.first), f1_(p.second) {}
+  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1878:3: style: Class 'RE' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  RE(const ::std::string& regex) { Init(regex.c_str()); }  // NOLINT
+  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1886:3: style: Class 'RE' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  RE(const char* regex) { Init(regex); }  // NOLINT
+  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:3045:3: style: Class 'String' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  String(const char* a_c_str) {  // NOLINT
+  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:3076:3: style: Class 'String' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  String(const ::std::string& str) {
+  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:7420:3: style: Struct 'ConstCharPtr' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  ConstCharPtr(const char* str) : value(str) {}
+  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:1160:3: style: Class 'tuple < void , typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 , typename T7 , typename T8 , typename T9 >' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  tuple(const GTEST_10_TUPLE_(U)& t) : f0_(t.f0_), f1_(t.f1_), f2_(t.f2_),
+  ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:9100:25: style: Class 'linked_ptr < const ParamGeneratorInterface < bool > >' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+  template <typename U> linked_ptr(linked_ptr<U> const& ptr) { copy(&ptr); }
+                        ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:7209:17: style: The function 'CreateTest' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual Test* CreateTest() { return new TestClass; }
+                ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:7195:17: note: Virtual function in base class
+  virtual Test* CreateTest() = 0;
+                ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:7209:17: note: Function in derived class
+  virtual Test* CreateTest() { return new TestClass; }
+                ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10292:17: style: The function 'CreateTest' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual Test* CreateTest() {
+                ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:7195:17: note: Virtual function in base class
+  virtual Test* CreateTest() = 0;
+                ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10292:17: note: Function in derived class
+  virtual Test* CreateTest() {
+                ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10331:28: style: The function 'CreateTestFactory' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual TestFactoryBase* CreateTestFactory(ParamType parameter) {
+                           ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10312:28: note: Virtual function in base class
+  virtual TestFactoryBase* CreateTestFactory(ParamType parameter) = 0;
+                           ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10331:28: note: Function in derived class
+  virtual TestFactoryBase* CreateTestFactory(ParamType parameter) {
+                           ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10391:25: style: The function 'GetTestCaseName' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual const string& GetTestCaseName() const { return test_case_name_; }
+                        ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10354:25: note: Virtual function in base class
+  virtual const string& GetTestCaseName() const = 0;
+                        ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10391:25: note: Function in derived class
+  virtual const string& GetTestCaseName() const { return test_case_name_; }
+                        ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10393:18: style: The function 'GetTestCaseTypeId' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual TypeId GetTestCaseTypeId() const { return GetTypeId<TestCase>(); }
+                 ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10356:18: note: Virtual function in base class
+  virtual TypeId GetTestCaseTypeId() const = 0;
+                 ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10393:18: note: Function in derived class
+  virtual TypeId GetTestCaseTypeId() const { return GetTypeId<TestCase>(); }
+                 ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10421:16: style: The function 'RegisterTests' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void RegisterTests() {
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10361:16: note: Virtual function in base class
+  virtual void RegisterTests() = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:10421:16: note: Function in derived class
+  virtual void RegisterTests() {
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18009:16: style: The function 'OnTestProgramStart' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestProgramStart(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17959:16: note: Virtual function in base class
+  virtual void OnTestProgramStart(const UnitTest& unit_test) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18009:16: note: Function in derived class
+  virtual void OnTestProgramStart(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18010:16: style: The function 'OnTestIterationStart' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestIterationStart(const UnitTest& /*unit_test*/,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17964:16: note: Virtual function in base class
+  virtual void OnTestIterationStart(const UnitTest& unit_test,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18010:16: note: Function in derived class
+  virtual void OnTestIterationStart(const UnitTest& /*unit_test*/,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18012:16: style: The function 'OnEnvironmentsSetUpStart' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnEnvironmentsSetUpStart(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17968:16: note: Virtual function in base class
+  virtual void OnEnvironmentsSetUpStart(const UnitTest& unit_test) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18012:16: note: Function in derived class
+  virtual void OnEnvironmentsSetUpStart(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18013:16: style: The function 'OnEnvironmentsSetUpEnd' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnEnvironmentsSetUpEnd(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17971:16: note: Virtual function in base class
+  virtual void OnEnvironmentsSetUpEnd(const UnitTest& unit_test) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18013:16: note: Function in derived class
+  virtual void OnEnvironmentsSetUpEnd(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18014:16: style: The function 'OnTestCaseStart' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestCaseStart(const TestCase& /*test_case*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17974:16: note: Virtual function in base class
+  virtual void OnTestCaseStart(const TestCase& test_case) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18014:16: note: Function in derived class
+  virtual void OnTestCaseStart(const TestCase& /*test_case*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18015:16: style: The function 'OnTestStart' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestStart(const TestInfo& /*test_info*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17977:16: note: Virtual function in base class
+  virtual void OnTestStart(const TestInfo& test_info) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18015:16: note: Function in derived class
+  virtual void OnTestStart(const TestInfo& /*test_info*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18016:16: style: The function 'OnTestPartResult' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestPartResult(const TestPartResult& /*test_part_result*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17980:16: note: Virtual function in base class
+  virtual void OnTestPartResult(const TestPartResult& test_part_result) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18016:16: note: Function in derived class
+  virtual void OnTestPartResult(const TestPartResult& /*test_part_result*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18017:16: style: The function 'OnTestEnd' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestEnd(const TestInfo& /*test_info*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17983:16: note: Virtual function in base class
+  virtual void OnTestEnd(const TestInfo& test_info) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18017:16: note: Function in derived class
+  virtual void OnTestEnd(const TestInfo& /*test_info*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18018:16: style: The function 'OnTestCaseEnd' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestCaseEnd(const TestCase& /*test_case*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17986:16: note: Virtual function in base class
+  virtual void OnTestCaseEnd(const TestCase& test_case) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18018:16: note: Function in derived class
+  virtual void OnTestCaseEnd(const TestCase& /*test_case*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18019:16: style: The function 'OnEnvironmentsTearDownStart' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnEnvironmentsTearDownStart(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17989:16: note: Virtual function in base class
+  virtual void OnEnvironmentsTearDownStart(const UnitTest& unit_test) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18019:16: note: Function in derived class
+  virtual void OnEnvironmentsTearDownStart(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18020:16: style: The function 'OnEnvironmentsTearDownEnd' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnEnvironmentsTearDownEnd(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17992:16: note: Virtual function in base class
+  virtual void OnEnvironmentsTearDownEnd(const UnitTest& unit_test) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18020:16: note: Function in derived class
+  virtual void OnEnvironmentsTearDownEnd(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18021:16: style: The function 'OnTestIterationEnd' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestIterationEnd(const UnitTest& /*unit_test*/,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17995:16: note: Virtual function in base class
+  virtual void OnTestIterationEnd(const UnitTest& unit_test,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18021:16: note: Function in derived class
+  virtual void OnTestIterationEnd(const UnitTest& /*unit_test*/,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18023:16: style: The function 'OnTestProgramEnd' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void OnTestProgramEnd(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:17999:16: note: Virtual function in base class
+  virtual void OnTestProgramEnd(const UnitTest& unit_test) = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:18023:16: note: Function in derived class
+  virtual void OnTestProgramEnd(const UnitTest& /*unit_test*/) {}
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:7570:7: warning: Found function call inside sizeof(). [sizeofFunctionCall]
+      sizeof(Helper(ImplicitlyConvertible::MakeFrom())) == 1;
+      ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:2157:8: style:inconclusive: Technically the member function 'testing::internal::Notification::WaitForNotification' can be const. [functionConst]
+  void WaitForNotification() {
+       ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:2229:16: style: The function 'Run' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual void Run() {
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:2177:16: note: Virtual function in base class
+  virtual void Run() = 0;
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:2229:16: note: Function in derived class
+  virtual void Run() {
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:8095:16: style: The function 'Create' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+  virtual bool Create(const char* statement, const RE* regex,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:8088:16: note: Virtual function in base class
+  virtual bool Create(const char* statement, const RE* regex,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:8095:16: note: Function in derived class
+  virtual bool Create(const char* statement, const RE* regex,
+               ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest.h:7561:7: warning: Found function call inside sizeof(). [sizeofFunctionCall]
+      sizeof(Helper(ImplicitlyConvertible::MakeFrom())) == 1;
+      ^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/fff.h:6576:0: error: failed to expand 'FAKE_VOID_FUNC_VARARG', Invalid ## usage when expanding 'FUNC_VOID_VARARG_N'. [preprocessorErrorDirective]
+#define FUNC_VOID_VARARG_N(N,...)     EXPAND(FAKE_VOID_FUNC ## N ## _VARARG(__VA_ARGS__))
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/test/fff_test_c.c:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/test/fff_test_cpp.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/fff.h:6607:0: error: failed to expand 'DECLARE_FAKE_VOID_FUNC_VARARG', Invalid ## usage when expanding 'DECLARE_FUNC_VOID_VARARG_N'. [preprocessorErrorDirective]
+#define DECLARE_FUNC_VOID_VARARG_N(N,...)     EXPAND(DECLARE_FAKE_VOID_FUNC ## N ## _VARARG(__VA_ARGS__))
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/test/fff_test_global_c.c:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/test/fff_test_global_cpp.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/test/global_fakes.c:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:76:24: style: The scope of the variable 'index' can be reduced. [variableScope]
+  CMOCK_MEM_INDEX_TYPE index;
+                       ^
+vendor/ceedling/vendor/cmock/src/cmock.c:78:9: style: The scope of the variable 'obj' can be reduced. [variableScope]
+  void* obj;
+        ^
+vendor/ceedling/vendor/cmock/src/cmock.c:79:9: style: The scope of the variable 'next' can be reduced. [variableScope]
+  void* next;
+        ^
+vendor/ceedling/vendor/unity/src/unity.c:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 of 41 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:276:9: style: The scope of the variable 'nibble' can be reduced. [variableScope]
+    int nibble;
+        ^
+vendor/ceedling/vendor/unity/src/unity.c:1349:18: style: The scope of the variable 'i' can be reduced. [variableScope]
+    UNITY_UINT32 i;
+                 ^
+vendor/ceedling/vendor/unity/src/unity.c:1389:18: style: The scope of the variable 'i' can be reduced. [variableScope]
+    UNITY_UINT32 i;
+                 ^
+vendor/ceedling/vendor/unity/src/unity.c:1513:18: style: The scope of the variable 'bytes' can be reduced. [variableScope]
+    UNITY_UINT32 bytes;
+                 ^
+vendor/ceedling/vendor/unity/src/unity.c:1757:28: style:inconclusive: Function 'UnityFail' argument 1 names different: declaration 'message' definition 'msg'. [funcArgNamesDifferent]
+void UnityFail(const char* msg, const UNITY_LINE_TYPE line)
+                           ^
+vendor/ceedling/vendor/unity/src/unity_internals.h:614:28: note: Function 'UnityFail' argument 1 names different: declaration 'message' definition 'msg'.
+void UnityFail(const char* message, const UNITY_LINE_TYPE line);
+                           ^
+vendor/ceedling/vendor/unity/src/unity.c:1757:28: note: Function 'UnityFail' argument 1 names different: declaration 'message' definition 'msg'.
+void UnityFail(const char* msg, const UNITY_LINE_TYPE line)
+                           ^
+vendor/ceedling/vendor/unity/src/unity.c:1794:30: style:inconclusive: Function 'UnityIgnore' argument 1 names different: declaration 'message' definition 'msg'. [funcArgNamesDifferent]
+void UnityIgnore(const char* msg, const UNITY_LINE_TYPE line)
+                             ^
+vendor/ceedling/vendor/unity/src/unity_internals.h:615:30: note: Function 'UnityIgnore' argument 1 names different: declaration 'message' definition 'msg'.
+void UnityIgnore(const char* message, const UNITY_LINE_TYPE line);
+                             ^
+vendor/ceedling/vendor/unity/src/unity.c:1794:30: note: Function 'UnityIgnore' argument 1 names different: declaration 'message' definition 'msg'.
+void UnityIgnore(const char* msg, const UNITY_LINE_TYPE line)
+                             ^
+vendor/ceedling/vendor/unity/src/unity.c:1810:31: style:inconclusive: Function 'UnityMessage' argument 1 names different: declaration 'message' definition 'msg'. [funcArgNamesDifferent]
+void UnityMessage(const char* msg, const UNITY_LINE_TYPE line)
+                              ^
+vendor/ceedling/vendor/unity/src/unity_internals.h:616:31: note: Function 'UnityMessage' argument 1 names different: declaration 'message' definition 'msg'.
+void UnityMessage(const char* message, const UNITY_LINE_TYPE line);
+                              ^
+vendor/ceedling/vendor/unity/src/unity.c:1810:31: note: Function 'UnityMessage' argument 1 names different: declaration 'message' definition 'msg'.
+void UnityMessage(const char* msg, const UNITY_LINE_TYPE line)
+                              ^
+vendor/ceedling/vendor/unity/src/unity.c:1430:20: style: Variable 'i' is assigned a value that is never used. [unreadVariable]
+    UNITY_UINT32 i = 0;
+                   ^
+vendor/ceedling/vendor/unity/src/unity.c:1832:0: information: Skipping configuration 'UNITY_CLOCK_MS;UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_EXEC_TIME_START' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_EXEC_TIME_START();
+^
+vendor/ceedling/vendor/unity/src/unity.c:1842:0: information: Skipping configuration 'UNITY_CLOCK_MS;UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_EXEC_TIME_STOP' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_EXEC_TIME_STOP();
+^
+vendor/ceedling/vendor/unity/src/unity.c:558:0: information: Skipping configuration 'UNITY_CLOCK_MS;UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_PRINT_EXEC_TIME' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_PRINT_EXEC_TIME();
+^
+vendor/ceedling/vendor/unity/src/unity_internals.h:465:0: information: Skipping configuration 'UNITY_CLOCK_MS;UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_TIME_TYPE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_TIME_TYPE CurrentTestStartTime;
+^
+vendor/ceedling/vendor/unity/src/unity_internals.h:466:0: information: Skipping configuration 'UNITY_CLOCK_MS;UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_TIME_TYPE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_TIME_TYPE CurrentTestStopTime;
+^
+vendor/ceedling/vendor/unity/src/unity.c:1832:0: information: Skipping configuration 'UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_EXEC_TIME_START' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_EXEC_TIME_START();
+^
+vendor/ceedling/vendor/unity/src/unity.c:1842:0: information: Skipping configuration 'UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_EXEC_TIME_STOP' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_EXEC_TIME_STOP();
+^
+vendor/ceedling/vendor/unity/src/unity.c:558:0: information: Skipping configuration 'UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_PRINT_EXEC_TIME' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_PRINT_EXEC_TIME();
+^
+vendor/ceedling/vendor/unity/src/unity_internals.h:465:0: information: Skipping configuration 'UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_TIME_TYPE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_TIME_TYPE CurrentTestStartTime;
+^
+vendor/ceedling/vendor/unity/src/unity_internals.h:466:0: information: Skipping configuration 'UNITY_EXEC_TIME_START;UNITY_EXEC_TIME_STOP;UNITY_PRINT_EXEC_TIME;UNITY_TIME_TYPE;UNITY_INCLUDE_EXEC_TIME' since the value of 'UNITY_TIME_TYPE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+    UNITY_TIME_TYPE CurrentTestStopTime;
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6983:0: style: The function 'AssumeRole' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:158:0: style: The function 'CMock_Guts_GetAddressFor' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:173:0: style: The function 'CMock_Guts_MemBytesCapacity' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:181:0: style: The function 'CMock_Guts_MemBytesFree' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:189:0: style: The function 'CMock_Guts_MemBytesUsed' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:74:0: style: The function 'CMock_Guts_MemChain' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:140:0: style: The function 'CMock_Guts_MemEndOfChain' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:197:0: style: The function 'CMock_Guts_MemFreeAll' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:205:0: style: The function 'CMock_Guts_MemFreeFinal' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/cmock/src/cmock.c:36:0: style: The function 'CMock_Guts_MemNew' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:1093:0: style: The function 'ClearAdHocTestResult' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2457:0: style: The function 'CmpHelperGE' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2460:0: style: The function 'CmpHelperGT' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2451:0: style: The function 'CmpHelperLE' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2454:0: style: The function 'CmpHelperLT' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2448:0: style: The function 'CmpHelperNE' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2481:0: style: The function 'CmpHelperSTRCASEEQ' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2511:0: style: The function 'CmpHelperSTRCASENE' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2465:0: style: The function 'CmpHelperSTREQ' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2497:0: style: The function 'CmpHelperSTRNE' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4839:0: style: The function 'CurrentStackTrace' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2406:0: style: The function 'DoubleLE' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2340:0: style: The function 'DoubleNearPredFormat' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:4347:0: style: The function 'EscapeXmlText' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6367:0: style: The function 'ExitedUnsuccessfully' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2399:0: style: The function 'FloatLE' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2325:0: style: The function 'GetBoolAssertionFailureMessage' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5822:0: style: The function 'GetCurrentOsStackTraceExceptTop' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2689:0: style: The function 'IsHRESULTFailure' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2682:0: style: The function 'IsHRESULTSuccess' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2596:0: style: The function 'IsNotSubstring' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:2584:0: style: The function 'IsSubstring' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/c_exception/lib/CException.c:11:0: style: The function 'Throw' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:685:0: style: The function 'UnityAssertBits' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:904:0: style: The function 'UnityAssertEqualFloatArray' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:774:0: style: The function 'UnityAssertEqualIntArray' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1502:0: style: The function 'UnityAssertEqualMemory' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:706:0: style: The function 'UnityAssertEqualNumber' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1344:0: style: The function 'UnityAssertEqualString' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1423:0: style: The function 'UnityAssertEqualStringArray' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1383:0: style: The function 'UnityAssertEqualStringLen' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:971:0: style: The function 'UnityAssertFloatSpecial' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:952:0: style: The function 'UnityAssertFloatsWithin' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:727:0: style: The function 'UnityAssertGreaterOrLessOrEqualNumber' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1224:0: style: The function 'UnityAssertNumbersArrayWithin' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1177:0: style: The function 'UnityAssertNumbersWithin' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1854:0: style: The function 'UnityBegin' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1826:0: style: The function 'UnityDefaultTestRun' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1870:0: style: The function 'UnityEnd' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1757:0: style: The function 'UnityFail' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1609:0: style: The function 'UnityFloatToPtr' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1794:0: style: The function 'UnityIgnore' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1810:0: style: The function 'UnityMessage' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1583:0: style: The function 'UnityNumToPtr' is never used. [unusedFunction]
+
+^
+vendor/ceedling/vendor/unity/src/unity.c:1848:0: style: The function 'UnitySetTestFile' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:6960:0: style: The function 'Wait' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_assert.c:40:0: style: The function '_xassert' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/examples/weak_linking/src/main.c:7:0: style: The function 'give_error' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/gtest/gtest-all.cc:5760:0: style: The function 'set_os_stack_trace_getter' is never used. [unusedFunction]
+
+^
+test/xcontiki/arch/test_xcontiki_arch_Clock.c:78:0: style: The function 'test_ClockWait' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_foo.c:14:0: style: The function 'test_foo' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_foo.c:25:0: style: The function 'test_foo_again' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_foo.c:34:0: style: The function 'test_foo_mock_with_const' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_foo.c:42:0: style: The function 'test_foo_mock_with_variable_args' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_event_processor.c:140:0: style: The function 'test_givenNewDataIsAvailable_whenTheDisplayHasUpdated_thenTheEventIsComplete' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_event_processor.c:92:0: style: The function 'test_givenTheDisplayHasAnError_whenTheDeviceIsPoweredOn_thenTheDisplayIsPoweredDown' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_event_processor.c:114:0: style: The function 'test_givenTheUserHasTypedSleep_whenItIsTimeToCheckTheKeyboard_theDisplayIsPoweredDown' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Process.c:107:0: style: The function 'test_process_exit' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Process.c:146:0: style: The function 'test_process_post_broadcast_event' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Process.c:60:0: style: The function 'test_process_start' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Protothread.c:74:0: style: The function 'test_protothread' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Timer.c:84:0: style: The function 'test_timer_remove' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_variable_args.c:15:0: style: The function 'test_variable_args_dummy_test' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_ProtothreadScheduler.c:45:0: style: The function 'test_whenAfterReset_thenEveryTaskShouldBeStarted' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Timer.c:20:0: style: The function 'test_whenIntervalIsSet_thenTheTimerShouldExpireAfterTheSetTime' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Protothread.c:62:0: style: The function 'test_whenLocalContinuationIsCorrupted_thenTaskShouldEnds_andLocalContinuationShouldResets' is never used. [unusedFunction]
+
+^
+examples_of_projects/linux_netbeans/test.c:37:0: style: The function 'test_whenMaxIntervalIsSet_thenClockWaitShouldNotLoopForever' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Timer.c:56:0: style: The function 'test_whenMaxIntervalIsSet_thenTheTimerShouldExpireAfterTheSetTime' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_ProtothreadScheduler.c:105:0: style: The function 'test_whenTaskWasStarted_andItIsEnded_thenTaskShouldRunAfterInterval' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_ProtothreadScheduler.c:68:0: style: The function 'test_whenTaskWasStarted_andItIsWaiting_thenTaskShouldRunImmediately' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_ProtothreadScheduler.c:85:0: style: The function 'test_whenTaskWasStarted_andItIsYielded_thenTaskShouldRunImmediately' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_event_processor.c:17:0: style: The function 'test_whenTheDeviceIsReset_thenTheStatusLedIsTurnedOff' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_event_processor.c:64:0: style: The function 'test_whenTheModeSelectButtonIsPressed_thenTheDisplayModeIsCycled' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_event_processor.c:32:0: style: The function 'test_whenThePowerReadingIsLessThan5_thenTheStatusLedIsNotTurnedOn' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Timer.c:70:0: style: The function 'test_whenTheTimerHasExpired_thenTheTimerShouldRemainExpired' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/examples/fff_example/test/test_event_processor.c:47:0: style: The function 'test_whenTheVolumeKnobIsMaxed_thenVolumeDisplayIsSetTo11' is never used. [unusedFunction]
+
+^
+test/xcontiki/arch/test_xcontiki_arch_Clock.c:48:0: style: The function 'test_whenZeroIntervalIsSet_thenClockWaitShouldReturnImmediately' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Timer.c:44:0: style: The function 'test_whenZeroIntervalIsSet_thenTheTimerShouldExpireImmediately' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Etimer.c:68:0: style: The function 'test_when_EtimerExpired_thenItShouldGenerateEvent' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Etimer.c:30:0: style: The function 'test_when_EtimerIsAllocated_thenItShouldNotChangeIndex' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Etimer.c:22:0: style: The function 'test_when_EtimerIsSetFirstTime_thenShouldAllocateNonZeroIndex' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Etimer.c:42:0: style: The function 'test_when_EtimerIsTryingAllocate_thenItShouldNotAllocateMoreTimersThanIsAvailableSpace' is never used. [unusedFunction]
+
+^
+test/xcontiki/os/sys/test_xcontiki_os_sys_Etimer.c:87:0: style: The function 'test_when_ProcessIsExiting_then_EtimerShouldBeRemoved' is never used. [unusedFunction]
+
+^
+vendor/ceedling/plugins/fake_function_framework/vendor/fff/examples/embedded_ui/UI_test_ansic.c:135:0: style: The function 'when_outputting_to_full_display_then_previous_inserted' is never used. [unusedFunction]
+
+^
+src/xcontiki/xcontiki.c:62:0: style: The function 'xcontiki__init' is never used. [unusedFunction]
+
+^
+src/xcontiki/xcontiki.c:43:0: style: The function 'xcontiki__main' is never used. [unusedFunction]
+
+^
+src/xcontiki/arch/xcontiki_arch_Clock.c:98:0: style: The function 'xcontiki_arch_Clock__delay_usec' is never used. [unusedFunction]
+
+^
+src/xcontiki/arch/xcontiki_arch_Clock.c:64:0: style: The function 'xcontiki_arch_Clock__get_seconds' is never used. [unusedFunction]
+
+^
+src/xcontiki/arch/xcontiki_arch_Clock.c:68:0: style: The function 'xcontiki_arch_Clock__set_seconds' is never used. [unusedFunction]
+
+^
+src/xcontiki/arch/xcontiki_arch_Sleepyhead.c:3:0: style: The function 'xcontiki_arch_Sleepyhead__set_next_wake_up' is never used. [unusedFunction]
+
+^
+src/xcontiki/arch/xcontiki_arch_Sleepyhead.c:7:0: style: The function 'xcontiki_arch_Sleepyhead__wake_up' is never used. [unusedFunction]
+
+^
+src/xcontiki/arch/dev/xcontiki_arch_dev_Watchdog.c:60:0: style: The function 'xcontiki_arch_dev_Watchdog__reboot' is never used. [unusedFunction]
+
+^
+src/xcontiki/arch/dev/xcontiki_arch_dev_Watchdog.c:56:0: style: The function 'xcontiki_arch_dev_Watchdog__stop' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_CircularList.c:103:0: style: The function 'xcontiki_os_lib_CircularList__add' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_CircularList.c:55:0: style: The function 'xcontiki_os_lib_CircularList__head' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_CircularList.c:49:0: style: The function 'xcontiki_os_lib_CircularList__init' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_CircularList.c:131:0: style: The function 'xcontiki_os_lib_CircularList__length' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_CircularList.c:61:0: style: The function 'xcontiki_os_lib_CircularList__tail' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:145:0: style: The function 'xcontiki_os_lib_RingbufIndex__empty' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:139:0: style: The function 'xcontiki_os_lib_RingbufIndex__full' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:89:0: style: The function 'xcontiki_os_lib_RingbufIndex__get' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:49:0: style: The function 'xcontiki_os_lib_RingbufIndex__init' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:114:0: style: The function 'xcontiki_os_lib_RingbufIndex__peek_get' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:77:0: style: The function 'xcontiki_os_lib_RingbufIndex__peek_put' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:57:0: style: The function 'xcontiki_os_lib_RingbufIndex__put' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_RingbufIndex.c:127:0: style: The function 'xcontiki_os_lib_RingbufIndex__size' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c:121:0: style: The function 'xcontiki_os_lib_Ringbuf__elements' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c:82:0: style: The function 'xcontiki_os_lib_Ringbuf__get' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c:44:0: style: The function 'xcontiki_os_lib_Ringbuf__init' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c:55:0: style: The function 'xcontiki_os_lib_Ringbuf__put' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/lib/xcontiki_os_lib_Ringbuf.c:115:0: style: The function 'xcontiki_os_lib_Ringbuf__size' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:157:0: style: The function 'xcontiki_os_sys_Etimer__adjust' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:177:0: style: The function 'xcontiki_os_sys_Etimer__expiration_time' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:167:0: style: The function 'xcontiki_os_sys_Etimer__expired' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:235:0: style: The function 'xcontiki_os_sys_Etimer__is_allocated' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:197:0: style: The function 'xcontiki_os_sys_Etimer__pending' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:135:0: style: The function 'xcontiki_os_sys_Etimer__reset' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:123:0: style: The function 'xcontiki_os_sys_Etimer__reset_with_new_interval' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:146:0: style: The function 'xcontiki_os_sys_Etimer__restart' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:187:0: style: The function 'xcontiki_os_sys_Etimer__start_time' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Etimer.c:209:0: style: The function 'xcontiki_os_sys_Etimer__stop' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Process.c:53:0: style: The function 'xcontiki_os_sys_Process__alloc_event' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Timer.c:197:0: style: The function 'xcontiki_os_sys_Timer__remaining' is never used. [unusedFunction]
+
+^
+src/xcontiki/os/sys/xcontiki_os_sys_Timer.c:232:0: style: The function 'xcontiki_os_sys_Timer__sleepyhead_thread' is never used. [unusedFunction]
+
+^
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
+
