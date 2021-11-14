@@ -1,7 +1,5 @@
 # xcontiki
 
-[![cppcheck-action-test](https://github.com/jarojuda/xcontiki/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/jarojuda/xcontiki/actions/workflows/cppcheck.yml)
-
 Port of the Contiki OS for the XC compilers.
 
 The XC8 compiler for the 8-bit PIC microcontrollers does not compile the Contiki OS sources.
