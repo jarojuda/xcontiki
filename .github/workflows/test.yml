@@ -16,4 +16,8 @@ jobs:
     - name: Download mplabx
       run: |
         env
-        wget https://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v5.50\(1\)-linux-installer.tar
+        wget -q https://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v5.50\(1\)-linux-installer.tar mplabx.tar
+        ls
+        tar -xf mplabx.tar
+        rm mplabx.tar
+        
