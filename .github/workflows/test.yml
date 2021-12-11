@@ -1,17 +1,19 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Test
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:  push
 jobs:
   # This workflow contains a single job called "greet"
-  list_env:
+  mplabx:
     runs-on: ubuntu-20.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello World"
+    - name: Download mplabx
+      run: |
+        env
+        wget https://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v5.50\(1\)-linux-installer.tar
