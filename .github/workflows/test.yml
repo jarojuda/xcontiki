@@ -20,3 +20,4 @@ jobs:
         ls
         tar -xf mplabx.tar
         rm mplabx.tar
+        ls -al
