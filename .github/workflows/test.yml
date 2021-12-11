@@ -15,7 +15,6 @@ jobs:
     # Runs a single command using the runners shell
     - name: Download mplabx
       run: |
-        env
         wget -q -O mplabx.tar https://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v5.50\(1\)-linux-installer.tar 
         ls
         tar -xf mplabx.tar
