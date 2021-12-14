@@ -12,13 +12,6 @@
 extern "C" {
 #endif
 
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...)
-#else
-#define PRINTF(...)
-#endif
-
 
     static xcontiki_arch_Clock__time_t start[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER];
     static xcontiki_arch_Clock__time_t interval[XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER];
@@ -42,7 +35,7 @@ extern "C" {
         if (i < XCONTIKI_OS_SYS_TIMER__CONF_TIMERS_NUMBER) {
             return i;
         } else {
-            PRINTF("No more timers to allocate\n");
+            PRINTF(("No more timers to allocate\n"));
         }
         return 0;
     }

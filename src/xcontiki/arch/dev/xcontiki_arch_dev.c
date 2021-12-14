@@ -2,7 +2,7 @@
 
 
 #if(XCONTIKI_ARCH_DEV_C == 0)
-#warning This is only an empty list of the xcontiki_arch_os_dev
+#warning This is only an empty list of tasks for the xcontiki_arch_os_dev
 
 
 xcontiki_os_sys_Protothread__state_t xcontiki_arch_dev__threads(void){

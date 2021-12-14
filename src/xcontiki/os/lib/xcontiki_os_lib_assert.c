@@ -29,18 +29,11 @@
  */
 #include "xcontiki/xcontiki.h"
 
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...)
-#else
-#define PRINTF(...)
-#endif
-
 void
 _xassert(const char *file, int lineno) {
-    PRINTF("Assertion failed: file %s, line %d.\n", file, lineno);
+    PRINTF(("Assertion failed: file %s, line %d.\n", file, lineno));
 
-    NOP();
+    _nop();
 
 #if !ASSERT_RETURNS
     PRINTF("The firmware will stop running\n");

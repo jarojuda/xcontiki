@@ -79,7 +79,7 @@ xcontiki_os_sys_Process__start(struct xcontiki_os_sys_Process *p, xcontiki_os_sy
     p->called = false;
     p->marked_to_exit = false;
 
-    PRINTF("process: starting '%s'\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p));
+    PRINTF(("process: starting '%s'\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p)));
 
     /* Post a synchronous initialization event to the process. */
     xcontiki_os_sys_Process__post_synchronous_event(p, XCONTIKI_OS_SYS_PROCESS__EVENT_INIT, data);
@@ -130,12 +130,12 @@ xcontiki_os_sys_Process__post_event_via_queue(struct xcontiki_os_sys_Process *p,
     xcontiki_os_sys_Process__num_events_t snum;
 
     if (xcontiki_os_sys_Process__get_current_process() == NULL) {
-        PRINTF("xcontiki_os_sys_process_post: NULL process posts event %d to process '%s', nevents %d\n",
-                ev, XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), nevents);
+        PRINTF(("xcontiki_os_sys_process_post: NULL process posts event %d to process '%s', nevents %d\n",
+                ev, XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), nevents));
     } else {
-        PRINTF("xcontiki_os_sys_process_post: Process '%s' posts event %d to process '%s', nevents %d\n",
+        PRINTF(("xcontiki_os_sys_process_post: Process '%s' posts event %d to process '%s', nevents %d\n",
                 XCONTIKI_OS_SYS_PROCESS__NAME_STRING(xcontiki_os_sys_Process__get_current_process()), ev,
-                p == XCONTIKI_OS_SYS_PROCESS__BROADCAST ? "<broadcast>" : XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), nevents);
+                p == XCONTIKI_OS_SYS_PROCESS__BROADCAST ? "<broadcast>" : XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), nevents));
     }
 
     if (nevents == XCONTIKI_OS_SYS_PROCESS__CONF_NUMEVENTS) {

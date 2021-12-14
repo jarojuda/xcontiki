@@ -43,12 +43,6 @@
 extern "C" {
 #endif
 
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...)
-#else
-#define PRINTF(...)
-#endif
 
     static xcontiki_os_sys_Timer__timer_id_t timer[XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER];
     static struct xcontiki_os_sys_Process *process_ptr[XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER];
@@ -72,7 +66,7 @@ extern "C" {
         if (i < XCONTIKI_OS_SYS_ETIMER__CONF_ETIMERS_NUMBER) {
             return i;
         } else {
-            PRINTF("No more event timers to allocate\n");
+            PRINTF(("No more event timers to allocate %d\n", i));
         }
         return 0;
     }

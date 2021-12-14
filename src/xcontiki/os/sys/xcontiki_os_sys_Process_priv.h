@@ -75,12 +75,6 @@ extern "C" {
 
     static void call_process(struct xcontiki_os_sys_Process *p, xcontiki_os_sys_Process__event_t ev, xcontiki_os_sys_Process__data_t data);
 
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...)
-#else
-#define PRINTF(...)
-#endif
 
     static void
     exit_process(struct xcontiki_os_sys_Process *p, struct xcontiki_os_sys_Process *fromprocess) {
@@ -169,12 +163,12 @@ extern "C" {
 
 #if DEBUG
         if (p->called) {
-            printf("process: process '%s' called again with event %d\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), ev);
+            PRINTF(("process: process '%s' called again with event %d\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), ev));
         }
 #endif /* DEBUG */
 
         if (p->running && !p->called ) {
-            PRINTF("process: calling process '%s' with event %d\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), ev);
+            PRINTF(("process: calling process '%s' with event %d\n", XCONTIKI_OS_SYS_PROCESS__NAME_STRING(p), ev));
             current_process_ptr = p;
             p->called = true;
             ret = p->thread(ev, data);
