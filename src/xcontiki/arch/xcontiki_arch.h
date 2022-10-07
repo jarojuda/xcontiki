@@ -46,6 +46,7 @@ extern "C" {
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define __PACKED __attribute__((packed))
 #define __rom
@@ -63,6 +64,7 @@ extern "C" {
 #include "xcontiki/arch/xcontiki_arch_Clock.h"
 #include "xcontiki/arch/xcontiki_arch_Sleepyhead.h"
 
+#define  PRINTF(a) do{printf a ;} while(0)
 
 #ifdef __cplusplus
 }

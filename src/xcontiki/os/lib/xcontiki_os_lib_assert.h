@@ -36,7 +36,9 @@
 #define assert(e) ((void)0)
 #else
 #define assert(e) ((e) ? (void)0 : _xassert(__FILE__, __LINE__))
-void _xassert(const char *, int);
+
+_Noreturn void _xassert(const char *, int);
+
 #endif
 
 #ifndef CTASSERT                /* Allow lint to override */

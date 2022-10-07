@@ -122,3 +122,4 @@ xcontiki_os_lib_Ringbuf__elements(xcontiki_os_lib_Ringbuf__ringbuf_t  *r) {
     return (r->put_ptr - r->get_ptr) & r->mask;
 }
 /*---------------------------------------------------------------------------*/
+

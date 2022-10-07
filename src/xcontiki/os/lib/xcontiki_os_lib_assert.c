@@ -29,15 +29,12 @@
  */
 #include "xcontiki/xcontiki.h"
 
-void
-_xassert(const char *file, int lineno) {
+_Noreturn void _xassert(const char *file, int lineno) {
     PRINTF(("Assertion failed: file %s, line %d.\n", file, lineno));
 
-    _nop();
-
 #if !ASSERT_RETURNS
-    PRINTF("The firmware will stop running\n");
-    PRINTF("A watchdog timer may restart this device\n");
+    PRINTF(("The firmware will stop running\n"));
+    PRINTF(("A watchdog timer may restart this device\n"));
     while (1);
 #endif
 }
