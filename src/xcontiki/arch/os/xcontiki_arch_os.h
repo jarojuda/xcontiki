@@ -42,7 +42,17 @@
 extern "C" {
 #endif
 
-#include "xcontiki/arch/os/sys/xcontiki_arch_os_sys.h"
+/** \def CC_ACCESS_NOW(x)
+ * This macro ensures that the access to a non-volatile variable can
+ * not be reordered or optimized by the compiler.
+ * See also https://lwn.net/Articles/508991/ - In Linux the macro is
+ * called ACCESS_ONCE
+ * The type must be passed, because the typeof-operator is a gcc
+ * extension
+ */
+
+#define XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(type, variable) (*(volatile type *)&(variable))
+
 
 
 #ifdef __cplusplus

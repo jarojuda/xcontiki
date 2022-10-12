@@ -57,8 +57,19 @@ extern "C" {
 #define _OMNITARGET ((void *)UINTPTR_MAX)
 #endif
 
+typedef uint32_t xcontiki_arch_Clock__time_t;
+#define XCONTIKI_ARCH_CLOCK__MAX UINT32_MAX
+typedef uint32_t xcontiki_arch_Clock__seconds_t;
+
+#define XCONTIKI_ARCH_CLOCK__FREQUENCY (1000ul)
+/**
+ * A second, measured in system clock time.
+ *
+ * \hideinitializer
+ */
+#define XCONTIKI_ARCH_CLOCK__SECOND ((xcontiki_arch_Clock__time_t)XCONTIKI_ARCH_CLOCK__FREQUENCY)
+
 #include "xcontiki/arch/xcontiki_arch_build.h"
-#include "xcontiki/arch/xcontiki_arch_conf.h"
 #include "xcontiki/arch/os/xcontiki_arch_os.h"
 #include "xcontiki/arch/dev/xcontiki_arch_dev.h"
 #include "xcontiki/arch/xcontiki_arch_Clock.h"
