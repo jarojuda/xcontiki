@@ -30,25 +30,14 @@
  */
 
 /*
- * File:   arch_dev.h
+ * File:   xcontiki_os_sys_ProtothreadsScheduler.h
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
+#ifndef XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER_H
+#define XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER_H
 
-#ifndef XCONTIKI_ARCH_DEV_H
-#define XCONTIKI_ARCH_DEV_H
+void xcontiki_os_sys_ProtothreadsScheduler__init(void);
+xcontiki_os_sys_Protothread__state_t xcontiki_os_sys_ProtothreadsScheduler__scheduler(void);
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include "xcontiki/arch/dev/xcontiki_arch_dev_Watchdog.h"
-#include "xcontiki/os/sys/xcontiki_os_sys_Protothread.h"
-
-    void xcontiki_arch_dev__init(void);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* XCONTIKI_ARCH_DEV_H */
+#endif //XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER_H

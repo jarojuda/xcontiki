@@ -47,6 +47,7 @@ extern "C" {
 #include "xcontiki/os/sys/xcontiki_os_sys_Timer.h"
 #include "xcontiki/os/sys/xcontiki_os_sys_Process.h"
 #include "xcontiki/os/sys/xcontiki_os_sys_Etimer.h"
+#include "xcontiki/os/sys/xcontiki_os_sys_ProtothreadsScheduler.h"
     
 #ifdef __cplusplus
 }

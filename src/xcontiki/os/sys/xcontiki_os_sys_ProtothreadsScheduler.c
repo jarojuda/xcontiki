@@ -30,47 +30,48 @@
  */
 
 /*
- * File:   xcontiki_os_sys_ProtothreadScheduler.c
+ * File:   .c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-//Include only from other source file
-
-#ifdef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER_C
-#error xcontiki_os_sys_ProtothreadScheduler.c include only once
-#endif
-#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER_C
-
-
-#ifdef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
-
 #include "xcontiki/xcontiki.h"
+
+#ifndef XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK_LIST
+
+xcontiki_os_sys_Protothread__state_t dumb_thread(void){
+    return XCONTIKI_OS_SYS_PROTOTHREAD__WAITING;
+}
+
+#define XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK_LIST \
+XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK(dumb_thread, XCONTIKI_ARCH_CLOCK__MAX)
+
+#endif //XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK_LIST
 
 enum {
     number_of_tasks = 0
-#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+#define XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK(task, interval)\
      +1
 
-    XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+    XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK_LIST
 
-#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+#undef XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK
 };
 
-#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+#define XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK(task, interval)\
     xcontiki_os_sys_Protothread__state_t task (void);
 
-XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK_LIST
 
-#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+#undef XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK
 
         static const xcontiki_arch_Clock__time_t interval[number_of_tasks] = {
-#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+#define XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK(task, interval)\
      interval,
 
-    XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+    XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK_LIST
 
-#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+#undef XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK
 };
 
 static xcontiki_os_sys_Protothread__state_t last_states[number_of_tasks];
@@ -80,22 +81,22 @@ static xcontiki_arch_Clock__time_t prev_diff[number_of_tasks];
 static xcontiki_os_sys_Protothread__state_t call_task(uint8_t task_number) {
 
     enum {
-#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+#define XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK(task, interval)\
      _##task,
 
-        XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+        XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK_LIST
 
-#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+#undef XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK
         
     };
 
     switch (task_number) {
-#define XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK(task, interval)\
+#define XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK(task, interval)\
  case _##task: return task();
 
-            XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
+            XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK_LIST
 
-#undef XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK
+#undef XCONTIKI_OS_SYS_PROTOTHREADSSCHEDULER__TASK
 
         default:
             return XCONTIKI_OS_SYS_PROTOTHREAD__ENDED;
@@ -104,7 +105,7 @@ static xcontiki_os_sys_Protothread__state_t call_task(uint8_t task_number) {
 
 static bool scheduler_first_run = true;
 
-static xcontiki_os_sys_Protothread__state_t scheduler(void) {
+xcontiki_os_sys_Protothread__state_t xcontiki_os_sys_ProtothreadsScheduler__scheduler(void) {
     static uint8_t i;
     xcontiki_arch_Clock__time_t diff;
 
@@ -146,8 +147,6 @@ static xcontiki_os_sys_Protothread__state_t scheduler(void) {
     return result;
 }
 
-static void scheduler__init(void) {
+void xcontiki_os_sys_ProtothreadsScheduler__init(void) {
     scheduler_first_run = true;
 }
-
-#endif //XCONTIKI_OS_SYS_PROTOTHREADSCHEDULER__TASK_LIST
