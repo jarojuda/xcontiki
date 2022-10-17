@@ -70,10 +70,9 @@ typedef uint32_t xcontiki_arch_Clock__seconds_t;
 #define XCONTIKI_ARCH_CLOCK__SECOND ((xcontiki_arch_Clock__time_t)XCONTIKI_ARCH_CLOCK__FREQUENCY)
 
 #include "xcontiki/arch/xcontiki_arch_build.h"
-#include "xcontiki/arch/os/xcontiki_arch_os.h"
-#include "xcontiki/arch/dev/xcontiki_arch_dev.h"
 #include "xcontiki/arch/xcontiki_arch_Clock.h"
 #include "xcontiki/arch/xcontiki_arch_Sleepyhead.h"
+#include "xcontiki/arch/xcontiki_arch_Watchdog.h"
 
 #define  PRINTF(a) do{printf a ;} while(0)
 

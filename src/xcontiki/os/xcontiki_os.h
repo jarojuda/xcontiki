@@ -46,6 +46,19 @@ extern "C" {
 #include "xcontiki/os/sys/xcontiki_os_sys.h"
 #include "xcontiki/os/lib/xcontiki_os_lib.h"
     
+ /** \def CC_ACCESS_NOW(x)
+ * This macro ensures that the access to a non-volatile variable can
+ * not be reordered or optimized by the compiler.
+ * See also https://lwn.net/Articles/508991/ - In Linux the macro is
+ * called ACCESS_ONCE
+ * The type must be passed, because the typeof-operator is a gcc
+ * extension
+ */
+
+#define XCONTIKI_OS__ACCESS_NOW(type, variable) (*(volatile type *)&(variable))
+
+    
+    
 
 #ifdef	__cplusplus
 }

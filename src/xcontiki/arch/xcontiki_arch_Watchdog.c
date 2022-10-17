@@ -30,33 +30,35 @@
  */
 
 /*
- * File:   xcontiki_arch_os.h
+ * File:   xcontiki_arch_os_dev_Watchdog.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#ifndef XCONTIKI_ARCH_OS_H
-#define XCONTIKI_ARCH_OS_H
+#include "xcontiki/xcontiki.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#if(XCONTIKI_ARCH_WATCHDOG_C == 0)
+#warning This is only a dummy implementation of the xcontiki_arch_Watchdog module
 
-/** \def CC_ACCESS_NOW(x)
- * This macro ensures that the access to a non-volatile variable can
- * not be reordered or optimized by the compiler.
- * See also https://lwn.net/Articles/508991/ - In Linux the macro is
- * called ACCESS_ONCE
- * The type must be passed, because the typeof-operator is a gcc
- * extension
- */
+void xcontiki_arch_Watchdog__init(void) {
 
-#define XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(type, variable) (*(volatile type *)&(variable))
-
-
-
-#ifdef __cplusplus
 }
-#endif
 
-#endif /* XCONTIKI_ARCH_OS_H */
+void xcontiki_arch_Watchdog__start(void) {
+
+}
+
+/* Do not use this function from within an interrupt context */
+void xcontiki_arch_Watchdog__periodic(void) {
+
+}
+
+void xcontiki_arch_Watchdog__stop(void) {
+
+}
+
+void xcontiki_arch_Watchdog__reboot(void) {
+
+}
+
+#endif

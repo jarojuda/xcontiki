@@ -47,7 +47,7 @@ xcontiki_os_sys_Protothread__state_t xcontiki__main(void) {
         first_run = false;
     }
 
-    xcontiki_arch_dev_Watchdog__periodic();
+    xcontiki_arch_Watchdog__periodic();
     xcontiki_os_sys_ProtothreadsScheduler__scheduler();
     xcontiki_os_sys_Etimer__request_poll();
     if (xcontiki_os_sys_Process__number_of_events_waiting() > 0) {
@@ -66,8 +66,7 @@ void xcontiki__init(void) {
 
 static void init(void) {
     xcontiki_os_sys_ProtothreadsScheduler__init();
-    xcontiki_arch_dev__init();
-    xcontiki_arch_dev_Watchdog__start();
+    xcontiki_arch_Watchdog__start();
     xcontiki_arch_Clock__init();
     xcontiki_os_sys_Process__initialize_the_process_module();
     xcontiki_os_sys_Process__start(&xcontiki_os_sys_Etimer__process, 0);

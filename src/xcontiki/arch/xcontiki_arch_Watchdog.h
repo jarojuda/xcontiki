@@ -30,21 +30,21 @@
  *
  */
 
-#ifndef XCONTIKI_ARCH_DEV_WATCHDOG_H
-#define XCONTIKI_ARCH_DEV_WATCHDOG_H
+#ifndef XCONTIKI_ARCH_WATCHDOG_H
+#define XCONTIKI_ARCH_WATCHDOG_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-    void xcontiki_arch_dev_Watchdog__init(void);
-    void xcontiki_arch_dev_Watchdog__start(void);
+    void xcontiki_arch_Watchdog__init(void);
+    void xcontiki_arch_Watchdog__start(void);
 
     /* Do not use this function from within an interrupt context */
-    void xcontiki_arch_dev_Watchdog__periodic(void);
-    void xcontiki_arch_dev_Watchdog__stop(void);
+    void xcontiki_arch_Watchdog__periodic(void);
+    void xcontiki_arch_Watchdog__stop(void);
 
-    void xcontiki_arch_dev_Watchdog__reboot(void);
+    void xcontiki_arch_Watchdog__reboot(void);
 
 
 #ifdef __cplusplus

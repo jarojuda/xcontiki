@@ -72,8 +72,8 @@ xcontiki_os_lib_Ringbuf__put(xcontiki_os_lib_Ringbuf__ringbuf_t  *r, uint8_t c) 
      * its value (c) is written. Reordering makes little sense, but
      * better safe than sorry.
      */
-    XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(uint8_t, r->data[r->put_ptr]) = c;
-    XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(uint8_t, r->put_ptr) = (r->put_ptr + 1) & r->mask;
+    XCONTIKI_OS__ACCESS_NOW(uint8_t, r->data[r->put_ptr]) = c;
+    XCONTIKI_OS__ACCESS_NOW(uint8_t, r->put_ptr) = (r->put_ptr + 1) & r->mask;
     return true;
 }
 
@@ -102,8 +102,8 @@ xcontiki_os_lib_Ringbuf__get(xcontiki_os_lib_Ringbuf__ringbuf_t  *r) {
          * because the register used for mask can be reused to save c
          * (on some architectures).
          */
-        c = XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(uint8_t, r->data[r->get_ptr]);
-        XCONTIKI_ARCH_OS_SYS_CC__ACCESS_NOW(uint8_t, r->get_ptr) = (r->get_ptr + 1) & r->mask;
+        c = XCONTIKI_OS__ACCESS_NOW(uint8_t, r->data[r->get_ptr]);
+        XCONTIKI_OS__ACCESS_NOW(uint8_t, r->get_ptr) = (r->get_ptr + 1) & r->mask;
         return c;
     } else {
         return UINT8_MAX;
