@@ -37,7 +37,6 @@
 
 #include "xcontiki/xcontiki.h"
 
-#if(XCONTIKI_ARCH_CLOCK_C == 0)
 #warning This is only a dummy implementation of the xcontiki_arch_os_sys_Clock module
 
 static volatile uint32_t hardware_timer_mock;
@@ -91,7 +90,7 @@ void xcontiki_arch_Clock__wait(xcontiki_arch_Clock__time_t interval) {
             break;
         }
         prev_diff = diff;
-        xcontiki_arch_dev_Watchdog__periodic();
+        xcontiki_arch_Watchdog__periodic();
     }
 }
 
@@ -117,5 +116,3 @@ void xcontiki_arch_Clock__delay_usec(uint32_t dt) {
         prev_diff = diff;
     }
 }
-
-#endif

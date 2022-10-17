@@ -30,54 +30,33 @@
  */
 
 /*
- * File:   arch_xcontiki.h
+ * File:   xcontiki_arch_os_dev_Watchdog.c
  * Author: Jaroslaw Juda <mail at JaroslawJuda.site>
  *
  */
 
-#ifndef XCONTIKI_ARCH_H
-#define XCONTIKI_ARCH_H
+#include "xcontiki/xcontiki.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#warning This is only a dummy implementation of the xcontiki_arch_Watchdog module
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+void xcontiki_arch_Watchdog__init(void) {
 
-#define __PACKED __attribute__((packed))
-#define __rom
-#define __ram
-#define rom
-
-#ifndef _OMNITARGET
-#define _OMNITARGET ((void *)UINTPTR_MAX)
-#endif
-
-typedef uint32_t xcontiki_arch_Clock__time_t;
-#define XCONTIKI_ARCH_CLOCK__MAX UINT32_MAX
-typedef uint32_t xcontiki_arch_Clock__seconds_t;
-
-#define XCONTIKI_ARCH_CLOCK__FREQUENCY (1000ul)
-/**
- * A second, measured in system clock time.
- *
- * \hideinitializer
- */
-#define XCONTIKI_ARCH_CLOCK__SECOND ((xcontiki_arch_Clock__time_t)XCONTIKI_ARCH_CLOCK__FREQUENCY)
-
-#include "xcontiki/arch/xcontiki_arch_build.h"
-#include "xcontiki/arch/xcontiki_arch_Clock.h"
-#include "xcontiki/arch/xcontiki_arch_Sleepyhead.h"
-#include "xcontiki/arch/xcontiki_arch_Watchdog.h"
-
-#define  PRINTF(a) do{printf a ;} while(0)
-
-#ifdef __cplusplus
 }
-#endif
 
-#endif /* XCONTIKI_ARCH_H */
+void xcontiki_arch_Watchdog__start(void) {
+
+}
+
+/* Do not use this function from within an interrupt context */
+void xcontiki_arch_Watchdog__periodic(void) {
+
+}
+
+void xcontiki_arch_Watchdog__stop(void) {
+
+}
+
+void xcontiki_arch_Watchdog__reboot(void) {
+
+}
+

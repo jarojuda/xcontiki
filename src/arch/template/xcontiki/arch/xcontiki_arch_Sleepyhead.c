@@ -1,5 +1,7 @@
 #include "xcontiki/xcontiki.h"
 
+#warning This is only a dummy implementation of the xcontiki_arch_Sleepyhead module
+
 void xcontiki_arch_Sleepyhead__set_next_wake_up(xcontiki_arch_Clock__time_t time){
     
 }
