@@ -36,24 +36,20 @@
  */
 
 #include "xcontiki/xcontiki.h"
+#include <time.h>
 
-#warning This is only a dummy implementation of the xcontiki_arch_os_sys_Clock module
 
-static volatile uint32_t hardware_timer_mock;
-static volatile xcontiki_arch_Clock__seconds_t dummy_clock_seconds;
 
 #ifndef TEST
  static uint32_t get_timer(void) {
-    ++hardware_timer_mock;
-    return hardware_timer_mock;
+    return clock();
 }
 #else
 uint32_t get_timer(void);
 #endif
 
 void xcontiki_arch_Clock__init(void) {
-    hardware_timer_mock= 0;
-    dummy_clock_seconds = 0;
+
 }
 
 xcontiki_arch_Clock__time_t xcontiki_arch_Clock__time(void) {
@@ -61,12 +57,9 @@ xcontiki_arch_Clock__time_t xcontiki_arch_Clock__time(void) {
 }
 
 xcontiki_arch_Clock__seconds_t xcontiki_arch_Clock__get_seconds(void) {
-    return dummy_clock_seconds;
+    return clock()/CLOCKS_PER_SEC;
 }
 
-void xcontiki_arch_Clock__set_seconds(xcontiki_arch_Clock__seconds_t sec) {
-    dummy_clock_seconds = sec;
-}
 
 //Do not use it unless you know what you are doing.
 
@@ -116,3 +109,4 @@ void xcontiki_arch_Clock__delay_usec(uint32_t dt) {
         prev_diff = diff;
     }
 }
+
