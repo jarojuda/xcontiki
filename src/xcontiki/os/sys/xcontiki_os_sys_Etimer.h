@@ -80,7 +80,7 @@ typedef uint8_t xcontiki_os_sys_Etimer__etimer_id_t;
 
 /**
  * \brief      Set an event timer.
- * \param et   A pointer to the event timer
+ * \param et   An ID of the event timer
  * \param interval The interval before the timer expires.
  *
  *             This function is used to set an event timer for a time
@@ -95,7 +95,7 @@ xcontiki_os_sys_Etimer__set(xcontiki_os_sys_Etimer__etimer_id_t et, xcontiki_arc
 /**
  * \brief      Reset an event timer with the same interval as was
  *             previously set.
- * \param et   A pointer to the event timer.
+ * \param et   An ID of the event timer.
  *
  *             This function resets the event timer with the same
  *             interval that was given to the event timer with the
@@ -112,7 +112,7 @@ void xcontiki_os_sys_Etimer__reset(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Reset an event timer with a new interval.
- * \param et   A pointer to the event timer.
+ * \param et   An ID of the event timer.
  * \param interval The interval before the timer expires.
  *
  *             This function very similar to etimer_reset. Opposed to
@@ -125,7 +125,7 @@ void xcontiki_os_sys_Etimer__reset_with_new_interval(xcontiki_os_sys_Etimer__eti
 
 /**
  * \brief      Restart an event timer from the current point in time
- * \param et   A pointer to the event timer.
+ * \param et   An ID of the event timer.
  *
  *             This function restarts the event timer with the same
  *             interval that was given to the etimer_set()
@@ -142,7 +142,7 @@ void xcontiki_os_sys_Etimer__restart(xcontiki_os_sys_Etimer__etimer_id_t et);
 
 /**
  * \brief      Adjust the expiration time for an event timer
- * \param et   A pointer to the event timer.
+ * \param et   An ID of the event timer.
  * \param td   The time difference to adjust the expiration time with.
  *
  *             This function is used to adjust the time the event
@@ -164,7 +164,7 @@ void xcontiki_os_sys_Etimer__adjust(xcontiki_os_sys_Etimer__etimer_id_t et, xcon
 
 /**
  * \brief      Get the expiration time for the event timer.
- * \param et   A pointer to the event timer
+ * \param et   An ID of the event timer
  * \return     The expiration time for the event timer.
  *
  *             This function returns the expiration time for an event timer.
@@ -173,7 +173,7 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__expiration_time(xcontiki_os_
 
 /**
  * \brief      Get the start time for the event timer.
- * \param et   A pointer to the event timer
+ * \param et   An ID of the event timer
  * \return     The start time for the event timer.
  *
  *             This function returns the start time (when the timer
@@ -183,7 +183,7 @@ xcontiki_arch_Clock__time_t xcontiki_os_sys_Etimer__start_time(xcontiki_os_sys_E
 
 /**
  * \brief      Check if an event timer has expired.
- * \param et   A pointer to the event timer
+ * \param et   An ID of the event timer
  * \return     Non-zero if the timer has expired, zero otherwise.
  *
  *             This function tests if an event timer has expired and
